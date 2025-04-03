@@ -21,3 +21,9 @@
 require("model.php");
 
 
+
+
+function readMoviesController(){
+    $movies = getAllMovies();
+    return $movies;
+}
