@@ -8,7 +8,7 @@ Deux tables sont présentes, Movie et Category. Assurez-vous au préalable qu'il
 pas de conflit de nommage avec vos autres tables.
 
 ### 2. Mise à jour des identifiants de connexion à la base de donnnées
-Editez ensuite le fichier server/model.php pour changer les identifiants de connexion à la BDD
+Editez ensuite le fichier server/model.php pour changer les identifiants de connexion à la BDD.
 
 ### 3. Vérification
 Vérifiez que vous accédez bien à l'index.html de l'application utilisateur (app) et de l'application administrateur (admin). L'une et l'autre sont quasi vides et ne disposent encore d'aucune fonctionnalité.

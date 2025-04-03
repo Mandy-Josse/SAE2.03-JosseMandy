@@ -5,3 +5,5 @@
 @import "./utilities.css" layer(utilities);
 
 @import "../component/NavBar/style.css" layer(components);
+@import "../component/List_ite1/style.css" layer(components);
+

@@ -11,9 +11,20 @@
     <header id="header"></header>
 
     <section id="content"></section>
+    <section id="List_ite1"></section>
+
 
     <script type="module">
       import { NavBar } from "./component/NavBar/script.js";
+      import { List_ite1 } from "./component/List_ite1/script.js";
+
+
+
+
+
+
+
+
 
       // Controleur
       // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
@@ -28,6 +39,8 @@
 
       C.start = function () {
         V.renderNavBar("C.handlerAbout()");
+        V.renderList_ite1("C.handlerAbout()");
+
       };
 
       // Vue (contient tout ce qui est relatif à l'affichage)
@@ -43,6 +56,11 @@
       V.renderNavBar = function (hAbout) {
         let header = document.querySelector("#header");
         header.innerHTML = NavBar.format(hAbout);
+      };
+
+      V.renderList_ite1 = function (hAbout) {
+        let header = document.querySelector("#List_ite1");
+        header.innerHTML = List_ite1.format(hAbout);
       };
 
       C.start(); // Démarre l'application
