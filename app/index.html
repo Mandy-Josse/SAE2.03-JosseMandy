@@ -22,10 +22,6 @@
 
 
 
-
-
-
-
       // Controleur
       // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
       // Une fois l'application terminée, on pourrait remettre let C.
@@ -58,9 +54,9 @@
         header.innerHTML = NavBar.format(hAbout);
       };
 
-      V.renderList_ite1 = function (hAbout) {
-        let header = document.querySelector("#List_ite1");
-        header.innerHTML = List_ite1.format(hAbout);
+      V.renderList_ite1 = function () {
+        let List_ite1 = document.querySelector("#List_ite1");
+        List_ite1.innerHTML = List_ite1.format(DataMovie);
       };
 
       C.start(); // Démarre l'application
