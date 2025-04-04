@@ -4,5 +4,5 @@
 @import "./variables.css" layer(variables);
 @import "./utilities.css" layer(utilities);
 
-@import "../component/NavBar/style.css" layer(components);
-@import "../component/ite1/style.css" layer(components);
+@import "./../component/NavBar/style.css" layer(components);
+@import "./../component/ite1/style.css" layer(components);
