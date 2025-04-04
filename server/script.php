@@ -59,7 +59,7 @@ if ( isset($_REQUEST['todo']) ){
       exit();
   }
 
-  if (data ===false) {
+  if (data === false) {
     echo json_encode('[error] Controller returns false');
     http_response_code(500);
     exit();

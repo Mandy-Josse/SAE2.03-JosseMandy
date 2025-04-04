@@ -42,6 +42,5 @@ function readMoviesController(){
         else {
             return false;
         }
-    }
-        
+    }   
 }
