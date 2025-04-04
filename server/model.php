@@ -21,14 +21,15 @@ define("DBPWD", "josse10");
 
 function getAllMovies(){
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    $sql = "Select id, name, image from Movie";
+    $sql = "select id, name, image from Movie";
     $stmt = $cnx->prepare($sql);
     $stmt->execute();
     $res = $stmt->fetchAll(PDO::FETCH_OBJ);
     return $res;
-} 
+};
 
-function addMovie($n, $y, $l, $d1, $d2, $c, $i, $t, $a) {
+
+/* function addMovie($n, $y, $l, $d1, $d2, $c, $i, $t, $a) {
     $sql = "INSERT INTO Movie (name, year, length, description, director, id_categorie, image, trailer, min_age)
             VALUES (:name, :year, :length, :description, :director, :id_categorie, :image, :trailer, :min_age)";
     
@@ -48,4 +49,4 @@ function addMovie($n, $y, $l, $d1, $d2, $c, $i, $t, $a) {
     $stmt->execute();
     $res = $stmt->rowCount(); 
     return $res;
-}
+}; */

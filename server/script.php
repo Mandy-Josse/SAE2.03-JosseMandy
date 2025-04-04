@@ -43,14 +43,15 @@ if ( isset($_REQUEST['todo']) ){
   header('Content-Type: application/json');
   $todo = $_REQUEST['todo'];
 
+
   switch ($todo) {
 
-    case 'readmovies':
-      $response = readMoviesController();
+    case 'getAllMovies':
+      $data = readMoviesController();
       break;
 
     case 'addMovie':
-      $response = addMoviesController();
+      $data = addMoviesController();
       break;
 
     default:
@@ -59,7 +60,7 @@ if ( isset($_REQUEST['todo']) ){
       exit();
   }
 
-  if (data === false) {
+  if ($data === false) {
     echo json_encode('[error] Controller returns false');
     http_response_code(500);
     exit();
@@ -67,6 +68,7 @@ if ( isset($_REQUEST['todo']) ){
 
   echo json_encode($data);
   http_response_code(200);
+  exit();
 }
 
 http_response_code(404);
