@@ -5,23 +5,22 @@ let template2 = await templateFile2.text();
 
 let List_ite1 = {};
 
-List_ite1.format = function (data) {
+List_ite1.format = function (data, movies, content) {
   let html = template;
-  List_ite1.formatOneCard (data)
+  html += List_ite1.formatOneCard(data);
+  if (movies.length == 0) {
+    content.innerHTML = "<p>Aucun film disponible pour le moment.</p>";
+  }  
   return html;
 };
-
-
-
 
 List_ite1.formatOneCard = function (data) {
   let html = template2;
 
-  let truncated_name = data.Name.length > 15 ? Name.substring(0,15) + "..." : Name;
-  html = html.replace("{{Affiche}}", data.affiche);
-  html = html.replace("{{Name}}", truncated_name);
+  let truncated_name = data.Name.length > 15 ? data.Name.substring(0, 15) + "..." : data.Name;
+  html = html.replace("{{image_name}}", data.image_name);
+  html = html.replace("{{title}}", truncated_name);
   return html;
 };
-
 
 export { List_ite1 };

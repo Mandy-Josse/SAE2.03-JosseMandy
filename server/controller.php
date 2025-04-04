@@ -20,10 +20,28 @@
  */
 require("model.php");
 
-
-
-
 function readMoviesController(){
     $movies = getAllMovies();
     return $movies;
+
+    function addMovieController() {
+        $titre = $_REQUEST['name'];
+        $annee = $_REQUEST['year'];
+        $duree = $_REQUEST['length'];
+        $description = $_REQUEST['description'];
+        $realisateur = $_REQUEST['director'];
+        $categorie = $_REQUEST['id_category'];
+        $affiche = $_REQUEST['image'];
+        $URLtrailer = $_REQUEST['trailer'];
+        $age = $_REQUEST['min_age'];
+
+        $ok = addMovie($titre, $annee, $duree, $description, $realisateur, $categorie);
+        if ($ok!= 0) {
+            return "Le film $titre à bien été ajouté.";
+        }   
+        else {
+            return false;
+        }
+    }
+        
 }

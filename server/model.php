@@ -20,15 +20,30 @@ define("DBPWD", "josse10");
 
 
 function getAllMovies(){
-    // Connexion à la base de données
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    // Requête SQL pour récupérer le menu avec des paramètres
-    $sql = "select id, name, image from Movie";
-    // Prépare la requête SQL
+    $sql = "Select id, name, image from Movie";
     $stmt = $cnx->prepare($sql);
-    // Exécute la requête SQL
     $stmt->execute();
-    // Récupère les résultats de la requête sous forme d'objets
     $res = $stmt->fetchAll(PDO::FETCH_OBJ);
-    return $res; // Retourne les résultats
+    return $res;
+} 
+
+function addMovie($n, $y, $l, $d1, $d2, $c, $i, $t, $a) {
+    $sql = "INSERT INTO Movie (name, year, length, description, director, id_categorie)
+            VALUES (:name,:year,:length, :description, :director, :id_categorie )";
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':name', $n);
+    $stmt->bindParam(':year', $y);
+    $stmt->bindParam(':length', $l);
+    $stmt->bindParam(':description', $d1);
+    $stmt->bindParam(':director', $d2);
+    $stmt->bindParam(':id_categorie', $c);
+    $stmt->bindParam(':image', $i);
+    $stmt->bindParam(':trailer', $t);
+    $stmt->bindParam(':min_age', $m);
+
+
+    $stmt->execute();
+    $res = $stmt->rowCount(); 
+    return $res;
 }
