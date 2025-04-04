@@ -17,10 +17,9 @@ List_ite1.format = function (data) {
 List_ite1.formatOneCard = function (data) {
   let html = template2;
 
-  let truncated_name =
-    data.name.length > 15 ? data.name.substring(0, 15) + "..." : data.name;
+  /* let truncated_name = data.name.length > 15 ? data.name.substring(0, 15) + "..." : data.name; */
   html = html.replace("{{image_name}}", data.image_name);
-  html = html.replace("{{title}}", truncated_name);
+  html = html.replace("{{title}}", data.name);
   return html;
 };
 

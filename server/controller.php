@@ -43,5 +43,4 @@ function addMovieController() {
     else {
         return false;
     }
-}   
-*/
+}   */
