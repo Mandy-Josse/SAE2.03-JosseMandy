@@ -25,7 +25,7 @@ function readMoviesController(){
     return $movies;
 }
 
-/*
+
 function addMovieController() {
     $titre = $_REQUEST['name'];
     $annee = $_REQUEST['year'];
@@ -43,4 +43,4 @@ function addMovieController() {
     else {
         return false;
     }
-}   */
+}

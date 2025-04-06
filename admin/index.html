@@ -8,14 +8,17 @@
   </head>
   <body>
     <section id="log"></section>
+    <section id="addmov"></section>
 
     <script type="module">
       import { Log } from "./component/Log/script.js";
+      import { NewMovieForm } from "./component/MovieForm/script.js";
 
       window.C = {};
 
       C.start = function () {
         V.renderLog("Démarrage de l'application");
+        V.renderAddMovie();
       };
 
       window.V = {};
@@ -23,6 +26,10 @@
       V.renderLog = function (txt) {
         let content = document.querySelector("#log");
         content.innerHTML = Log.format(txt);
+      };
+      V.renderAddMovie = function () {
+        let addmovie = document.querySelector("#addmov");
+        addmovie.innerHTML = NewMovieForm.format("ajouterFilm");
       };
 
       C.start();

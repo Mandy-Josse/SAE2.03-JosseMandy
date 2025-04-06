@@ -1,0 +1,101 @@
+<div class="addMovie">
+  <h2 class="addMovie__title">Ajouter un film</h2>
+  <form class="addMovie__form">
+    <input
+      class="addMovie__intput"
+      required
+      type="text"
+      name="title"
+      placeholder="Titre"
+    />
+
+    <input
+      class="addMovie__intput"
+      required
+      type="number"
+      name="annee"
+      placeholder="Année"
+      min="1895"
+      max="2025"
+    />
+    <select class="addMovie__intput" name="min_age">
+      <option value="0">Tous publics</option>
+      <option value="10">10ans</option>
+      <option value="12">12ans</option>
+      <option value="16">16ans</option>
+      <option value="18">18ans</option>
+    </select>
+
+    <input
+      class="addMovie__intput"
+      required
+      type="text"
+      name="categorie"
+      placeholder="Catégorie"
+      pattern="[^0-9]*"
+      title="Numbers are not allowed"
+    />
+    <input
+      class="addMovie__intput"
+      required
+      type="text"
+      name="realisateur"
+      placeholder="Réalisateur"
+      pattern="[^0-9]*"
+      title="Numbers are not allowed"
+    />
+    <input
+      class="addMovie__intput"
+      required
+      type="number"
+      name="duree"
+      placeholder="Durée"
+    />
+    <input
+      class="addMovie__intput"
+      required
+      type="text"
+      name="synopsis"
+      placeholder="Synopsis"
+      pattern="[^0-9]*"
+    />
+    <input
+      class="addMovie__intput"
+      required
+      type="text"
+      name="trailer"
+      placeholder="URL de la bande annonce"
+      pattern="[^0-9]*"
+      title="Numbers are not allowed"
+    />
+    <input
+      class="addMovie__intput"
+      required
+      type="text"
+      name="affiche_name"
+      placeholder="Nom de l'affiche"
+      pattern="[^0-9]*"
+      title="Numbers are not allowed"
+    />
+
+    <button class="addMovie__sendbutton" onclick="{{handler}}">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="addMovie__icon"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        width="20"
+        height="20"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M12 4v16m8-8H4"
+        />
+      </svg>
+      Ajouter
+    </button>
+  </form>
+</div>

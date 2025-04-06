@@ -29,11 +29,10 @@ function getAllMovies(){
 };
 
 
-/* function addMovie($n, $y, $l, $d1, $d2, $c, $i, $t, $a) {
+function addMovie($n, $y, $l, $d1, $d2, $c, $i, $t, $a) {
     $sql = "INSERT INTO Movie (name, year, length, description, director, id_categorie, image, trailer, min_age)
             VALUES (:name, :year, :length, :description, :director, :id_categorie, :image, :trailer, :min_age)";
     
-
     $stmt = $cnx->prepare($sql);
     $stmt->bindParam(':name', $n);
     $stmt->bindParam(':year', $y);
@@ -49,4 +48,4 @@ function getAllMovies(){
     $stmt->execute();
     $res = $stmt->rowCount(); 
     return $res;
-}; */
+};
