@@ -26,15 +26,19 @@
       <option value="18">18ans</option>
     </select>
 
-    <input
-      class="addMovie__intput"
-      required
-      type="text"
-      name="categorie"
-      placeholder="Catégorie"
-      pattern="[^0-9]*"
-      title="Numbers are not allowed"
-    />
+    <select class="addMovie__intput" name="categorie">
+      <option value="1">Action</option>
+      <option value="2">Comédie</option>
+      <option value="3">Drame</option>
+      <option value="4">Science-fiction</option>
+      <option value="5">Animation</option>
+      <option value="6">Thriller</option>
+      <option value="7">Horreur</option>
+      <option value="8">Aventure</option>
+      <option value="9">Fantaisie</option>
+      <option value="10">Documentaire</option>
+    </select>
+
     <input
       class="addMovie__intput"
       required
@@ -42,7 +46,6 @@
       name="realisateur"
       placeholder="Réalisateur"
       pattern="[^0-9]*"
-      title="Numbers are not allowed"
     />
     <input
       class="addMovie__intput"
@@ -66,7 +69,6 @@
       name="trailer"
       placeholder="URL de la bande annonce"
       pattern="[^0-9]*"
-      title="Numbers are not allowed"
     />
     <input
       class="addMovie__intput"
@@ -75,7 +77,6 @@
       name="affiche_name"
       placeholder="Nom de l'affiche"
       pattern="[^0-9]*"
-      title="Numbers are not allowed"
     />
 
     <button class="addMovie__sendbutton" onclick="{{handler}}">

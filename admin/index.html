@@ -16,20 +16,24 @@
 
       window.C = {};
 
+      C.handlerAddMovie = async function () {
+        let data = await DataMovie.requestMovies();
+        V.renderList_ite1(data);
+      };
+
       C.start = function () {
         V.renderLog("Démarrage de l'application");
         V.renderAddMovie();
       };
 
       window.V = {};
-
       V.renderLog = function (txt) {
         let content = document.querySelector("#log");
         content.innerHTML = Log.format(txt);
       };
       V.renderAddMovie = function () {
         let addmovie = document.querySelector("#addmov");
-        addmovie.innerHTML = NewMovieForm.format("ajouterFilm");
+        addmovie.innerHTML = NewMovieForm.format("C.handlerAddMovie()");
       };
 
       C.start();

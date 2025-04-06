@@ -4,7 +4,6 @@ let HOST_URL = "https://mmi.unilim.fr/~josse10/SAE2.03-JosseMandy"; // CHANGE TH
 let DataMovie = {};
 
 DataMovie.add = async function () {
-  r;
   let answer = await fetch(HOST_URL + "/sever/script.php?todo=addMovie");
   let addmovies = await answer.json();
   return addmovies;
