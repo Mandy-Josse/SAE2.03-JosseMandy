@@ -37,12 +37,12 @@ function addMovieController() {
     $duree = $_REQUEST['duree'];
     $description = $_REQUEST['description'];
     $realisateur = $_REQUEST['realisateur'];
-    $categorie = $_REQUEST['categorie'];
+    $id_category = $_REQUEST['id_category'];
     $affiche = $_REQUEST['affiche_name'];
     $URLtrailer = $_REQUEST['trailer'];
     $age = $_REQUEST['min_age'];
 
-    $ok = addMovie($titre, $annee, $duree, $description, $realisateur,$categorie, $affiche, $URLtrailer, $age);
+    $ok = addMovie($titre, $annee, $duree, $description, $realisateur,$id_category, $affiche, $URLtrailer, $age);
 
     if ($ok != 0) {
      return ["success" => true, "message" => "Le film $titre a bien été ajouté."];

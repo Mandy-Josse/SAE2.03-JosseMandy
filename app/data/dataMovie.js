@@ -13,8 +13,8 @@ DataMovie.requestMovieDetails = async function (id) {
   let answer = await fetch(
     HOST_URL + "/server/script.php?todo=getMovieDetails&id=" + id
   );
-  let movie = await answer.json(); // This will be an object, not an array
-  return movie;
+  let movieArray = await answer.json();
+  return movieArray[0]; // ✅ Prend le premier (et seul) film
 };
 
 export { DataMovie };

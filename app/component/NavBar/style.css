@@ -1,10 +1,18 @@
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+header {
+  position: sticky;
+  z-index: 10;
+  top: 0;
   padding: 1rem 3rem;
   color: var(--color-fg);
   background-color: var(--color-bg);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  color: var(--color-fg);
 
   .navbar__item {
     --_offset: 0.2rem;
@@ -18,4 +26,18 @@
       --_offset: 0.5rem;
     }
   }
+}
+.navbar__list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+}
+
+.navbar__title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--color-fg);
+  padding: 1rem 5rem 1rem 1rem;
 }

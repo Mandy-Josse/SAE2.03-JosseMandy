@@ -30,22 +30,30 @@
         V.renderList_ite1(data);
       };
 
-      C.handlerAbout = function () {
-        alert(
-          "Ceci est une base de projet pour la SAE2.03 édition 2025. Bonne chance !"
-        );
+      C.handlerbacktofilms = function () {
+        const sectionIte1 = document.querySelector("#ite1");
+        if (sectionIte1) {
+          sectionIte1.scrollIntoView({ behavior: "smooth" }); // défilement fluide
+        }
+      };
+      C.handlerbacktofilmdetails = function () {
+        const sectiondetails = document.querySelector("#movieDetails");
+        if (sectiondetails) {
+          sectiondetails.scrollIntoView({ behavior: "smooth" }); // défilement fluide
+        }
       };
 
-      C.handlerDetail = function (id) {
-        let data = DataMovie.requestMovieDetails(id);
-        console.log(data); // Add this line to log the returned data
+      C.handlerDetail = async function (id) {
+        let data = await DataMovie.requestMovieDetails(id); // ✅ on attend la réponse
+        console.log("Movie details object:", data); // ✅ debug affichera un vrai objet
 
         V.renderMovieDetails(data);
+        C.handlerbacktofilmdetails();
       };
 
       C.start = async function () {
         C.getMovie();
-        V.renderNavBar("C.handlerAbout()");
+        V.renderNavBar("C.handlerbacktofilms()");
       };
 
       // Vue (contient tout ce qui est relatif à l'affichage)

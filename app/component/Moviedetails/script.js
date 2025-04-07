@@ -4,6 +4,8 @@ let template = await templateFile.text();
 let MovieDetails = {};
 
 MovieDetails.format = function (data) {
+  console.log("Movie details object :", data); // debug
+
   let html = template;
 
   html = html.replace("{{image}}", data.image);

@@ -34,8 +34,8 @@
         $sql = "SELECT name, year, length, description, director, id_category, image, trailer, min_age FROM Movie WHERE id = $id";
         $stmt = $cnx->prepare($sql);
         $stmt->execute();
-        $res = $stmt->fetchAll(PDO::FETCH_OBJ);
-        return $res;
+        $res = $stmt->fetch(PDO::FETCH_OBJ);
+        return [$res];
     };
 
 
@@ -43,7 +43,7 @@
     function addMovie($n, $y, $l, $d1, $d2, $c, $i, $t, $a) {
         $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
         $sql = "INSERT INTO Movie (name, year, length, description, director, id_category, image, trailer, min_age)
-                VALUES (:name, :year, :length, :description, :director, :id_category, :image, :trailer, :min_age)";
+                VALUES (:name, :year, :length, :description, :director, :id_categorie, :image, :trailer, :min_age)";
         $stmt = $cnx->prepare($sql);
 
         $stmt->bindParam(':name', $n);
