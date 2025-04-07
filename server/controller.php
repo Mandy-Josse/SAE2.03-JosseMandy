@@ -45,9 +45,9 @@ function addMovieController() {
     $ok = addMovie($titre, $annee, $duree, $description, $realisateur,$categorie, $affiche, $URLtrailer, $age);
 
     if ($ok != 0) {
-        echo json_encode(["success" => true, "message" => "Le film $titre a bien été ajouté."]);
+     return ["success" => true, "message" => "Le film $titre a bien été ajouté."];
     } else {
-        echo json_encode(["success" => false, "message" => "Erreur lors de l'ajout du film."]);
+        return ["success" => false, "message" => "Erreur lors de l'ajout du film."];
     }
 }
 

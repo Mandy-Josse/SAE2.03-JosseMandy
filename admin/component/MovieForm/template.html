@@ -15,6 +15,7 @@
       type="number"
       name="annee"
       placeholder="Année"
+      pattern="[0-9]{4}"
       min="1895"
       max="2025"
     />
@@ -53,6 +54,8 @@
       type="number"
       name="duree"
       placeholder="Durée"
+      min="0"
+      max="9999"
     />
     <input
       class="addMovie__intput"
@@ -79,7 +82,7 @@
       pattern="[^0-9]*"
     />
 
-    <intput type="button" class="addMovie__sendbutton" onclick="{{handler}}">
+    <div type="button" class="addMovie__sendbutton" onclick="{{handler}}">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="addMovie__icon"
@@ -97,6 +100,6 @@
         />
       </svg>
       Ajouter
-    </intput>
+    </div>
   </form>
 </div>

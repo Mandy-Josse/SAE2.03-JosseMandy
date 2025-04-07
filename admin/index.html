@@ -21,6 +21,8 @@
         let form = document.querySelector(".addMovie__form");
         let fd = new FormData(form);
         let res = await DataMovie.add(fd);
+        console.log(res);
+        V.renderLog(res.message);
       };
 
       C.start = function () {
