@@ -1,0 +1,67 @@
+{
+    "entree": {
+        "description": "Vous vous trouvez dans l'entrée de la maison. 3 options s'offrent à vous.",
+        "portes": ["couloir", "salon", "cuisine"]
+    },
+
+    "couloir": {
+        "description": "Le couloir est étroit et sombre. Mieux ne vaut pas s'y attarder...",
+        "portes": ["escalier", "entree", "salon"]
+    },
+
+    "salon": {
+        "description": "Le salon est crasseux, canapés et fauteuils sont éventrés. On devine qu'ils n'ont pas été les seuls à cause des tâches de sang sur les murs...",
+        "portes": ["terrasse", "entree", "couloir"]
+    },
+
+    "terrasse": {
+        "description": "La terrasse est envahie d'une épaisse et épineuse végétation, impossible de passer par là.",
+        "portes": ["salon"]
+    },
+
+    "cuisine": {
+        "description": "La cuisine ? Au robinet qui émerge de la mer de détritus tel un périscope, on suppose que c'est bien la cuisine.",
+        "portes": ["entree", "cellier"]
+    },
+
+    "cellier": {
+        "description": "Le cellier fait tampon entre la cuisine et l'entrée, l'odeur y est insupportable, ne trainez pas.",
+        "portes": ["entree"]
+    },
+
+    "escalier": {
+        "description": "L'escalier est piégeur, plusieurs marches sont cassées. En dessous scintillent de curieuses pointes métalliques.",
+        "portes": ["couloir", "chambre", "bureau"]
+    },
+
+    "chambre": {
+        "description": "Etonnamment, la chambre est exceptionnellement propre et parfaitement rangée. Quelles traces a-t-on voulur faire disparaître dans cette pièce ?",
+        "portes": ["escalier", "grenier"]
+    },
+
+    "grenier": {
+        "description": "Le grenier est sombre et poussiéreux. Des choses sont pendues aux poutres. Mais il y a trop de toiles d'araignées pour deviner ce dont il s'agit.",
+        "portes": ["chambre", "velux"]
+    },
+
+    "bureau": {
+        "description": "Le bureau sent le papier et le cuir moisis. Des documents sont éparpillées aux quatres coins de la pièce. Clairement la pièce a déjà été fouillée. Etes-vous bien seul dans cette bâtisse ?",
+        "portes": ["couloir", "balcon"]
+    },
+
+    "balcon": {
+        "description": "Le balcon vous offre un bon bol d'air frais. La végétation envahissante vous empêche d'appréhender les alentours. Le vent bruisse dans les buissons. Etes-vous certain que ce n'est que le vent ?",
+        "portes": ["bureau"]
+    },
+
+    "velux": {
+        "description": "Le velux semble bloqué. Perché sur une chaise, vous y portez un bon coup d'épaule.",
+        "portes": ["sortie"]
+    },
+
+    "sortie": {
+        "description": "Ouf, vous voici hors d'atteinte ! Juste derrière vous une main noueuse referme le vélux ! Vous vous laissez glisser le long de la gouttière et vous enfuyez aussi vite que vous le pouvez !",
+        "portes": ["sortie"]
+    }
+
+}

@@ -1,0 +1,7 @@
+@import "./reset.css";
+@import "./variables.css";
+@import "./exercice.css";
+
+@import "../component/Log/style.css";
+@import "../component/NewMenuForm/style.css";
+@import "../component/DeleteMenuForm/style.css";

@@ -13,12 +13,14 @@
     <script type="module">
       import { Log } from "./component/Log/script.js";
       import { NewMovieForm } from "./component/MovieForm/script.js";
+      import { DataMovie } from "./data/dataMovie.js";
 
       window.C = {};
 
       C.handlerAddMovie = async function () {
-        let data = await DataMovie.requestMovies();
-        V.renderList_ite1(data);
+        let form = document.querySelector(".addMovie__form");
+        let fd = new FormData(form);
+        let res = await DataMovie.add(fd);
       };
 
       C.start = function () {

@@ -1,0 +1,11 @@
+.dialog__direction {
+    background-color: white;
+    color: darkslategray;
+    padding: 10px 26px;
+    margin: 3px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 10px;
+}

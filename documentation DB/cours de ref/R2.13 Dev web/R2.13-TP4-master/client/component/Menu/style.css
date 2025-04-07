@@ -1,0 +1,26 @@
+.menu {
+    width: 70%;
+    margin-left: 0;
+    text-align: center;
+    font-family: 'Corinthia', cursive;
+    font-size: xx-large;
+    font-weight: 700;
+    color: white;
+}
+
+.menu__entree {
+    padding: 1em;
+    padding-top: 2em;
+}
+
+.menu__plat {
+    padding: .5em;
+}
+
+.menu__dessert {
+    padding: 1em;
+}
+
+.menu__subtitle {
+    color:rgb(239, 232, 232);
+}

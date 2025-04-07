@@ -3,10 +3,18 @@ let HOST_URL = "https://mmi.unilim.fr/~josse10/SAE2.03-JosseMandy"; // CHANGE TH
 
 let DataMovie = {};
 
-DataMovie.add = async function () {
-  let answer = await fetch(HOST_URL + "/sever/script.php?todo=addMovie");
-  let addmovies = await answer.json();
-  return addmovies;
+DataMovie.add = async function (fdata) {
+  let config = {
+    method: "POST",
+    body: fdata,
+  };
+
+  let answer = await fetch(
+    HOST_URL + "/server/script.php?todo=addMovie",
+    config
+  );
+  let data = await answer.json();
+  return data;
 };
 
 export { DataMovie };

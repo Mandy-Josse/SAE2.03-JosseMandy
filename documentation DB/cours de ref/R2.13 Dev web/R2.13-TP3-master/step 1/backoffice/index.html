@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <title>Back Office</title>
+        <meta charset="UTF-8">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@200&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="./css/base.css">
+    </head>
+    <body>
+
+    <section id="app">
+
+        <nav> 
+            <h1>BACK OFFICE</h1>
+        </nav>
+        
+            
+        <section id="addMenu"></section>
+    
+    </section>
+
+    <script type="module">
+        import {NewMenuForm} from './component/NewMenuForm/script.js';
+        import {DataMenu} from './data/dataMenu.js';
+
+        // Controleur
+        window.C = {};
+
+        /** C.start
+        * Le rôle de la fonction est d'initialiser l'application.
+        * On y mettra tout le code nécessaire pour démarrer l'application.
+        * C.start est appelée à la fin du script pour qu'elle s'exécute
+        * au chargement de la page.
+        */
+        C.start = function(){
+            V.renderMenu();
+        }
+
+        // Vue
+        window.V = {};
+
+        V.renderMenu = function(data){
+            let content = document.querySelector('#addMenu');
+            content.innerHTML = NewMenuForm.format();
+        }
+
+        // intialisation de l'application
+        C.start();
+    </script>
+    </body>
+</html>

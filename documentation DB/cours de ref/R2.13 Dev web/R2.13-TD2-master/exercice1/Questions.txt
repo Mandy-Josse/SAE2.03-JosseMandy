@@ -1,0 +1,5 @@
+Q1
+Ouvrez le fichier server/script.php et suivez les indications données en commentaire
+
+Q2
+Ouvrez le fichier client/index.php et suivez les indications données en commentaire

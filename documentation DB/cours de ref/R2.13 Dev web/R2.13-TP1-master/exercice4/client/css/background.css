@@ -1,0 +1,26 @@
+.bg {
+    /* The image used */
+    background-image: url("../assets/bg.jpg");
+  
+    /* Full height */
+    height: 100%;
+  
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  .bgOut {
+     /* The image used */
+     background-image: url("../assets/out.jpg");
+  
+     /* Full height */
+     height: 100%;
+  
+     /* Center and scale the image nicely */
+     background-position: center;
+     background-repeat: no-repeat;
+     background-size: cover;
+  }
+  

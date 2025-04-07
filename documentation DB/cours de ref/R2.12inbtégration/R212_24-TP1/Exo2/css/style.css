@@ -1,0 +1,132 @@
+@import url();
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  font-family: var(--ff-primary);
+  background-color: whitesmoke;
+}
+
+.parent{
+  display: grid;
+  grid-template-areas:
+    "a"
+    "b"
+    "c"
+    "d"
+    "e"
+    "f"
+    "g"
+    "h";
+  max-width: 80%;
+  gap: 1rem;
+  font-weight: 400;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  height: 100%;
+  width: 100%;
+  padding: 2rem;
+  gap: 1rem;
+  text-align: left;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card__content {
+  font-size: 140%;
+  font-weight: 500;
+}
+
+
+
+/* .card--purple::after {
+    content: url("../images/bg-pattern-quotation.svg");
+    position: absolute;
+    top: 10px;
+    right: 0px;
+} */
+
+.card1 {
+  grid-area: a;
+  align-items: center;
+  text-align: center;
+  color: var(--clr-secondary-500);
+  background-color: var(--clr-primary-800);
+}
+.card1__text__color {
+  color: var(--clr-secondary-400);
+}
+
+.card2 {
+  grid-area: b;
+  background-color: var(  --clr-secondary-500);
+}
+
+.card3 {
+  grid-area: c;
+  padding-bottom: 0;
+  background-color: var(--clr-secondary-400);
+}
+
+.card4 {
+  grid-area: d;
+  background-color: var(--clr-primary-400);
+  padding-right: 0;
+}
+
+
+.card5 {
+  flex-direction: row;
+  align-items: center;
+  grid-area: e;
+  color: var(--clr-secondary-500);
+  background-color: var(--clr-primary-800);
+}
+.card5__image {
+  width: 15rem;
+  height: 15rem;
+}
+
+.card6 {
+  grid-area: f;
+  background-color: var(  --clr-secondary-500);
+}
+
+.card7 {
+  background-color: var(--clr-secondary-alpha);
+  grid-area: g;
+}
+.card7__text__color {
+  color: var(--clr-primary-800);
+}
+
+.card8 {
+  background-color: var(--clr-secondary-400);
+  grid-area: h;
+}
+.card8__image {
+}
+
+
+.card__img-cont {
+  margin-right: -50px;
+}
+
+@media (min-width: 50em) {
+  .parent{
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas:
+      "g a a d"
+      "g b c d"
+      "h b c d"
+      "h f e e";
+  }
+}

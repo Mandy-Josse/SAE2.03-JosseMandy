@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kata 5 | Template & @media</title>
+    <style>
+    body {
+        height: 100vh;
+        margin: 0;
+        font-family: sans-serif;
+    }
+
+    .parent{
+        height: 100%;
+        /* Création d'un contexte GridLayout */
+        display: grid;
+
+        /* Création d'un template rows */
+        grid-template-areas:
+            "h h h"
+            "m m m"
+            "l l l"
+            "r r r"
+            "f f f";
+    }
+
+    .header {
+        grid-area: h;
+        padding: 2rem;
+        background: lightpink;
+    }
+
+    .sidebar--left {
+        /* Changement d'ordre */
+        grid-area: l;
+
+        background: lightblue;
+    }
+
+    .main {
+        grid-area: m;
+        background: coral;
+    }
+
+    .sidebar--right {
+        grid-area: r;
+        background: yellow;
+    }
+
+    .footer {
+        /* Changement d'ordre */
+        grid-area: f;
+        padding: 2em;
+        text-align: center;
+        background: wheat;
+    }
+
+    [class^='sidebar']{
+        padding: 1em;
+    }
+
+    @media (min-width: 45em) {
+        .parent{
+            grid-template-areas:
+            "h h h"
+            "l m r"
+            "l m r"
+            "f f f";
+        }
+
+        .header {
+            /* Placement */
+
+        }
+
+        .sidebar--left {
+            /* Placement */
+
+            /* Changement d'ordre */
+
+        }
+
+        .main {
+            /* Placement */
+
+        }
+
+        .sidebar--right {
+             /* Placement */
+
+        }
+
+        .footer {
+            /* Placement */
+
+        }    
+    }
+    </style>
+</head>
+<body>
+<div class="parent">
+    <header class="header">
+        <h1 >Header</h1>
+    </header>
+    <aside class="sidebar--left" >Left Sidebar</aside>
+    <main class="main"></main>
+    <aside class="sidebar--right" >Right Sidebar</aside>
+    <footer class="footer">Footer Content</footer>
+</div>
+</body>
+</html>

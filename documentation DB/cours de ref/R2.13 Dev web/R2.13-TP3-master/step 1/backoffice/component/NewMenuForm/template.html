@@ -1,0 +1,23 @@
+<div class="addMenu">
+    <h4 class="addMenu__title"># Ajouter ou modifier un menu</h4>
+    <form class="addMenu__form" method='GET' action="https://mmi.unilim.fr/~josse10/TP3/step%201/server/script.php">
+        <select name="jour">
+            <option value="">--Please choose an option--</option>
+            <option value="lundi">Lundi</option>
+            <option value="mardi">Mardi</option>
+            <option value="mercredi">Mercredi</option>
+            <option value="jeudi">Jeudi</option>
+            <option value="vendredi">Vendredi</option>
+            <option value="samedi">Samedi</option>
+            <option value="dimanche">Dimanche</option>
+        </select>
+        <input type='text' name='entree' placeholder='Saisir une entrée' required pattern="[^0-9]+" title="Numbers are not allowed">
+        <input type='text' name='plat' placeholder='Saisir un plat' required pattern="[^0-9]+" title="Numbers are not allowed">
+        <input type='text' name='dessert' placeholder='Saisir un dessert' required pattern="[^0-9]+" title="Numbers are not allowed">
+        <input type="submit" value="Update" name="todo">
+
+
+
+
+    </form>
+</div>

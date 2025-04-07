@@ -42,8 +42,6 @@ if ( isset($_REQUEST['todo']) ){
    */
   header('Content-Type: application/json');
   $todo = $_REQUEST['todo'];
-
-
   switch ($todo) {
 
     case 'getAllMovies':
@@ -51,7 +49,7 @@ if ( isset($_REQUEST['todo']) ){
       break;
 
     case 'addMovie':
-      $data = addMoviesController();
+      $data = addMovieController();
       break;
 
     default:

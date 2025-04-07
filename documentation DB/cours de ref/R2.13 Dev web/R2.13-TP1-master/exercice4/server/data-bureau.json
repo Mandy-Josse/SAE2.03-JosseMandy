@@ -1,0 +1,4 @@
+{
+        "description": "Le bureau sent le papier et le cuir moisis. Des documents sont éparpillées aux quatres coins de la pièce. Clairement la pièce a déjà été fouillée. Etes-vous bien seul dans cette bâtisse ?",
+        "portes": ["couloir", "balcon"]
+}

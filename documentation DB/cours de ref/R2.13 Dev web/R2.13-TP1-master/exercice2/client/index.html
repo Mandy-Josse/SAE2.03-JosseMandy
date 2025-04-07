@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang='fr'>
+    <head>
+        <meta charset="UTF-8">
+        <title>Escape Game</title>
+        <link href="./css/base.css" type="text/css" rel="stylesheet" />
+    </head>
+    <body class="bg">
+      
+       <section id="room">
+          <!-- le information sur une pièce et les directions possibles s'afficheront ici -->
+       </section>
+
+      
+       <script type="module">
+        import { DataDialog} from './data/dataDialog.js';
+        import { Dialog } from './component/Dialog/script.js';
+
+        /*  Questions : 
+
+            Les questions de cet exercice portent uniquement sur la partie cliente.
+            L'architecture de la partie cliente est analogue à celle de votre SAE1.05.
+            A ce stade, nous n'allons pas encore établir le dialogue HTTP avec la partie serveur.
+            
+
+            Q1 :
+            Complétez la fonction V.changeBackground. Testez depuis la console du navigateur.
+            Les classes de style bg et bgOut sont déjà déclarées (pour info elles sont dans css/background.css)
+
+            Q2 :
+            Vous aurez remarqué que la page présente un template non formaté.
+            C'est le résultat de l'appelle à la fonction V.renderDialog (fin de script) qui tente
+            d'afficher les données présentes dans DataDialog (data/dataDialog.js) à l'aide du 
+            composant Dialog (component/Dialog) 
+            Mettez à jour la fonction Dialog.format (component/Dialog/script.js) afin de formater
+            correctement le template avec des données structurées telles que celles présentes dans
+            DataDialog.
+            Vous utiliserez le composant Button qui est déjà complet.
+
+        */
+
+
+    
+
+
+        /*  V
+
+            La vue, objet qui regroupe toutes les opérations d'affichage et propres à l'interface
+            Note : 
+            Ecrire 'window.V' et non 'let V' permet de rendre l'objet V accessible depuis la console du navigateur.
+            Sinon ce ne serait pas possible car nous sommes dans un module javascript et par défaut, tout ce qui 
+            est dans un module n'est pas visible de l'extérieur du module. La console est extérieur aux modules.
+            Donc c'est uniquement pour que vous puissiez tester votre code depuis la console du navigateur.
+        */
+        window.V = {};
+
+        
+        /* V.renderDialog
+           Met à jour l'affichage de la boite de dialogue (composant Dialog) à l'aide des données data.
+           Le composant est affiché dans l'élément d'identifiant room.
+        */
+        V.renderDialog = function(data){
+            let cible = document.querySelector('#room');
+            cible.innerHTML =  Dialog.format(data);
+        }
+
+        /*  V.changeBackground
+
+            Pas de paramètre, pas de valeur de retour. 
+            La fonction change l'image en arrière plan de la page en enlevant la classe de style bg 
+            à l'élément body puis en ajoutant la classe de style bgOut à l'élément body
+        */
+        V.changeBackground = function(){
+            document.body.classlist.remove("bg")
+            document.body.classlist.add("bgOut")
+        }
+
+
+        V.renderDialog(DataDialog);
+
+
+       </script>
+    
+    </body>
+</html>

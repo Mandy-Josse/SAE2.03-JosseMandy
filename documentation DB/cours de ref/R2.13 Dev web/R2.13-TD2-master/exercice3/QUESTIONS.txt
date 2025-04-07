@@ -1,0 +1,28 @@
+Les questions suivantes ne portent que sur la parte serveur.
+
+
+Q1 : Importer la base de données
+Connectez vous à votre compte sur le serveur de base de données MySQL du département MMI.
+Utilisez l'onglet Importer pour pouvoir sélectionner et importer dans votre BDD le fichier .sql
+fournit avec cet exercice. 
+Vous devez constater que vous avez 2 nouvelles tables dans votre base "Lego_Collection" et "Lego_Set".
+Regardez leur contenu.
+Désormais les données sont dans ces tables sur votre BDD. C'est là qu'il faudra aller les chercher.
+
+
+Q2 : Configuration du script PHP server
+La partie serveur est déjà en grande partie fonctionnelle. Mais PHP va devoir se connecter à 
+votre bdd. Par conséquent il faut configurer vos identifants de connexion.
+Ouvrez le fichier server/model.php et modifiez en conséquence les données de connexion.
+
+Q3 : Test
+Copiez/collez la partie client de l'exercice précédent (éventuellement mettre à jour l'URL dans dataLegos.js).
+Testez ensuite que tout fonctionne, ou presque.
+
+
+Q3 : Rétablissement des autres collections
+Comme vous l'avez constaté, seule la collection creator est disponible. La partie serveur est en effet
+incomplète. En vous basant sur votre compréhension du script server/script.php et en utilisant les fonctions
+déclarées dans server/model.php, complétez server.php pour qu'il retourne les données des collections creator
+(déjà le cas) mais aussi creator expert et star wars.
+

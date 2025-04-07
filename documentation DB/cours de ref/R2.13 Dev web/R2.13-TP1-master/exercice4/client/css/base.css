@@ -1,0 +1,6 @@
+@import "./reset.css";
+@import "./variables.css";
+@import "./background.css";
+
+@import "../component/Button/style.css";
+@import "../component/Dialog/style.css";

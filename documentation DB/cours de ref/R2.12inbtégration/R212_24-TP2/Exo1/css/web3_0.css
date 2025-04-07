@@ -1,0 +1,45 @@
+.article {
+    grid-area: a;
+    display: flex;
+    flex-direction: column;
+}
+.web__image_container {
+    width: fit-content;
+    max-height: 15rem;
+    overflow: hidden;
+}
+.web__image {
+    height: 100%;
+    width: 100%;
+}
+
+@media (min-width: 50em) {
+    .web__image_container {
+        width: fill;
+        width: 100%;
+    }
+    .web__image {
+        height: 250%;
+        width: 100%;
+    }
+}
+
+.title {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: 800;
+    font-size: 150%;
+}
+.text-grey {
+    color: var(--clr-dark-grayish-blue);
+    font-weight: 400;
+}
+.button {
+    width:fit-content;
+    margin: 1rem;
+    margin-left: 0rem;
+    padding: 0.5em 2em 0.5em 2em;
+    color: var(--clr-off-white);
+    background-color: var(--clr-soft_red);
+    font-weight: 700;
+}

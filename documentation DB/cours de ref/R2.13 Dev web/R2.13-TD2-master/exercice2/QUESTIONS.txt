@@ -1,0 +1,19 @@
+Les questions suivantes ne portent que sur la partie client.
+La partie server est inchangée par rapport à l'exercice 1.
+
+
+Q1
+Vous disposez d'un composant LegoCard qui est fonctionnel. Il n'y a pas de modification à apporter.
+Juste à l'utiliser. Regardez (component/LegoCard/script.js) ce qu'il contient pour voir quoi en faire.
+Vous disposer d'un module dataLego (data/dataLego.js) qui est lui aussi fonctionnel. Regardez tout de
+même ce qu'il contient aussi.
+Dans index.html, complétez la fonction C.getCollection en cohérence avec sa documentation.
+Vous ferez bon usage de la fonction V.renderCollection qui permet d'afficher une collection de
+Lego dans la section d'identifiant content.
+Testez votre fonction depuis la console du navigateur en affichant l'une des collections
+disponibles.
+
+Q2
+Modifiez le menu de sorte à ce que si l'utilisateur clique sur l'une des collections, le navigateur
+exécutera votre fonction C.getCollection avec la bonne valeur de paramètre pour afficher la collection 
+de Lego correspondante.

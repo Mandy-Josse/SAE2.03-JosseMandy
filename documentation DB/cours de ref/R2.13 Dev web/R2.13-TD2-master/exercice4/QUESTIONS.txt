@@ -1,0 +1,10 @@
+Dans cet exercice, vous devrez modifier la partie server et la partie client.
+
+Q0 : 
+Reportez à l'identique la partie client du précédent exercice, modulo la mise à jour de l'URL (éventuellement)
+Mettez à jour les idenfiants de cnx à la bdd dans server/model.php
+
+Q1 : The missing collection
+Regardez bien le contenu de votre base de données : elle contient une collection qui n'est pas 
+présente dans votre application.
+Modifiez tout ce que vous devez modifer pour la rendre disponible comme les autres.

@@ -1,0 +1,4 @@
+{
+        "description": "L'escalier est piégeur, plusieurs marches sont cassées. En dessous scintillent de curieuses pointes métalliques.",
+        "portes": ["couloir", "chambre", "bureau"]
+}

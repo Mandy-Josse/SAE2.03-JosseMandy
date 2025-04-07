@@ -1,0 +1,28 @@
+.search {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 3rem;
+}
+.search__svg {
+    height: 2rem;
+    width: 2rem;
+    flex-shrink: 0;
+}
+
+.search__bar {
+    display: flex;
+    flex-direction: column;
+
+}
+
+hr {
+    width: 100vh;
+    opacity: 40%;
+}
+
+.search__text {
+    opacity: 1;
+    background-color: transparent;
+    border: none;
+}

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang='fr'>
+    <head>
+        <meta charset="UTF-8">
+        <title>Escape Game</title>
+        <link href="./css/base.css" type="text/css" rel="stylesheet" />
+    </head>
+    <body class="bg">
+      
+       <section id="room">
+          <!-- le information sur une pièce et les directions possibles s'afficheront ici -->
+       </section>
+
+       <h1 style="color:white" onclick="C.goTo('cuisine')">CLICK ME</h1>
+
+      
+       <script type="module">
+        import { DataDialog} from './data/dataDialog.js';
+        import { Dialog } from './component/Dialog/script.js';
+
+        /*  Questions : 
+
+            AVANT de répondre à ces questions il vous faut traiter la partie serveur.
+            Voir server/script.php !
+
+            Q1 :
+            Mettez à jour la variable HOST_URL en cohérence avec votre hébergement de la partie serveur.
+            
+            Q2 :
+            Actuellement, si on clique sur un bouton (une direction). Il ne se passe rien.
+            Cliquez sur "CLICK ME" et constatez.
+            Regardez dans le code HTML l'élément h1 correspondant.
+            Sachant que ce principe est applicable à n'importe quel élément HTML, modfiez
+            le composant Button (template ET script.js) afin que chaque bouton soit doté de la même
+            instruction avec le nom de la bonne pièce en paramètre.
+            Vous pourrez ensuite supprimer l'élément h1.
+
+            Q3 :
+            Il ne reste plus qu'à traiter la fin du jeu.
+            Que modifier pour que l'image en fond change lorsque la sortie est atteinte ?
+        */
+
+        /*  C, le contrôleur
+
+            Si V, la vue, correspond à tout ce qui permet de mettre à jour l'affichage,
+            C, le contrôleur, est la partie de l'application qui décide quoi faire, quand et comment.
+            Le contôleur contient en général la logique de votre application.
+            Il est le lien entre les données et la vue. Il choisit les bonnes données au bon moment et
+            les transmet à la vue pour qu'elle les affiche.
+            Jamais les données et la vue ne doivent interagir directement (rappelez-vous, il faut séparer le
+            fond de la forme). Seul le contrôleur peut interagir avec tout le monde.
+
+        */
+        window.C = {};
+
+        /* C.goTo
+            room : le nom d'une pièce où se rendre
+            La fonction récupère les données de la pièce contenue dans le paramètre room
+            puis les affiche sur la page.
+
+            Note : il faudra utiliser await !
+        */
+        C.goTo = async function(room){
+            let data = await DataDialog.request(room);
+            V.renderDialog(data);
+        }
+
+        /* C.start
+            Fonction appelée au chargement de la page pour initialiser l'application
+            (l'appel est en fin de script)
+        */
+        C.start = function(){
+            C.goTo('entree');
+        }
+
+        /*  V
+            La vue, objet qui regroupe toutes les opérations d'affichage et propres à l'interface
+        */
+        window.V = {};
+
+        
+        /* V.renderDialog
+           Met à jour l'affichage de la boite de dialogue (composant Dialog) à l'aide des données data.
+           Le composant est affiché dans l'élément d'identifiant room.
+        */
+        V.renderDialog = function(data){
+            let cible = document.querySelector('#room');
+            cible.innerHTML = Dialog.format(data);
+        }
+
+        /*  V.changeBackground
+
+            Pas de paramètre, pas de valeur de retour. 
+            La fonction change l'image en arrière plan de la page en enlevant la classe de style bg 
+            à l'élément body puis en ajoutant la classe de style bgOut à l'élément body
+        */
+        V.changeBackground = function(){
+            document.body.classList.remove('bg');
+            document.body.classList.add('bgOut');
+        }
+
+        C.start();
+
+       </script>
+    
+    </body>
+</html>

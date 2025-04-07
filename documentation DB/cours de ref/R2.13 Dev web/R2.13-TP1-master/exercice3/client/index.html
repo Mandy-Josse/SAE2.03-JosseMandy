@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang='fr'>
+    <head>
+        <meta charset="UTF-8">
+        <title>Escape Game</title>
+        <link href="./css/base.css" type="text/css" rel="stylesheet" />
+    </head>
+    <body class="bg">
+      
+       <section id="room">
+          <!-- le information sur une pièce et les directions possibles s'afficheront ici -->
+       </section>
+
+      
+       <script type="module">
+        import { DataDialog} from './data/dataDialog.js';
+        import { Dialog } from './component/Dialog/script.js';
+
+        // cette instruction sert uniquement à vous permettre de tester
+        // DataDialog depuis la console de votre navigateur web
+        window.DataDialog = DataDialog;
+
+        /*  Questions : 
+
+            Q1 :
+            DataDialog a changé ! 
+            Il peut à présent interroger le serveur pour récupérer des données sur les pièces.
+            Lisez attentivement les commentaires dans data/dataDialog.js.
+            Mettez à jour la variable HOST_URL en cohérence avec votre hébergement de la partie serveur.
+            Depuis la console du navigateur, testez la fonction DataDialog.request pour
+            tenter de récupérer les données de quelques pièces (salon, escalier...)
+
+            Q2 :
+            Lire les explication sur C, le contrôleur.
+            Complétez la fonction C.goTo en cohérence avec sa documentation.
+            Testez là ensuite depuis la console du navigateur pour faire afficher sur
+            la page les données de quelques pièces (l'une après l'autre)
+
+            Q3 :
+            En fin de script, vous trouverez un appel à C.start()
+            Mais cette fonction est actuellement vide. Mettez là à jour afin qu'au lancement
+            de l'application, on affiche les informations sur l'entrée.
+        */
+
+        /*  C, le contrôleur
+
+            Si V, la vue, correspond à tout ce qui permet de mettre à jour l'affichage,
+            C, le contrôleur, est la partie de l'application qui décide quoi faire, quand et comment.
+            Le contôleur contient en général la logique de votre application.
+            Il est le lien entre les données et la vue. Il choisit les bonnes données au bon moment et
+            les transmet à la vue pour qu'elle les affiche.
+            Jamais les données et la vue ne doivent interagir directement (rappelez-vous, il faut séparer le
+            fond de la forme). Seul le contrôleur peut interagir avec tout le monde.
+
+        */
+        window.C = {};
+
+        /* C.goTo
+            room : le nom d'une pièce où se rendre
+            La fonction récupère les données de la pièce contenue dans le paramètre room
+            puis les affiche sur la page.
+
+            Note : il faudra utiliser await !
+        */
+        C.goTo = async function(room){
+            let obj = await DataDialog.request(room);
+            V.renderDialog(obj);
+        }
+
+
+        /* C.start
+            Fonction appelée au chargement de la page pour initialiser l'application
+            (l'appel est en fin de script)
+        */
+        C.start = function(){
+            C.goTo("entree");
+        }
+
+
+        /*  V
+            La vue, objet qui regroupe toutes les opérations d'affichage et propres à l'interface
+        */
+        window.V = {};
+
+        
+        /* V.renderDialog
+           Met à jour l'affichage de la boite de dialogue (composant Dialog) à l'aide des données data.
+           Le composant est affiché dans l'élément d'identifiant room.
+        */
+        V.renderDialog = function(data){
+            let cible = document.querySelector('#room');
+            cible.innerHTML = Dialog.format(data);
+        }
+
+        /*  V.changeBackground
+
+            Pas de paramètre, pas de valeur de retour. 
+            La fonction change l'image en arrière plan de la page en enlevant la classe de style bg 
+            à l'élément body puis en ajoutant la classe de style bgOut à l'élément body
+        */
+        V.changeBackground = function(){
+            document.body.classList.remove('bg');
+            document.body.classList.add('bgOut');
+        }
+
+        C.start();
+
+       </script>
+    
+    </body>
+</html>

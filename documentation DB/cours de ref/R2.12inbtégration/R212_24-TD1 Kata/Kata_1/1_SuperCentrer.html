@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kata 0 | Super Centré</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        /* Création d'un contexte GridLayout */
+        display: grid;
+        /* Centrer l'élément sur les deux axes */
+        place-items: center;
+        background: hsl(198, 32%, 74%);
+      }
+
+      .elt {
+        padding: 1em;
+        font-size: 2rem;
+        border-radius: 20px;
+        background: hsl(276, 42%, 66%);
+        /* Empêche de sélectionner le texte  */
+        user-select: none;
+        cursor: pointer;
+        transition: all 0.3s ease-in;
+        transform: rotate(90deg);
+      }
+
+      .elt:hover {
+        /* Apppliquer l'animation au survol de l'élément */
+        /* Appel de l'animation 'anim' / durée / répétition */
+        animation:  anim 1s infinite;
+      }
+
+      /* Créer une animation sur plusieurs images:  
+        . modifiant la couleur d'arrière-plan de l'élément
+        . en  appliquant une transformation  */
+      @keyframes anim {
+        0% {
+
+          rotate: 0deg;
+          background: red;
+        }
+        25% {
+          rotate: 90deg;
+        }
+        50% {
+          rotate: 0deg;
+          translate: 5rem;
+          background: yellow;
+
+        }
+        75% {
+          rotate: -90deg;
+        }
+        100% {
+          rotate: 0deg;
+          background: blue;
+
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="elt">:)</div>
+  </body>
+</html>

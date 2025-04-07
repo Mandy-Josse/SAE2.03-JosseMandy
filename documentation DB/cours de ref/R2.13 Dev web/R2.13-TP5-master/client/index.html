@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Les Menus de la semaine</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="./css/base.css">
+
+</head>
+
+<body>
+
+    <section class="container">
+
+     
+      <nav class="nav"> <!-- contenu statique -->
+
+        <section class="nav__week">
+          <h1 class="title">Les menus de la semaine</h1>
+          <input id="semaine" type="number" value="1" name="semaine" placeholder="semaine" min="1" max="52">
+        </section>
+
+        <section class="nav__day">
+          <button onclick="C.getMenu('lundi')">Lundi</button>
+          <button onclick="C.getMenu('mardi')">Mardi</button>
+          <button onclick="C.getMenu('mercredi')">Mercredi</button>
+          <button onclick="C.getMenu('jeudi')">Jeudi</button>
+          <button onclick="C.getMenu('vendredi')">Vendredi</button>
+          <button onclick="C.getMenu('samedi')">Samedi</button>
+          <button onclick="C.getMenu('dimanche')">Dimanche</button>
+        </section>
+      </nav>
+  
+  
+
+      <section class="content"> <!-- contenu dynamique -->
+
+      </section>
+
+    </section>
+
+  <script type="module">
+    import {DataMenu} from './data/dataMenu.js';
+    import {Menu} from './component/Menu/script.js';
+
+    // Controleur
+    // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
+    // Une fois l'application terminée, on pourrait remettre let C.
+    window.C = {};
+
+    /* C.getMenu
+
+        param jour: le nom d'un jour de la semaine
+
+        La fonction affiche le menu du jour correspondant
+    */
+    C.getMenu = async function(jour){
+      let input = document.querySelector('#semaine');
+      let semaine = input.value;
+      let data = await DataMenu.request(semaine, jour);
+      if (data.length == 0){
+        data = [
+          {entree: 'Soon...', plat: 'Soon...', dessert: 'Soon...'}
+        ];
+      }
+      V.renderMenu(data);
+    }
+
+    // Vue
+    window.V = {};
+
+    /* V.renderMenu
+
+      param data : un tableau d'objets, chaque objet décrivant les données d'un menu
+      Utilise le componsant Menu pour afficher les menus transmis via le paramètre data.
+    */
+    V.renderMenu = function(data){
+      let content = document.querySelector('.content');
+      content.innerHTML = Menu.formatMany(data);
+    }
+   
+  </script>
+
+</body>
+
+</html>

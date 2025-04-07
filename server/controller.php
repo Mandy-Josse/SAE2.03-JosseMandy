@@ -26,21 +26,29 @@ function readMoviesController(){
 }
 
 
+
+
+
+
+
 function addMovieController() {
-    $titre = $_REQUEST['name'];
-    $annee = $_REQUEST['year'];
-    $duree = $_REQUEST['length'];
+    $titre = $_REQUEST['title'];
+    $annee = $_REQUEST['annee'];
+    $duree = $_REQUEST['duree'];
     $description = $_REQUEST['description'];
-    $realisateur = $_REQUEST['director'];
-    $categorie = $_REQUEST['id_category'];
-    $affiche = $_REQUEST['image'];
+    $realisateur = $_REQUEST['realisateur'];
+    $categorie = $_REQUEST['categorie'];
+    $affiche = $_REQUEST['affiche_name'];
     $URLtrailer = $_REQUEST['trailer'];
     $age = $_REQUEST['min_age'];
-    $ok = addMovie($titre, $annee, $duree, $description, $realisateur,$categorie);
-    if ($ok!= 0) {
-        return "Le film $titre à bien été ajouté.";
-    }   
-    else {
-        return false;
+
+    $ok = addMovie($titre, $annee, $duree, $description, $realisateur,$categorie, $affiche, $URLtrailer, $age);
+
+    if ($ok != 0) {
+        echo json_encode(["success" => true, "message" => "Le film $titre a bien été ajouté."]);
+    } else {
+        echo json_encode(["success" => false, "message" => "Erreur lors de l'ajout du film."]);
     }
 }
+
+?>

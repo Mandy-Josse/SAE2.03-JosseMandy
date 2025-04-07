@@ -1,0 +1,27 @@
+body,
+html {
+    height: 100%;
+}
+
+section {
+
+    display: flex;
+    justify-content: center;
+}
+
+.dialog {
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 15%;
+    background-color: black;
+    opacity: 0.7;
+    color: white;
+    width: 40%;
+    padding: 2%;
+}
+
+.dialog__description {
+    padding: 2%;
+    font-size: 20px;
+}
+
