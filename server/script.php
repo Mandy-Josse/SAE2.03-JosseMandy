@@ -55,6 +55,10 @@ if ( isset($_REQUEST['todo']) ){
     case 'getMovieDetails':
       $data = getMovieDetailsController();
       break;
+
+    case 'readMoviesGrouped':
+    $data = readMoviesGroupedController();
+    break;
       
     default:
       echo json_decode('[error] unknown todo value');

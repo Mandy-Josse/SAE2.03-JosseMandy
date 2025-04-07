@@ -13,18 +13,16 @@
     <section id="content"></section>
     <section id="ite1"></section>
     <section id="movieDetails"></section>
+    <section class="movieGrouped" id="movieGrouped"></section>
 
     <script type="module">
       import { DataMovie } from "./data/dataMovie.js";
       import { NavBar } from "./component/NavBar/script.js";
       import { List_ite1 } from "./component/ite1/script.js";
       import { MovieDetails } from "./component/Moviedetails/script.js";
+      import { list_category } from "./component/MovieCategory/script.js";
 
-      // Controleur
-      // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
-      // Une fois l'application terminée, on pourrait remettre let C.
       window.C = {};
-
       C.getMovie = async function () {
         let data = await DataMovie.requestMovies();
         V.renderList_ite1(data);
@@ -33,19 +31,19 @@
       C.handlerbacktofilms = function () {
         const sectionIte1 = document.querySelector("#ite1");
         if (sectionIte1) {
-          sectionIte1.scrollIntoView({ behavior: "smooth" }); // défilement fluide
+          sectionIte1.scrollIntoView({ behavior: "smooth" });
         }
       };
       C.handlerbacktofilmdetails = function () {
         const sectiondetails = document.querySelector("#movieDetails");
         if (sectiondetails) {
-          sectiondetails.scrollIntoView({ behavior: "smooth" }); // défilement fluide
+          sectiondetails.scrollIntoView({ behavior: "smooth" });
         }
       };
 
       C.handlerDetail = async function (id) {
-        let data = await DataMovie.requestMovieDetails(id); // ✅ on attend la réponse
-        console.log("Movie details object:", data); // ✅ debug affichera un vrai objet
+        let data = await DataMovie.requestMovieDetails(id);
+        console.log("Movie details object:", data);
 
         V.renderMovieDetails(data);
         C.handlerbacktofilmdetails();
@@ -54,16 +52,24 @@
       C.start = async function () {
         C.getMovie();
         V.renderNavBar("C.handlerbacktofilms()");
+        C.getMovieGrouped();
+        let data = await DataMovie.requestGroupedMovies();
       };
 
-      // Vue (contient tout ce qui est relatif à l'affichage)
+      C.getMovieGrouped = async function () {
+        let data = await DataMovie.requestGroupedMovies();
+        for (let category of data) {
+          let categoryBlock = list_category.formatCategoryBlock(
+            category.category,
+            category.movies
+          );
+          let content = document.querySelector("#movieGrouped");
+          content.innerHTML += categoryBlock;
+        }
+      };
+
       window.V = {};
-      /**
-       * V.renderNavBar
-       * Cette fonction est responsable de l'affichage de la barre de navigation (NavBar).
-       * Elle sélectionne l'élément HTML avec l'ID "header" et y insère le contenu
-       * formaté par le composant NavBar.
-       */
+
       V.renderNavBar = function (hAbout) {
         let header = document.querySelector("#header");
         header.innerHTML = NavBar.format(hAbout);
@@ -79,7 +85,7 @@
         movieDet.innerHTML = MovieDetails.format(data);
       };
 
-      C.start(); // Démarre l'application
+      C.start();
     </script>
   </body>
 </html>

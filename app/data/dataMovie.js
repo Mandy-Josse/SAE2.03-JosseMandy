@@ -17,4 +17,11 @@ DataMovie.requestMovieDetails = async function (id) {
   return movieArray[0]; // ✅ Prend le premier (et seul) film
 };
 
+DataMovie.requestGroupedMovies = async function () {
+  let answer = await fetch(
+    HOST_URL + "/server/script.php?todo=readMoviesGrouped"
+  );
+  let data = await answer.json();
+  return data;
+};
 export { DataMovie };

@@ -62,4 +62,11 @@ function getMovieDetailsController () {
         exit();
     }
 }
+
+
+function readMoviesGroupedController() {
+    return getMoviesGroupedByCategory();
+}
+
+
 ?>
