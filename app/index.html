@@ -12,11 +12,13 @@
 
     <section id="content"></section>
     <section id="ite1"></section>
+    <section id="movieDetails"></section>
 
     <script type="module">
       import { DataMovie } from "./data/dataMovie.js";
       import { NavBar } from "./component/NavBar/script.js";
       import { List_ite1 } from "./component/ite1/script.js";
+      import { MovieDetails } from "./component/Moviedetails/script.js";
 
       // Controleur
       // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
@@ -32,6 +34,13 @@
         alert(
           "Ceci est une base de projet pour la SAE2.03 édition 2025. Bonne chance !"
         );
+      };
+
+      C.handlerDetail = function (id) {
+        let data = DataMovie.requestMovieDetails(id);
+        console.log(data); // Add this line to log the returned data
+
+        V.renderMovieDetails(data);
       };
 
       C.start = async function () {
@@ -55,6 +64,11 @@
       V.renderList_ite1 = function (data) {
         let ite1 = document.querySelector("#ite1");
         ite1.innerHTML = List_ite1.format(data);
+      };
+
+      V.renderMovieDetails = function (data) {
+        let movieDet = document.querySelector("#movieDetails");
+        movieDet.innerHTML = MovieDetails.format(data);
       };
 
       C.start(); // Démarre l'application

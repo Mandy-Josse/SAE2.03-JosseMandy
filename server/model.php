@@ -28,16 +28,22 @@
         return $res;
     };
 
-
-
-
+    
+    function getMovieDetails($id){
+        $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+        $sql = "SELECT name, year, length, description, director, id_category, image, trailer, min_age FROM Movie WHERE id = $id";
+        $stmt = $cnx->prepare($sql);
+        $stmt->execute();
+        $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $res;
+    };
 
 
 
     function addMovie($n, $y, $l, $d1, $d2, $c, $i, $t, $a) {
         $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
         $sql = "INSERT INTO Movie (name, year, length, description, director, id_category, image, trailer, min_age)
-                VALUES (:name, :year, :length, :description, :director, :id_categorie, :image, :trailer, :min_age)";
+                VALUES (:name, :year, :length, :description, :director, :id_category, :image, :trailer, :min_age)";
         $stmt = $cnx->prepare($sql);
 
         $stmt->bindParam(':name', $n);
@@ -45,7 +51,7 @@
         $stmt->bindParam(':length', $l);
         $stmt->bindParam(':description', $d1);
         $stmt->bindParam(':director', $d2);
-        $stmt->bindParam(':id_categorie', $c);
+        $stmt->bindParam(':id_category', $c);
         $stmt->bindParam(':image', $i);
         $stmt->bindParam(':trailer', $t);
         $stmt->bindParam(':min_age', $a);

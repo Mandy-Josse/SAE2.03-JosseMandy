@@ -78,6 +78,7 @@ List_ite1.formatOneCard = function (data) {
   // Remplace les tags dynamiques avec les données du film
   html = html.replace("{{image_name}}", data.image);
   html = html.replace("{{title}}", data.name);
+  html = html.replace("{{handler}}", C.handlerDetail(data.id)); // Ajoute le handler pour le clic sur la carte
 
   return html; // Retourne la carte générée
 };

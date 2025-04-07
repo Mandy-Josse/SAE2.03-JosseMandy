@@ -51,4 +51,15 @@ function addMovieController() {
     }
 }
 
+function getMovieDetailsController () {
+    if (isset($_REQUEST['id'])) {
+        $id = $_REQUEST['id']; // Get the ID from the request
+        $movies = getMovieDetails($id); // Pass the ID to the function
+        return $movies;
+    } else {
+        echo json_encode(['error' => 'Missing id parameter']);
+        http_response_code(400); // Bad Request
+        exit();
+    }
+}
 ?>
