@@ -9,4 +9,17 @@ NavBar.format = function (hAbout, hHome) {
   return html;
 };
 
+//
+//
+let emptyCategories = ["animation", "thriller", "documentaire"]; // à mettre à jour dynamiquement selon ta BDD
+
+document.addEventListener("DOMContentLoaded", () => {
+  emptyCategories.forEach((cat) => {
+    let item = document.querySelector(`.navbar__item[data-category="${cat}"]`);
+    if (item) {
+      item.classList.add("navbar__item--disabled");
+    }
+  });
+});
+
 export { NavBar };

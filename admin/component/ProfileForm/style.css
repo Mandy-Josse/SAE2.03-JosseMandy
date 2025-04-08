@@ -1,0 +1,49 @@
+.addProfile {
+  padding: 1rem;
+  gap: 0.5rem;
+}
+
+.addProfile__title {
+  color: var(--color-black);
+}
+
+.addProfile__form {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 0.5rem;
+}
+
+.addProfile__sendbutton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 1rem;
+  padding: 1rem 3rem 1rem 3rem;
+  gap: 10px;
+  font-size: larger;
+  background-color: black;
+  color: white;
+  border: 1;
+  border-color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.addProfile__intput {
+  background-color: var(--color-light-blue);
+  border: 1;
+  border-color: rgba(198, 228, 255, 0.616);
+  padding: 1rem;
+  border-radius: 20px;
+}
+
+.addProfile__sendbutton:hover {
+  background-color: #444444;
+}
+
+.addProfile__icon {
+  stroke: white;
+}

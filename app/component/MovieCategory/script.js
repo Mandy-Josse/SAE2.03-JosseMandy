@@ -14,15 +14,15 @@ list_category.formatCategoryBlock = function (categoryName, movieList) {
   }
 
   let cardsHTML = "";
-
   for (let movie of movieList) {
     cardsHTML += list_category.formatOneCard(movie);
   }
+  let idCategory = categoryName.toLowerCase().replace(/\s+/g, "-");
 
   let categoryHTML = template;
   categoryHTML = categoryHTML.replace("{{title_category}}", categoryName);
   categoryHTML = categoryHTML.replace("{{cards}}", cardsHTML);
-
+  categoryHTML = categoryHTML.replace("{{id_category}}", idCategory);
   return categoryHTML;
 };
 

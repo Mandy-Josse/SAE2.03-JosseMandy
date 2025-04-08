@@ -9,11 +9,10 @@
 
   <body>
     <header id="header"></header>
-
     <section id="content"></section>
     <section id="ite1"></section>
-    <section id="movieDetails"></section>
-    <section class="movieGrouped" id="movieGrouped"></section>
+    <section id="movieDetails" class="movieDetails"></section>
+    <section id="movieGrouped" class="movieGrouped"></section>
 
     <script type="module">
       import { DataMovie } from "./data/dataMovie.js";
@@ -22,12 +21,15 @@
       import { MovieDetails } from "./component/Moviedetails/script.js";
       import { list_category } from "./component/MovieCategory/script.js";
 
+      // CONTROLLER
       window.C = {};
       C.getMovie = async function () {
         let data = await DataMovie.requestMovies();
         V.renderList_ite1(data);
       };
 
+      //
+      //FONCTIONS D'ANCRES
       C.handlerbacktofilms = function () {
         const sectionIte1 = document.querySelector("#ite1");
         if (sectionIte1) {
@@ -41,19 +43,14 @@
         }
       };
 
+      //
+      //FONCTIONS DE GESTION DES COMPOSANTS/EVENEMENTS
       C.handlerDetail = async function (id) {
         let data = await DataMovie.requestMovieDetails(id);
         console.log("Movie details object:", data);
 
         V.renderMovieDetails(data);
         C.handlerbacktofilmdetails();
-      };
-
-      C.start = async function () {
-        C.getMovie();
-        V.renderNavBar("C.handlerbacktofilms()");
-        C.getMovieGrouped();
-        let data = await DataMovie.requestGroupedMovies();
       };
 
       C.getMovieGrouped = async function () {
@@ -68,6 +65,15 @@
         }
       };
 
+      C.start = async function () {
+        C.getMovie();
+        V.renderNavBar("C.handlerbacktofilms()");
+        C.getMovieGrouped();
+        let data = await DataMovie.requestGroupedMovies();
+      };
+
+      //
+      // RENDER ET VUE WINDOWS
       window.V = {};
 
       V.renderNavBar = function (hAbout) {

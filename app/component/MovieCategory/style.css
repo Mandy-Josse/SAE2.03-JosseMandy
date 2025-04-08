@@ -1,8 +1,11 @@
-/* base.css */
+.movieGrouped {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
-/* Style global de la page */
-
-#content {
+.category_container {
+  margin-top: 10rem;
   padding: 20px;
 }
 
@@ -15,7 +18,6 @@
   color: var(--color-fg);
 }
 .category_group {
-  margin-top: 10rem;
   background-color: var(--color-bg);
   color: var(--color-fg);
   border-radius: 20px;
