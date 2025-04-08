@@ -49,3 +49,40 @@ header {
   pointer-events: none;
   opacity: 0.6;
 }
+
+.navbar__item--disabled {
+  color: grey;
+  text-decoration: none;
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--color-bg);
+  min-width: 200px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content .navbar__item {
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+}
+
+.dropdown-content .navbar__item:hover {
+  text-underline-offset: 0.5rem;
+  background-color: rgb(41, 41, 41);
+}
+

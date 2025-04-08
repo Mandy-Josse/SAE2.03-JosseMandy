@@ -11,7 +11,7 @@ NavBar.format = function (hAbout, hHome) {
 
 //
 //
-let emptyCategories = ["animation", "thriller", "documentaire"]; // à mettre à jour dynamiquement selon ta BDD
+let emptyCategories = [];
 
 document.addEventListener("DOMContentLoaded", () => {
   emptyCategories.forEach((cat) => {

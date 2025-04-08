@@ -19,7 +19,6 @@
  *  de faire des opérations sur les données stockées en base de données.
  */
 require("model.php");
-
 function readMoviesController(){
     $movies = getAllMovies();
     return $movies;
@@ -29,7 +28,7 @@ function readMoviesController(){
 
 
 
-
+/////ADMIN///////////ADMIN///////////////ADMIN///////////////ADMIN
 
 function addMovieController() {
     $titre = $_REQUEST['title'];
@@ -51,6 +50,30 @@ function addMovieController() {
     }
 }
 
+
+function addprofileController() {
+    $name = $_REQUEST['name'];
+    $age = $_REQUEST['age'];
+    $avatar = $_REQUEST['avatar'];
+
+    $ok = addProfile($name, $age, $avatar);
+
+    if ($ok != 0) {
+     return ["success" => true, "message" => "Le profil $name a bien été ajouté."];
+    } else {
+        return ["success" => false, "message" => "Erreur lors de l'ajout du profil."];
+    }
+}
+
+
+
+
+
+
+
+
+////APP//////////////////APP/////////////////APP////////APP//////
+
 function getMovieDetailsController () {
     if (isset($_REQUEST['id'])) {
         $id = $_REQUEST['id']; // Get the ID from the request
@@ -69,4 +92,15 @@ function readMoviesGroupedController() {
 }
 
 
+
+
+
+
+
+
+
+
+
+
 ?>
+

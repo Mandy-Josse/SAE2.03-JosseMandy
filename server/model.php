@@ -96,15 +96,13 @@
 
 
 
-
-
+///////ADMIN///////////////////ADMIN/////////////////////////ADMIN//////////////////////ADMIN
 
     function addMovie($n, $y, $l, $d1, $d2, $c, $i, $t, $a) {
         $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
         $sql = "INSERT INTO Movie (name, year, length, description, director, id_category, image, trailer, min_age)
                 VALUES (:name, :year, :length, :description, :director, :id_category, :image, :trailer, :min_age)";
         $stmt = $cnx->prepare($sql);
-
         $stmt->bindParam(':name', $n);
         $stmt->bindParam(':year', $y);
         $stmt->bindParam(':length', $l);
@@ -115,6 +113,21 @@
         $stmt->bindParam(':trailer', $t);
         $stmt->bindParam(':min_age', $a);
 
+        $stmt->execute();
+        $res = $stmt->rowCount(); 
+        return $res;
+    }
+
+
+    function addProfile($n, $y, $a) {
+        $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+        $sql = "INSERT INTO Users (name, age, avatar)
+                VALUES (:name, :age, :avatar)";
+        $stmt = $cnx->prepare($sql);
+        
+        $stmt->bindParam(':name', $n);
+        $stmt->bindParam(':age', $y);
+        $stmt->bindParam(':avatar', $a);
 
         $stmt->execute();
         $res = $stmt->rowCount(); 

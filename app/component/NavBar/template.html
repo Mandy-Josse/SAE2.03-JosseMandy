@@ -2,17 +2,91 @@
   <h1 class="navbar__title">SEEFILMS</h1>
   <ul class="navbar__list">
     <li class="navbar__item" onclick="{{hAbout}}">Films</li>
-    <div class="dropdown-child"></div>
-      <li class="navbar__item" data-category="action" onclick="document.getElementById('action').scrollIntoView({behavior: 'smooth'})">Action</li>
-      <li class="navbar__item" data-category="comédie" onclick="document.getElementById('comédie').scrollIntoView({behavior: 'smooth'})">Comédie</li>
-      <li class="navbar__item" data-category="drame" onclick="document.getElementById('drame').scrollIntoView({behavior: 'smooth'})">Drame</li>
-      <li class="navbar__item" data-category="science-fiction"onclick="document.getElementById('science-fiction').scrollIntoView({behavior: 'smooth'})">Science-fiction</li>
-      <li class="navbar__item" data-category="animation" onclick="document.getElementById('animation').scrollIntoView({behavior: 'smooth'})">Animation</li>
-      <li class="navbar__item" data-category="thriller" onclick="document.getElementById('thriller').scrollIntoView({behavior: 'smooth'})">Thriller</li>
-      <li class="navbar__item" data-category="horreur"onclick="document.getElementById('horreur').scrollIntoView({behavior: 'smooth'})">Horreur</li>
-      <li class="navbar__item" data-category="aventure"onclick="document.getElementById('aventure').scrollIntoView({behavior: 'smooth'})">Aventure</li>
-      <li class="navbar__item" data-category="fantaisie" onclick="document.getElementById('fantaisie').scrollIntoView({behavior: 'smooth'})">Fantaisie</li>
-      <li class="navbar__item" data-category="documentaire" onclick="document.getElementById('documentaire').scrollIntoView({behavior: 'smooth'})">Documentaire</li>
-    </div>
+    <li class="navbar__item dropdown">
+      <span
+        >Catégories
+        <svg
+          class="navbar__itemsvg"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="white"
+          viewBox="0 0 24 24"
+          width="16"
+          height="16"
+          class="dropdown-arrow"
+        >
+          <path d="M7 10l5 5 5-5z" /></svg></span>
+      <ul class="dropdown-content">
+        <li
+          class="navbar__item"
+          data-category="action"
+          onclick="document.getElementById('action').scrollIntoView({behavior: 'smooth'})"
+        >
+          Action
+        </li>
+        <li
+          class="navbar__item"
+          data-category="comédie"
+          onclick="document.getElementById('comédie').scrollIntoView({behavior: 'smooth'})"
+        >
+          Comédie
+        </li>
+        <li
+          class="navbar__item"
+          data-category="drame"
+          onclick="document.getElementById('drame').scrollIntoView({behavior: 'smooth'})"
+        >
+          Drame
+        </li>
+        <li
+          class="navbar__item"
+          data-category="science-fiction"
+          onclick="document.getElementById('science-fiction').scrollIntoView({behavior: 'smooth'})"
+        >
+          Science-fiction
+        </li>
+        <li
+          class="navbar__item"
+          data-category="animation"
+          onclick="document.getElementById('animation').scrollIntoView({behavior: 'smooth'})"
+        >
+          Animation
+        </li>
+        <li
+          class="navbar__item"
+          data-category="thriller"
+          onclick="document.getElementById('thriller').scrollIntoView({behavior: 'smooth'})"
+        >
+          Thriller
+        </li>
+        <li
+          class="navbar__item"
+          data-category="horreur"
+          onclick="document.getElementById('horreur').scrollIntoView({behavior: 'smooth'})"
+        >
+          Horreur
+        </li>
+        <li
+          class="navbar__item"
+          data-category="aventure"
+          onclick="document.getElementById('aventure').scrollIntoView({behavior: 'smooth'})"
+        >
+          Aventure
+        </li>
+        <li
+          class="navbar__item"
+          data-category="fantaisie"
+          onclick="document.getElementById('fantaisie').scrollIntoView({behavior: 'smooth'})"
+        >
+          Fantaisie
+        </li>
+        <li
+          class="navbar__item"
+          data-category="documentaire"
+          onclick="document.getElementById('documentaire').scrollIntoView({behavior: 'smooth'})"
+        >
+          Documentaire
+        </li>
+      </ul>
+    </li>
   </ul>
 </nav>
