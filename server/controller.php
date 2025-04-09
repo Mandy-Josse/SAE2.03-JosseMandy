@@ -58,10 +58,12 @@ function addprofileController() {
 
     $ok = addProfile($name, $age, $avatar);
 
-    if ($ok != 0) {
-     return ["success" => true, "message" => "Le profil $name a bien été ajouté."];
+    if ($ok === 1) {
+        return ["success" => true, "message" => "Le profil $name a bien été ajouté."];
+    } elseif ($ok === -1) {
+        return ["success" => false, "message" => "Ce nom de profil existe déjà."];
     } else {
-        return ["success" => false, "message" => "Erreur lors de l'ajout du profil."];
+        return ["success" => false, "message" => "Une erreur technique est survenue."];
     }
 }
 
@@ -93,6 +95,10 @@ function readMoviesGroupedController() {
 
 
 
+function readProfilesController() {
+    $profiles = getAllProfiles();
+    return $profiles;
+}
 
 
 

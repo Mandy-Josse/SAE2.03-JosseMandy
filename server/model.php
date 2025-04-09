@@ -94,43 +94,67 @@
     return $result;
 }
 
+function getAllProfiles() {
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+    $sql = "SELECT id, name, avatar FROM Users";
+    $stmt = $cnx->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
+}
 
 
 ///////ADMIN///////////////////ADMIN/////////////////////////ADMIN//////////////////////ADMIN
 
-    function addMovie($n, $y, $l, $d1, $d2, $c, $i, $t, $a) {
+function addMovie($n, $y, $l, $d1, $d2, $c, $i, $t, $a) {
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+    $sql = "INSERT INTO Movie (name, year, length, description, director, id_category, image, trailer, min_age)
+            VALUES (:name, :year, :length, :description, :director, :id_category, :image, :trailer, :min_age)";
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':name', $n);
+    $stmt->bindParam(':year', $y);
+    $stmt->bindParam(':length', $l);
+    $stmt->bindParam(':description', $d1);
+    $stmt->bindParam(':director', $d2);
+    $stmt->bindParam(':id_category', $c);
+    $stmt->bindParam(':image', $i);
+    $stmt->bindParam(':trailer', $t);
+    $stmt->bindParam(':min_age', $a);
+    $stmt->execute();
+    $res = $stmt->rowCount(); 
+    return $res;
+}
+
+
+function addProfile($n, $y, $a) {
+    try {
         $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
-        $sql = "INSERT INTO Movie (name, year, length, description, director, id_category, image, trailer, min_age)
-                VALUES (:name, :year, :length, :description, :director, :id_category, :image, :trailer, :min_age)";
+        $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        // Vérifier si le nom existe déjà
+        $checkSql = "SELECT COUNT(*) FROM Users WHERE name = :name";
+        $checkStmt = $cnx->prepare($checkSql);
+        $checkStmt->bindParam(':name', $n);
+        $checkStmt->execute();
+        $count = $checkStmt->fetchColumn();
+
+        if ($count > 0) {
+            // Le nom existe déjà
+            return -1;
+        }
+
+        // Insérer le nouveau profil
+        $sql = "INSERT INTO Users (name, age, avatar) VALUES (:name, :age, :avatar)";
         $stmt = $cnx->prepare($sql);
-        $stmt->bindParam(':name', $n);
-        $stmt->bindParam(':year', $y);
-        $stmt->bindParam(':length', $l);
-        $stmt->bindParam(':description', $d1);
-        $stmt->bindParam(':director', $d2);
-        $stmt->bindParam(':id_category', $c);
-        $stmt->bindParam(':image', $i);
-        $stmt->bindParam(':trailer', $t);
-        $stmt->bindParam(':min_age', $a);
-
-        $stmt->execute();
-        $res = $stmt->rowCount(); 
-        return $res;
-    }
-
-
-    function addProfile($n, $y, $a) {
-        $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
-        $sql = "INSERT INTO Users (name, age, avatar)
-                VALUES (:name, :age, :avatar)";
-        $stmt = $cnx->prepare($sql);
-        
         $stmt->bindParam(':name', $n);
         $stmt->bindParam(':age', $y);
         $stmt->bindParam(':avatar', $a);
-
         $stmt->execute();
-        $res = $stmt->rowCount(); 
-        return $res;
+
+        return $stmt->rowCount(); // 1 si insertion réussie, 0 sinon
+    } catch (PDOException $e) {
+        // Tu peux log l'erreur ici si tu veux
+        return 0;
     }
+}
+
 ?>

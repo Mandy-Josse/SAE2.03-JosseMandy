@@ -7,3 +7,8 @@
 @import "../component/Log/style.css" layer(components);
 @import "../component/MovieForm/style.css" layer(components);
 @import "../component/ProfileForm/style.css" layer(components);
+
+body {
+    font-family: var(--ff-sans);
+}
+

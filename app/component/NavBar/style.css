@@ -86,3 +86,8 @@ header {
   background-color: rgb(41, 41, 41);
 }
 
+.navbar__item--disabled {
+  pointer-events: none;
+  opacity: 0.5;
+  cursor: not-allowed;
+}

@@ -26,7 +26,6 @@
       <option value="16">16ans</option>
       <option value="18">18ans</option>
     </select>
-
     <select class="addMovie__intput" name="categorie">
       <option value="1">Action</option>
       <option value="2">Comédie</option>
@@ -39,7 +38,8 @@
       <option value="9">Fantaisie</option>
       <option value="10">Documentaire</option>
     </select>
-
+  </form>
+  <form class="addMovie__form">
     <input
       class="addMovie__intput"
       required
@@ -65,6 +65,8 @@
       placeholder="Synopsis"
       pattern="[^0-9]*"
     />
+  </form>
+  <form class="addMovie__form">
     <input
       class="addMovie__intput"
       required
@@ -81,7 +83,9 @@
       placeholder="Nom de l'affiche"
       pattern="[^0-9]*"
     />
-
+  </form>
+  
+  <form class="addMovie__form">
     <div type="button" class="addMovie__sendbutton" onclick="{{handler}}">
       <svg
         xmlns="http://www.w3.org/2000/svg"

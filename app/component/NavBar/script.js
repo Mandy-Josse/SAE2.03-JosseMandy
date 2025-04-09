@@ -3,11 +3,26 @@ let template = await templateFile.text();
 
 let NavBar = {};
 
-NavBar.format = function (hAbout, hHome) {
+
+NavBar.formatOneCategory = function (data) {
+  html = html.replace("{{category_id}}", data.id);
+  html = html.replace("{{category_name}}", data.name);
+};
+
+
+NavBar.format = function (hAbout, hProfile, data) {
   let html = template;
   html = html.replace("{{hAbout}}", hAbout);
+  html = html.replace("{{hProfile}}", hProfile);
+
+  data.forEach((data) => {
+    html += NavBar.formatOneCategory(data);
+  });
+
   return html;
 };
+
+
 
 //
 //

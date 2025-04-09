@@ -3,8 +3,11 @@
   gap: 0.5rem;
 }
 
+
 .addProfile__title {
-  color: var(--color-black);
+  text-align: center;
+  font-family: var(--ff-sans);
+  font-size: 2.5rem;
 }
 
 .addProfile__form {
@@ -22,6 +25,7 @@
   padding: 1rem;
   padding: 1rem 3rem 1rem 3rem;
   gap: 10px;
+  font-family: var(--ff-sans);
   font-size: larger;
   background-color: black;
   color: white;

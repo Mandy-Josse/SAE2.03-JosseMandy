@@ -22,3 +22,5 @@ MovieDetails.format = function (data) {
 };
 
 export { MovieDetails };
+
+

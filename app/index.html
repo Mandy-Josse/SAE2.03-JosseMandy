@@ -16,16 +16,22 @@
 
     <script type="module">
       import { DataMovie } from "./data/dataMovie.js";
+      import { DataProfile } from "./data/dataProfile.js";
       import { NavBar } from "./component/NavBar/script.js";
       import { List_ite1 } from "./component/ite1/script.js";
       import { MovieDetails } from "./component/Moviedetails/script.js";
       import { list_category } from "./component/MovieCategory/script.js";
+      //import { NavBarProfiles } from "./component/NavBar/script.js";
 
       // CONTROLLER
       window.C = {};
       C.getMovie = async function () {
         let data = await DataMovie.requestMovies();
         V.renderList_ite1(data);
+      };
+      C.getProfiles = async function () {
+        let profiles = await DataProfile.requestProfiles();
+        return profiles;
       };
 
       //
@@ -64,21 +70,35 @@
           content.innerHTML += categoryBlock;
         }
       };
-
-      C.start = async function () {
-        C.getMovie();
-        V.renderNavBar("C.handlerbacktofilms()");
-        C.getMovieGrouped();
-        let data = await DataMovie.requestGroupedMovies();
+      
+      C.getprofiles = async function () {
+        let profiles = await DataProfile.requestProfiles();
+        console.log("Profiles object:", profiles);
+        return profiles;
       };
 
-      //
+
+
+
+      C.start = async function () {
+        let profiles = await C.getProfiles(); // récupère les profils
+        await C.getMovie();                   // charge les films
+        await C.getMovieGrouped();           // charge les catégories de films
+        V.renderNavBar(
+          "C.handlerbacktofilms()",
+          "C.handlergetprofiles()",
+          profiles                            //passe les profils
+        );
+      };
+
+
+
       // RENDER ET VUE WINDOWS
       window.V = {};
 
-      V.renderNavBar = function (hAbout) {
+      V.renderNavBar = function (hAbout, hProfile, data) {
         let header = document.querySelector("#header");
-        header.innerHTML = NavBar.format(hAbout);
+        header.innerHTML = NavBar.format(hAbout, hProfile, data);
       };
 
       V.renderList_ite1 = function (data) {
@@ -90,6 +110,8 @@
         let movieDet = document.querySelector("#movieDetails");
         movieDet.innerHTML = MovieDetails.format(data);
       };
+     
+
 
       C.start();
     </script>
