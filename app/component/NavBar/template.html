@@ -4,8 +4,8 @@
     <li class="navbar__item" onclick="{{hAbout}}">Films</li>
 
     <li class="navbar__item dropdown">
-      <span
-        >Catégories
+      <span>
+        Catégories
         <svg
           class="navbar__itemsvg"
           xmlns="http://www.w3.org/2000/svg"
@@ -89,7 +89,20 @@
         </li>
       </ul>
     </li>
+
+
     <li class="navbar__item" onclick="{{hProfile}}">Profil</li>
+    <div class="navbar__profiles dropdown">
+      <h2 class="title">Choisis ton profil</h2>
+      <div class="profile-container">
+        <select class="addcategory__input" name="categorie" onchange="{{hProfile}}">
+            {{profiles}}
+          </select>
+        </form>
+      </div>
+    </div>
+    
+
 
   </ul>
 </nav>

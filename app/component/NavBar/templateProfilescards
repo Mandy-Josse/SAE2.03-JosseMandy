@@ -1,1 +1,0 @@
-<option class="Category_select" value="{{category_id}}">{{category_name}}</option>

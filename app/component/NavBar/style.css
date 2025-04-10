@@ -91,3 +91,15 @@ header {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+.navbar__profiles_dropdown {
+  position: relative;
+  top: 10px;
+}
+
+.addcategory__input {
+  border: none;
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  
+}
