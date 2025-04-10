@@ -59,6 +59,13 @@ header {
   opacity: 0.6;
 }
 
+
+
+
+
+
+
+/* DROPDOWN */
 .dropdown {
   position: relative;
 }
@@ -68,9 +75,9 @@ header {
   position: absolute;
   top: 100%;
   left: 0;
+  padding: 0.5rem;
   background-color: var(--color-bg);
-  min-width: 200px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
 }
 
 .dropdown:hover .dropdown-content {
@@ -84,7 +91,7 @@ header {
 
 .dropdown-content .navbar__item:hover {
   text-underline-offset: 0.5rem;
-  background-color: rgb(41, 41, 41);
+  background-color: var(--color-fg);
 }
 
 .navbar__item--disabled {
@@ -104,7 +111,7 @@ header {
 
 .addprofile__input:focus {
   border: block;
-  background-color: var(--color-bg--darker);
-  color: var(--color-fg);
+  background-color: var(--color-fg);
+  color: var(--color-black);
   
 }

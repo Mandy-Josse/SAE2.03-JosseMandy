@@ -8,14 +8,12 @@
   </head>
 
   <body>
-    <section id="Profilepop"></section>
-    <div class="profilepop__overlay" id="profileOverlay">
-      <header id="header"></header>
-      <section id="content"></section>
-      <section id="ite1"></section>
-      <section id="movieDetails" class="movieDetails"></section>
-      <section id="movieGrouped" class="movieGrouped"></section>
-    </div>
+    <section id="Profilepop" class="profilepop__overlay"></section>
+    <header id="header"></header>
+    <section id="content"></section>
+    <section id="ite1"></section>
+    <section id="movieDetails" class="movieDetails"></section>
+    <section id="movieGrouped" class="movieGrouped"></section>
 
     <script type="module">
       import { DataMovie } from "./data/dataMovie.js";
@@ -51,6 +49,7 @@
       C.ProfileSelectChange = function () {
         C.selectedProfile = document.querySelector("#profileSelect").value;
         console.log("Selected profile:", C.selectedProfile);
+        document.getElementById("Profilepop").style.display = "none"; // Cache la popup
       };
 
 
@@ -103,7 +102,7 @@
         await C.getMovieGrouped();           // charge les catégories de films
         V.renderNavBar(
           "C.handlerbacktofilms()",
-          "C.getprofiles()",
+          "C.getProfiles()",
           "C.ProfileSelectChange()",
           profiles  //passe les profils
         );
@@ -142,6 +141,7 @@
       V.renderProfileSelector = function (ProfileSelectChange, data) {
         console.log("Rendering profile selector with data:", data);
         let profileSelect = document.querySelector("#Profilepop");
+        profileSelect.style.display = "flex";
         profileSelect.innerHTML = Profilepop.formatProfileSelector(ProfileSelectChange, data);
       };
 
