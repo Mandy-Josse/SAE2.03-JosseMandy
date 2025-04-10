@@ -8,16 +8,24 @@ NavBar.formatOneCategory = function (data) {
   html = html.replace("{{category_id}}", data.id);
   html = html.replace("{{category_name}}", data.name);
 };
+NavBar.formatOneProfile = function (data) {
+  return `<option value="${data.id}">${data.name}</option>`;
+};
 
 
 NavBar.format = function (hAbout, hProfile, data) {
   let html = template;
+
   html = html.replace("{{hAbout}}", hAbout);
   html = html.replace("{{hProfile}}", hProfile);
 
-  data.forEach((data) => {
-    html += NavBar.formatOneCategory(data);
+  let optionsHTML = "";
+  data.forEach((profile) => {
+    optionsHTML += NavBar.formatOneProfile(profile);
   });
+  
+  html = html.replace("{{profiles}}", optionsHTML);
+
 
   return html;
 };

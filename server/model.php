@@ -96,7 +96,7 @@
 
 function getAllProfiles() {
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
-    $sql = "SELECT id, name, avatar FROM Users";
+    $sql = "SELECT * FROM Users";
     $stmt = $cnx->prepare($sql);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_OBJ);

@@ -86,7 +86,7 @@
         await C.getMovieGrouped();           // charge les catégories de films
         V.renderNavBar(
           "C.handlerbacktofilms()",
-          "C.handlergetprofiles()",
+          "C.getprofiles()",
           profiles                            //passe les profils
         );
       };
@@ -111,8 +111,6 @@
         movieDet.innerHTML = MovieDetails.format(data);
       };
      
-
-
       C.start();
     </script>
   </body>
