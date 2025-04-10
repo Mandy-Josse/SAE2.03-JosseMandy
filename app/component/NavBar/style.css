@@ -11,6 +11,7 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: left;
+  gap: auto;
   align-items: center;
   color: var(--color-fg);
 
@@ -39,7 +40,7 @@ header {
   font-size: 2rem;
   font-weight: bold;
   color: var(--color-fg);
-  padding: 1rem 5rem 1rem 1rem;
+  padding: 1rem;
 }
 
 .navbar__item--disabled {

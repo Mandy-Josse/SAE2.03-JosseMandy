@@ -8,11 +8,14 @@
   </head>
 
   <body>
-    <header id="header"></header>
-    <section id="content"></section>
-    <section id="ite1"></section>
-    <section id="movieDetails" class="movieDetails"></section>
-    <section id="movieGrouped" class="movieGrouped"></section>
+    <section id="Profilepop"></section>
+    <div class="profilepop__overlay" id="profileOverlay">
+      <header id="header"></header>
+      <section id="content"></section>
+      <section id="ite1"></section>
+      <section id="movieDetails" class="movieDetails"></section>
+      <section id="movieGrouped" class="movieGrouped"></section>
+    </div>
 
     <script type="module">
       import { DataMovie } from "./data/dataMovie.js";
@@ -21,33 +24,46 @@
       import { List_ite1 } from "./component/ite1/script.js";
       import { MovieDetails } from "./component/Moviedetails/script.js";
       import { list_category } from "./component/MovieCategory/script.js";
-      //import { NavBarProfiles } from "./component/NavBar/script.js";
+      import { Profilepop } from "./component/Profilepop/script.js";
+
+
 
       // CONTROLLER
       window.C = {};
+      C.selectedProfile = undefined;
+
+
+      //Récupère les données minimum de la base de données des film (id, nom, affiche du film uniquement)
       C.getMovie = async function () {
         let data = await DataMovie.requestMovies();
         V.renderList_ite1(data);
       };
+      //Récupère les donnée de la base de données des profils
       C.getProfiles = async function () {
         let profiles = await DataProfile.requestProfiles();
+        console.log("Profiles object:", profiles);
         return profiles;
+        V.renderProfileSelector()
       };
 
-      C.selectedProfile = null;
+
+      //Assure le changement de l'id du profil sélectionné après selection ou modification 
       C.ProfileSelectChange = function () {
         C.selectedProfile = document.querySelector("#profileSelect").value;
         console.log("Selected profile:", C.selectedProfile);
       };
 
+
       //
       //FONCTIONS D'ANCRES
+      //Ramène au somet de la page sur la liste de films non triée
       C.handlerbacktofilms = function () {
         const sectionIte1 = document.querySelector("#ite1");
         if (sectionIte1) {
           sectionIte1.scrollIntoView({ behavior: "smooth" });
         }
       };
+      //Ramène suite au clic sur un film à l'endroit de la page ou apparait le film de détail (Serait bien au futur de le faire sur une page à part si le temps permet)
       C.handlerbacktofilmdetails = function () {
         const sectiondetails = document.querySelector("#movieDetails");
         if (sectiondetails) {
@@ -57,6 +73,7 @@
 
       //
       //FONCTIONS DE GESTION DES COMPOSANTS/EVENEMENTS
+      // Gère les clics sur les films de la liste et récupère les infos détaillées et complète du film selon son id
       C.handlerDetail = async function (id) {
         let data = await DataMovie.requestMovieDetails(id);
         console.log("Movie details object:", data);
@@ -65,6 +82,7 @@
         C.handlerbacktofilmdetails();
       };
 
+      //Assure le regroupement des films par catégorie
       C.getMovieGrouped = async function () {
         let data = await DataMovie.requestGroupedMovies();
         for (let category of data) {
@@ -76,14 +94,6 @@
           content.innerHTML += categoryBlock;
         }
       };
-      
-      C.getprofiles = async function () {
-        let profiles = await DataProfile.requestProfiles();
-        console.log("Profiles object:", profiles);
-        return profiles;
-        V.renderProfileSelector()
-      };
-
 
 
 
@@ -95,8 +105,13 @@
           "C.handlerbacktofilms()",
           "C.getprofiles()",
           "C.ProfileSelectChange()",
-          profiles                            //passe les profils
+          profiles  //passe les profils
         );
+
+        //Active une pop up pour choisir un profil si la valeur n'est pas définie = Après déconnection/lancement de l'app
+          if (C.selectedProfile === undefined) {
+          V.renderProfileSelector("C.ProfileSelectChange()", profiles);
+        }
       };
 
 
@@ -104,24 +119,32 @@
       // RENDER ET VUE WINDOWS
       window.V = {};
 
+      //Fonction qui render la Barre de navigation
       V.renderNavBar = function (hAbout, hProfile, hProfileSelectChange, data) {
         let header = document.querySelector("#header");
         header.innerHTML = NavBar.format(hAbout, hProfile, hProfileSelectChange, data);
       };
 
+      //Fonction qui render la première liste de films sans catégorie
       V.renderList_ite1 = function (data) {
         let ite1 = document.querySelector("#ite1");
         ite1.innerHTML = List_ite1.format(data);
       };
 
+      //Fonction qui render la section Détails du film quèand on clique sur une carte de film
       V.renderMovieDetails = function (data) {
         let movieDet = document.querySelector("#movieDetails");
         movieDet.innerHTML = MovieDetails.format(data);
       };
-      V.renderProfileSelector = function (data) {
-        let profileSelect = document.querySelector("#profileSelect");
-        profileSelect.innerHTML = NavBar.formatProfileSelector(data);
+
+
+      //Fonction qui rebnder la pop up de choix de profil
+      V.renderProfileSelector = function (ProfileSelectChange, data) {
+        console.log("Rendering profile selector with data:", data);
+        let profileSelect = document.querySelector("#Profilepop");
+        profileSelect.innerHTML = Profilepop.formatProfileSelector(ProfileSelectChange, data);
       };
+
 
      
       C.start();
