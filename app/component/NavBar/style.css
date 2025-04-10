@@ -92,14 +92,18 @@ header {
   cursor: not-allowed;
 }
 
+
+
+
+
 .navbar__profiles_dropdown {
   position: relative;
-  top: 10px;
 }
 
-.addcategory__input {
-  border: none;
-  background-color: var(--color-bg);
+
+.addprofile__input:focus {
+  border: block;
+  background-color: var(--color-bg--darker);
   color: var(--color-fg);
   
 }

@@ -1,26 +1,27 @@
 let templateFile = await fetch("./component/NavBar/template.html");
 let template = await templateFile.text();
-let templateFileProfiles = await fetch("./component/NavBar/template.html");
+let templateFileProfiles = await fetch("./component/NavBar/templateProfile.html");
 let templateProfiles = await templateFileProfiles.text();
 
 let NavBar = {};
 
-NavBar.formatOneCategory = function (data) {
-  html = html.replace("{{category_id}}", data.id);
-  html = html.replace("{{category_name}}", data.name);
-};
 
 NavBar.formatOneProfile = function (data) {
-  return `<option value="${data.id}">${data.name}</option>`;
+  let html = templateProfiles;
+
+  html = html.replace("{{idusers}}", data.idusers);
+  html = html.replace("{{profile_name}}", data.name);
+  html = html.replace("{{age}}", data.age);
+
+  return html;
 };
 
 
-
-NavBar.format = function (hAbout, hProfile, data) {
+NavBar.format = function (hAbout, hProfile, hProfileSelectChange, data) {
   let html = template;
-
   html = html.replace("{{hAbout}}", hAbout);
   html = html.replace("{{hProfile}}", hProfile);
+  html = html.replace("{{hProfileSelectChange}}", hProfileSelectChange);
 
   let optionsHTML = "";
   data.forEach((profile) => {
@@ -28,21 +29,7 @@ NavBar.format = function (hAbout, hProfile, data) {
   });
 
   html = html.replace("{{profiles}}", optionsHTML);
-
   return html;
 };
-
-//
-//
-let emptyCategories = [];
-
-document.addEventListener("DOMContentLoaded", () => {
-  emptyCategories.forEach((cat) => {
-    let item = document.querySelector(`.navbar__item[data-category="${cat}"]`);
-    if (item) {
-      item.classList.add("navbar__item--disabled");
-    }
-  });
-});
 
 export { NavBar };

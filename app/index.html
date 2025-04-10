@@ -34,6 +34,12 @@
         return profiles;
       };
 
+      C.selectedProfile = null;
+      C.ProfileSelectChange = function () {
+        C.selectedProfile = document.querySelector("#profileSelect").value;
+        console.log("Selected profile:", C.selectedProfile);
+      };
+
       //
       //FONCTIONS D'ANCRES
       C.handlerbacktofilms = function () {
@@ -75,6 +81,7 @@
         let profiles = await DataProfile.requestProfiles();
         console.log("Profiles object:", profiles);
         return profiles;
+        V.renderProfileSelector()
       };
 
 
@@ -87,6 +94,7 @@
         V.renderNavBar(
           "C.handlerbacktofilms()",
           "C.getprofiles()",
+          "C.ProfileSelectChange()",
           profiles                            //passe les profils
         );
       };
@@ -96,9 +104,9 @@
       // RENDER ET VUE WINDOWS
       window.V = {};
 
-      V.renderNavBar = function (hAbout, hProfile, data) {
+      V.renderNavBar = function (hAbout, hProfile, hProfileSelectChange, data) {
         let header = document.querySelector("#header");
-        header.innerHTML = NavBar.format(hAbout, hProfile, data);
+        header.innerHTML = NavBar.format(hAbout, hProfile, hProfileSelectChange, data);
       };
 
       V.renderList_ite1 = function (data) {
@@ -110,6 +118,11 @@
         let movieDet = document.querySelector("#movieDetails");
         movieDet.innerHTML = MovieDetails.format(data);
       };
+      V.renderProfileSelector = function (data) {
+        let profileSelect = document.querySelector("#profileSelect");
+        profileSelect.innerHTML = NavBar.formatProfileSelector(data);
+      };
+
      
       C.start();
     </script>

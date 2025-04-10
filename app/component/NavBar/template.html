@@ -16,6 +16,7 @@
           class="dropdown-arrow"
         >
           <path d="M7 10l5 5 5-5z" /></svg></span>
+
       <ul class="dropdown-content">
         <li
           class="navbar__item"
@@ -91,18 +92,17 @@
     </li>
 
 
-    <li class="navbar__item" onclick="{{hProfile}}">Profil</li>
-    <div class="navbar__profiles dropdown">
-      <h2 class="title">Choisis ton profil</h2>
-      <div class="profile-container">
-        <select class="addcategory__input" name="categorie" onchange="{{hProfile}}">
-            {{profiles}}
-          </select>
-        </form>
+    <li class="navbar__item dropdown" onclick="{{hProfile}}">
+      <span>
+        Profil
+        <ul class="dropdown-content">
+          <h4 class="title">Choisis ton profil</h4>
+          <div class="profile-container">
+            <select id="profileSelect" class="addprofile__input" name="profile" onchange="{{hProfileSelectChange}}">
+              {{profiles}}
+            </select>
+          </div>
       </div>
-    </div>
-    
-
-
+    </li> 
   </ul>
 </nav>
