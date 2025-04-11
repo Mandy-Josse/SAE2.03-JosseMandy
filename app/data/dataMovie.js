@@ -3,25 +3,25 @@ let HOST_URL = "https://mmi.unilim.fr/~josse10/SAE2.03-JosseMandy"; // CHANGE TH
 
 let DataMovie = {};
 
-DataMovie.requestMovies = async function () {
-  let answer = await fetch(HOST_URL + "/server/script.php?todo=getAllMovies");
+DataMovie.requestMovies = async function (age) {
+  let answer = await fetch(HOST_URL + "/server/script.php?todo=getAllMovies&age=" + age);
   let movies = await answer.json();
   return movies;
 };
 
 DataMovie.requestMovieDetails = async function (id) {
   let answer = await fetch(
-    HOST_URL + "/server/script.php?todo=getMovieDetails&id=" + id
-  );
+    HOST_URL + "/server/script.php?todo=getMovieDetails&id=" + id);
   let movieArray = await answer.json();
-  return movieArray[0]; // ✅ Prend le premier (et seul) film
+  return movieArray[0]; 
 };
 
 DataMovie.requestGroupedMovies = async function () {
   let answer = await fetch(
-    HOST_URL + "/server/script.php?todo=readMoviesGrouped"
-  );
+    HOST_URL + "/server/script.php?todo=readMoviesGrouped");
   let data = await answer.json();
   return data;
+
+
 };
 export { DataMovie };

@@ -7,10 +7,10 @@ let List_ite1 = {};
 
 // Fonction qui génère la page avec les cartes
 List_ite1.format = function (data) {
+  console.log("Données reçues pour format:", data);
   // Si pas de films, affiche un message
   if (data.length === 0) {
-    content.innerHTML =
-      '<p class="nofilm">Aucun film disponible pour le moment.</p>';
+    content.innerHTML = '<p class="nofilm">Aucun film disponible pour le moment.</p>';
     return "";
   }
 

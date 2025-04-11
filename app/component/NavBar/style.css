@@ -91,7 +91,7 @@ header {
 
 .dropdown-content .navbar__item:hover {
   text-underline-offset: 0.5rem;
-  background-color: var(--color-fg);
+  background-color: var(--color-gray-darker);
 }
 
 .navbar__item--disabled {

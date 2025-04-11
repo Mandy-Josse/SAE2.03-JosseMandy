@@ -19,16 +19,63 @@
  *  de faire des opérations sur les données stockées en base de données.
  */
 require("model.php");
-function readMoviesController(){
-    $movies = getAllMovies();
-    return $movies;
+
+
+
+
+
+////APP//////////////////APP/////////////////APP///////////////////////////////////APP/////////////////APP//////////////////APP//////////////////APP/////////////////APP//////////////
+
+function readMoviesController() { 
+    if (isset($_REQUEST['age'])) {
+        $age = $_REQUEST['age'];
+        $movies = getAllMovies($age);
+        // var_dump($movies);
+        return $movies;
+    } else {
+        echo json_encode(['error' => 'Missing age parameter']);
+        http_response_code(400); // Bad Request
+        exit();
+    }
+}
+
+
+
+function getMovieDetailsController () {
+    if (isset($_REQUEST['id'])) {
+        $id = $_REQUEST['id']; // Get the ID from the request
+        $movies = getMovieDetails($id); // Pass the ID to the function
+        return $movies;
+    } else {
+        echo json_encode(['error' => 'Missing id parameter']);
+        http_response_code(400); // Bad Request
+        exit();
+    }
+}
+function readMoviesGroupedController() {
+    return getMoviesGroupedByCategory();
+}
+
+
+
+function readProfilesController() {
+    $profiles = getAllProfiles();
+    return $profiles;
 }
 
 
 
 
 
-/////ADMIN///////////ADMIN///////////////ADMIN///////////////ADMIN
+
+
+
+
+
+
+
+
+/////ADMIN///////////ADMIN///////////////ADMIN///////////////ADMIN////////////////ADMIN///////////////ADMIN///////////////ADMIN////////////////ADMIN///////////////ADMIN///////////////ADMIN
 
 function addMovieController() {
     $titre = $_REQUEST['title'];
@@ -66,43 +113,6 @@ function addprofileController() {
         return ["success" => false, "message" => "Une erreur technique est survenue."];
     }
 }
-
-
-
-
-
-
-
-
-////APP//////////////////APP/////////////////APP////////APP//////
-
-function getMovieDetailsController () {
-    if (isset($_REQUEST['id'])) {
-        $id = $_REQUEST['id']; // Get the ID from the request
-        $movies = getMovieDetails($id); // Pass the ID to the function
-        return $movies;
-    } else {
-        echo json_encode(['error' => 'Missing id parameter']);
-        http_response_code(400); // Bad Request
-        exit();
-    }
-}
-
-
-function readMoviesGroupedController() {
-    return getMoviesGroupedByCategory();
-}
-
-
-
-function readProfilesController() {
-    $profiles = getAllProfiles();
-    return $profiles;
-}
-
-
-
-
 
 
 

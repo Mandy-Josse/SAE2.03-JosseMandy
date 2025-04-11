@@ -19,10 +19,16 @@
     define("DBPWD", "josse10");
 
 
-    function getAllMovies(){
+    function getAllMovies($age){
+        /* if (!isset($age) || $age === null) {
+            $age = 0;
+        } */
+
+
         $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-        $sql = "select id, name, image from Movie";
+        $sql = "select id, name, image from Movie WHERE :age >= min_age";
         $stmt = $cnx->prepare($sql);
+        $stmt->bindParam(':age', $age);
         $stmt->execute();
         $res = $stmt->fetchAll(PDO::FETCH_OBJ);
         return $res;
@@ -67,7 +73,6 @@
     $stmt->execute();
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Regroupement manuel
     $grouped = [];
 
     foreach ($rows as $row) {

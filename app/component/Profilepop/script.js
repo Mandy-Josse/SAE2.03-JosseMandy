@@ -6,10 +6,10 @@ let templateProfiles = await templateFileProfiles.text();
 let Profilepop = {};
 
 
-Profilepop.formatOneProfile = function (data) {
+Profilepop.formatOneProfile = function (i, data) {
   let html = templateProfiles;
 
-  html = html.replace("{{idusers}}", data.idusers);
+  html = html.replace("{{idusers}}", i);
   html = html.replace("{{profile_name}}", data.name);
   html = html.replace("{{age}}", data.age);
 
@@ -18,13 +18,18 @@ Profilepop.formatOneProfile = function (data) {
 
 
 Profilepop.formatProfileSelector = function (hProfileSelectChange, data) {
+  console.log("Données reçues pour formatProfileSelector:", data);
+
   let html = template;
   html = html.replace("{{hProfileSelectChange}}", hProfileSelectChange);
 
   let optionsHTML = "";
-  data.forEach((profile) => {
-    optionsHTML += Profilepop.formatOneProfile(profile);
-  });
+  for (let i = 0; i < data.length; i++) {
+    let profile = data[i];
+    optionsHTML += Profilepop.formatOneProfile(i, profile);
+  }
+  console.log("data = ", data);
+
   html = html.replace("{{profiles}}", optionsHTML);
   return html;
 };
