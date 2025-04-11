@@ -17,11 +17,12 @@ Profilepop.formatOneProfile = function (i, data) {
 };
 
 
-Profilepop.formatProfileSelector = function (hProfileSelectChange, data) {
+Profilepop.formatProfileSelector = function (hProfileSelectChange,hProfileSelecthide, data) {
   console.log("Données reçues pour formatProfileSelector:", data);
 
   let html = template;
   html = html.replace("{{hProfileSelectChange}}", hProfileSelectChange);
+  html = html.replace("{{hProfileSelecthide}}", hProfileSelecthide);
 
   let optionsHTML = "";
   for (let i = 0; i < data.length; i++) {

@@ -55,11 +55,21 @@
           C.selectedProfile,
           profiles[C.selectedProfile].age
         );
-        document.getElementById("Profilepop").style.display = "none"; // Cache la popup
+        C.ProfileSelectChangeHide()
         C.getMovie(profiles[C.selectedProfile].age).then((data) => {
           V.renderList_ite1(data); // actualise l'affichage des films
         });
       };
+
+      C.ProfileSelectChangeHide = function () {
+        document.getElementById("Profilepop").style.display = "none"; // Cache la popup
+      };
+
+
+
+
+
+
 
       //
       //FONCTIONS D'ANCRES
@@ -85,13 +95,13 @@
         let data = await DataMovie.requestMovieDetails(id);
         console.log("Movie details object:", data);
 
-        /*V.renderMovieDetails(data);
-        C.handlerbacktofilmdetails(); */
+        V.renderMovieDetails(data);
+        C.handlerbacktofilmdetails();
       };
 
       //Assure le regroupement des films par catégorie
       C.getMovieGrouped = async function (data) {
-        console.log(data);
+        console.log("groupedmovie :", data);
         let datacat = await DataMovie.requestGroupedMovies();
         console.log("datacat:", datacat);
         return datacat;
@@ -104,18 +114,19 @@
       C.start = async function () {
         let age = undefined;
         let profiles = await C.getProfiles(); // récupère les profils
+        console.log("profiles:", profiles)
         // Active une pop up pour choisir un profil si la valeur n'est pas définie = Après déconnection/lancement de l'app
         if (C.selectedProfile != undefined) {
           age = profiles.age;
           console.log("profile is defined", age);
         } else {
           console.log("profile is NOT defined.");
-          V.renderProfileSelector("C.ProfileSelectChange()", profiles);
+          V.renderProfileSelector("C.ProfileSelectChange()", "C.ProfileSelectChangeHide()", profiles);
           age = profiles.age;
         }
         V.renderNavBar(
           "C.handlerbacktofilms()",
-          "C.getProfiles()",
+          "V.renderProfileSelector()",
           "C.ProfileSelectChange()",
           profiles            //transmet les profils
         );
@@ -152,12 +163,13 @@
       };
 
       //Fonction qui rebnder la pop up de choix de profil
-      V.renderProfileSelector = function (ProfileSelectChange, data) {
+      V.renderProfileSelector = function (ProfileSelectChange, ProfileSelecthide, data) {
         console.log("Rendering profile selector with data:", data);
         let profileSelect = document.querySelector("#Profilepop");
         profileSelect.style.display = "flex";
         profileSelect.innerHTML = Profilepop.formatProfileSelector(
           ProfileSelectChange,
+          ProfileSelecthide,
           data
         );
       };
