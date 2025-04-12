@@ -39,8 +39,7 @@
         let datacat = await C.getMovieGrouped(data);        // charge les catégories de films
         console.log("bien sorti avec:", data);
 
-        V.getMovieGrouped(datacat);
-
+        V.getMovieGrouped (datacat)
         return data;
       };
 
@@ -111,10 +110,32 @@
 
       //Assure le regroupement des films par catégorie, objet catégories puis sous objet liste de film
       C.getMovieGrouped = async function (data) {
-        console.log("groupedmovie :", data);                      //Liste des films triés par getmovie selon l'age
-        let datacat = await DataMovie.requestGroupedMovies();     //Liste des catégories ET films associé
-        console.log("datacat:", datacat);
-        return datacat;
+        let datacat = await DataMovie.requestGroupedMovies(); // Liste des catégories ET films associés
+        console.log("datacat avant filtre:", datacat);
+
+        //Construit un set d'ID de films autorisés (respectent l'âge et sont donc déjà dans data)
+        let allowedMovieIds = new Set(data.map(movie => movie.id));
+        //Filtre les films de chaque catégorie
+        let filteredCat = datacat
+          .map(categoryBlock => {
+            let filteredMovies = categoryBlock.movies.filter(movie =>
+              allowedMovieIds.has(movie.id)
+            );
+          
+            //Garde la catégorie que si elle contient des films
+            if (filteredMovies.length > 0) {
+              return {
+                category: categoryBlock.category,
+                movies: filteredMovies
+              };
+            } else {
+              return null; // return undefined sinon
+            }
+          })
+          .filter(cat => cat !== null); // Supprime les catégories vides
+        
+        console.log("datacat après filtre:", filteredCat);
+        return filteredCat;
       };
 
 
@@ -198,9 +219,15 @@
       };
 
       V.getMovieGrouped = async function (datacat) {
-        let categoryBlock = list_category.formatCategoryBlock(datacat);
         let content = document.querySelector("#movieGrouped");
-        content.innerHTML += categoryBlock;
+        content.innerHTML = "";
+
+        if (!datacat || datacat.length === 0) {
+          content.innerHTML = '<p class="nofilm">Aucun film disponible pour le moment.</p>';
+          return;
+        }
+        let categoryBlock = list_category.formatCategoryBlock(datacat);
+        content.innerHTML = categoryBlock;
       };
 
       C.start();

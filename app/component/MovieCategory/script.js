@@ -9,12 +9,7 @@ let list_category = {};
 list_category.formatCategoryBlock = function (datacat) {
   console.log("here with datacat:", datacat);
 
-  if (!datacat || datacat.length === 0) {
-    content.innerHTML =
-      '<p class="nofilm">Aucun film disponible pour le moment.</p>';
-    return "";
-  }
-
+  
   let fullHTML = "";
 
   for (let categoryObj of datacat) {
