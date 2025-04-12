@@ -115,7 +115,21 @@ function addprofileController() {
 }
 
 
+function updateProfileController(){
+    $name = $_REQUEST['name'];
+    $age = $_REQUEST['age'];
+    $avatar = $_REQUEST['avatar'];
 
+    $ok = updateProfile($names, $age, $avatar);
+
+    if ($ok > 0){
+        return ["message" => "Le profil '$name' a été modifié avec succès."];
+    } else {
+        return ["message" => "Erreur lors de la modification du profil '$name'."];
+    }
+}
+
+  
 
 
 ?>

@@ -155,9 +155,25 @@ function addProfile($n, $y, $a) {
         $stmt->bindParam(':avatar', $a);
         $stmt->execute();
 
-        return $stmt->rowCount(); // 1 si insertion réussie, 0 sinon
+        return $stmt->rowCount();
     } catch (PDOException $e) {
-        // Tu peux log l'erreur ici si tu veux
+        return 0;
+    }
+}
+function updateProfile($name, $age, $avatar){
+    try {
+        $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+        $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $sql = "UPDATE Users SET age = :age, avatar = :avatar WHERE name = :name";
+        $stmt = $cnx->prepare($sql);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':age', $age);
+        $stmt->bindParam(':avatar', $avatar);
+        $stmt->execute();
+
+        return $stmt->rowCount(); // > 0 si maj réussie
+    } catch (PDOException $e) {
         return 0;
     }
 }
