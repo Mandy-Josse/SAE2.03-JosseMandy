@@ -31,11 +31,9 @@
 
       //Récupère les données minimum de la base de données des film (id, nom, affiche du film uniquement)
       C.getMovie = async function (age) {
-        console.log("bien rentré");
-        console.log("entrée avec age:", age);
+        // console.log("entrée avec age:", age);
         let data = await DataMovie.requestMovies(age);
-        console.log("bien sorti avec:", data);
-
+        // console.log("bien sorti avec:", data);
         return data;
 
       };
@@ -43,18 +41,22 @@
       //Récupère les donnée de la base de données des profils
       C.getProfiles = async function () {
         profiles = await DataProfile.requestProfiles();
-        console.log("Profiles object:", profiles);
+        // console.log("Profiles object:", profiles);
         return profiles;
       };
 
-      //Assure le changement de l'id du profil sélectionné après selection ou modification
-      C.ProfileSelectChange = function () {
-        C.selectedProfile = document.querySelector("#profileSelect").value;
-        console.log(
-          "Selected profile:",
-          C.selectedProfile,
-          profiles[C.selectedProfile].age
-        );
+      //Assure le changement de l'id du profil sélectionné après selection ou modification dans navbar
+      C.ProfileSelectChangeNav = function () {
+        C.selectedProfile = document.querySelector("#profileSelectnav").value;
+        console.log("Selected profile:",C.selectedProfile,profiles[C.selectedProfile].age);
+        C.getMovie(profiles[C.selectedProfile].age).then((data) => {
+          V.renderList_ite1(data); // actualise l'affichage des films
+        });
+      };
+      //Assure le changement de l'id du profil sélectionné après selection ou modification dans la pop up
+      C.ProfileSelectChangePop = function () {
+        C.selectedProfile = document.querySelector("#profileSelectpop").value;
+        console.log("Selected profile:", C.selectedProfile, profiles[C.selectedProfile].age);
         C.ProfileSelectChangeHide()
         C.getMovie(profiles[C.selectedProfile].age).then((data) => {
           V.renderList_ite1(data); // actualise l'affichage des films
@@ -93,7 +95,7 @@
       // Gère les clics sur les films de la liste et récupère les infos détaillées et complète du film selon son id
       C.handlerDetail = async function (id) {
         let data = await DataMovie.requestMovieDetails(id);
-        console.log("Movie details object:", data);
+        // console.log("Movie details object:", data);
 
         V.renderMovieDetails(data);
         C.handlerbacktofilmdetails();
@@ -111,41 +113,56 @@
 
 
 
+
+
+
+
+
       C.start = async function () {
         let age = undefined;
         let profiles = await C.getProfiles(); // récupère les profils
         console.log("profiles:", profiles)
+        V.renderNavBar(
+          "C.handlerbacktofilms()",
+          "C.getProfiles()",
+          "C.ProfileSelectChangeNav()",
+          profiles            //transmet les profils
+        );
         // Active une pop up pour choisir un profil si la valeur n'est pas définie = Après déconnection/lancement de l'app
         if (C.selectedProfile != undefined) {
-          age = profiles.age;
+          age = profiles[C.selectedProfile].age;
           console.log("profile is defined", age);
         } else {
           console.log("profile is NOT defined.");
-          V.renderProfileSelector("C.ProfileSelectChange()", "C.ProfileSelectChangeHide()", profiles);
-          age = profiles.age;
+          V.renderProfileSelector("C.ProfileSelectChangePop()", "C.ProfileSelectChangeHide()", profiles);
+          age = 0;
         }
-        V.renderNavBar(
-          "C.handlerbacktofilms()",
-          "V.renderProfileSelector()",
-          "C.ProfileSelectChange()",
-          profiles            //transmet les profils
-        );
         console.log("Selected profile age:", age);
         let data = await C.getMovie(age);               // Charge les films selon l'âge
         // let datacat = C.getMovieGrouped(data);        // charge les catégories de films
         // V.getMovieGrouped(datacat);
       };
 
+
+
+
+
+
+
+
+
+
+
       // RENDER ET VUE WINDOWS
       window.V = {};
 
       //Fonction qui render la Barre de navigation
-      V.renderNavBar = function (hAbout, hProfile, hProfileSelectChange, data) {
+      V.renderNavBar = function (hAbout, hProfile, ProfileSelectChange, data) {
         let header = document.querySelector("#header");
         header.innerHTML = NavBar.format(
           hAbout,
           hProfile,
-          hProfileSelectChange,
+          ProfileSelectChange,
           data
         );
       };
