@@ -33,10 +33,20 @@
       C.getMovie = async function (age) {
         // console.log("entrée avec age:", age);
         let data = await DataMovie.requestMovies(age);
-        // console.log("bien sorti avec:", data);
-        return data;
+        console.log("bien sorti avec:", data);
 
+
+        let datacat = await C.getMovieGrouped(data);        // charge les catégories de films
+        console.log("bien sorti 2 avec:", age);
+        console.log("bien sorti 2 avec:", data);
+
+
+        V.getMovieGrouped(data);
+
+        return data;
       };
+
+
 
       //Récupère les donnée de la base de données des profils
       C.getProfiles = async function () {
@@ -69,10 +79,6 @@
 
 
 
-
-
-
-
       //
       //FONCTIONS D'ANCRES
       //Ramène au somet de la page sur la liste de films non triée
@@ -90,6 +96,9 @@
         }
       };
 
+
+
+
       //
       //FONCTIONS DE GESTION DES COMPOSANTS/EVENEMENTS
       // Gère les clics sur les films de la liste et récupère les infos détaillées et complète du film selon son id
@@ -101,13 +110,13 @@
         C.handlerbacktofilmdetails();
       };
 
-      //Assure le regroupement des films par catégorie
-      C.getMovieGrouped = async function (data) {
-        console.log("groupedmovie :", data);
-        let datacat = await DataMovie.requestGroupedMovies();
-        console.log("datacat:", datacat);
-        return datacat;
-      };
+      //Assure le regroupement des films par catégorie, objet catégories puis sous objet liste de film
+      C.getMovieGrouped = async function (age) {
+  let datacat = await DataMovie.requestGroupedMovies(age); // on envoie juste l'âge
+  console.log("datacat:", datacat);
+  return datacat;
+};
+
 
 
 
@@ -124,7 +133,6 @@
         console.log("profiles:", profiles)
         V.renderNavBar(
           "C.handlerbacktofilms()",
-          "C.getProfiles()",
           "C.ProfileSelectChangeNav()",
           profiles            //transmet les profils
         );
@@ -157,11 +165,10 @@
       window.V = {};
 
       //Fonction qui render la Barre de navigation
-      V.renderNavBar = function (hAbout, hProfile, ProfileSelectChange, data) {
+      V.renderNavBar = function (hAbout, ProfileSelectChange, data) {
         let header = document.querySelector("#header");
         header.innerHTML = NavBar.format(
           hAbout,
-          hProfile,
           ProfileSelectChange,
           data
         );
@@ -192,14 +199,9 @@
       };
 
       V.getMovieGrouped = async function (datacat) {
-        for (let category of datacat) {
-          let categoryBlock = list_category.formatCategoryBlock(
-            category.category,
-            category.movies
-          );
-          let content = document.querySelector("#movieGrouped");
-          content.innerHTML += categoryBlock;
-        }
+        let categoryBlock = list_category.formatCategoryBlock(datacat);
+        let content = document.querySelector("#movieGrouped");
+        content.innerHTML += categoryBlock;
       };
 
       C.start();

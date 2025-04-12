@@ -17,10 +17,9 @@ NavBar.formatOneProfile = function (i, data) {
 };
 
 
-NavBar.format = function (hHome, hProfile, hProfileSelectChange, data) {
+NavBar.format = function (hHome, hProfileSelectChange, data) {
   let html = template;
   html = html.replace("{{hHome}}", hHome);
-  html = html.replace("{{hProfile}}", hProfile);
   html = html.replace("{{hProfileSelectChange}}", hProfileSelectChange);
   let optionsHTML = "";
   for (let i = 0; i < data.length; i++) {

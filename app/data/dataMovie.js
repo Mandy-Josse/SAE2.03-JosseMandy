@@ -16,9 +16,9 @@ DataMovie.requestMovieDetails = async function (id) {
   return movieArray[0]; 
 };
 
-DataMovie.requestGroupedMovies = async function () {
+DataMovie.requestGroupedMovies = async function (data1) {
   let answer = await fetch(
-    HOST_URL + "/server/script.php?todo=readMoviesGrouped");
+    HOST_URL + "/server/script.php?todo=readMoviesGrouped&data=" + data1);
   let data = await answer.json();
   return data;
 
