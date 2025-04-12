@@ -37,11 +37,9 @@
 
 
         let datacat = await C.getMovieGrouped(data);        // charge les catégories de films
-        console.log("bien sorti 2 avec:", age);
-        console.log("bien sorti 2 avec:", data);
+        console.log("bien sorti avec:", data);
 
-
-        V.getMovieGrouped(data);
+        V.getMovieGrouped(datacat);
 
         return data;
       };
@@ -79,6 +77,10 @@
 
 
 
+
+
+
+
       //
       //FONCTIONS D'ANCRES
       //Ramène au somet de la page sur la liste de films non triée
@@ -96,9 +98,6 @@
         }
       };
 
-
-
-
       //
       //FONCTIONS DE GESTION DES COMPOSANTS/EVENEMENTS
       // Gère les clics sur les films de la liste et récupère les infos détaillées et complète du film selon son id
@@ -111,12 +110,12 @@
       };
 
       //Assure le regroupement des films par catégorie, objet catégories puis sous objet liste de film
-      C.getMovieGrouped = async function (age) {
-  let datacat = await DataMovie.requestGroupedMovies(age); // on envoie juste l'âge
-  console.log("datacat:", datacat);
-  return datacat;
-};
-
+      C.getMovieGrouped = async function (data) {
+        console.log("groupedmovie :", data);                      //Liste des films triés par getmovie selon l'age
+        let datacat = await DataMovie.requestGroupedMovies();     //Liste des catégories ET films associé
+        console.log("datacat:", datacat);
+        return datacat;
+      };
 
 
 

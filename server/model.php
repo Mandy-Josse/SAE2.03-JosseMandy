@@ -66,7 +66,6 @@
                 m.name,
                 m.image
             FROM Movie m
-            WHERE Movie IS IN data
             JOIN Category c ON m.id_category = c.id
             ORDER BY c.name, m.name";
 

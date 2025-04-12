@@ -53,16 +53,7 @@ function getMovieDetailsController () {
     }
 }
 function readMoviesGroupedController() {
-    if (isset($_REQUEST['data'])) {
-        $data = $_REQUEST['data']; // Get the ID from the request
-        $datacat = getMovieDetails($data); // Pass the ID to the function
-        return $datacat;
-    } else {
-        echo json_encode(['error' => 'Missing data parameter']);
-        http_response_code(400); // Bad Request
-        exit();
-    }
-    return getMoviesGroupedByCategory();    //is this useful-?
+    return getMoviesGroupedByCategory();
 }
 
 
