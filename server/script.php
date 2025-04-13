@@ -55,9 +55,10 @@ if ( isset($_REQUEST['todo']) ){
     case 'addProfile':
       $data = addprofileController();
       break;
+      
     case 'updateProfile':
-      $data = updateProfileController();
-      break;
+     $data = updateProfileController();
+     break;
 
     case 'getMovieDetails':
       $data = getMovieDetailsController();

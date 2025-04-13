@@ -30,5 +30,10 @@ DataProfile.update = async function (fdata) {
   return data;
 };
 
+DataProfile.requestProfiles = async function () {
+  let response = await fetch(HOST_URL + "/server/script.php?todo=readProfiles");
+  let profiles = await response.json();
+  return profiles;
+};
 
 export { DataProfile };

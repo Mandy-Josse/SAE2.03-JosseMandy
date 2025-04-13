@@ -13,14 +13,24 @@
     <section id="addprofile"></section>
 
     <script type="module">
+      import { DataMovie } from "./data/dataMovie.js";
+      import { DataProfile } from "./data/dataProfile.js";
       import { Log } from "./component/Log/script.js";
       import { NewMovieForm } from "./component/MovieForm/script.js";
       import { NewProfileForm } from "./component/ProfileForm/script.js";
       import { updateProfileForm } from "./component/ProfileFormUpdate/script.js";
-      import { DataMovie } from "./data/dataMovie.js";
-      import { DataProfile } from "./data/dataProfile.js";
+
+
+
 
       window.C = {};
+      //Récupère les donnée de la base de données des profils
+      C.getProfiles = async function () {
+        let profiles = await DataProfile.requestProfiles();
+        // console.log("Profiles object:", profiles);
+        return profiles;
+      };
+
 
       C.handlerAddMovie = async function () {
         let form = document.querySelector(".addMovie__form");
@@ -47,11 +57,13 @@
 
 
 
-      C.start = function () {
+
+      C.start = async function () {
+        let profiles = await C.getProfiles(); // récupère les profils
         V.renderLog("Démarrage de l'application");
         V.renderAddMovie();
         V.renderAddProfile();
-        V.renderUpdateProfile();
+        V.renderUpdateProfile(profiles);
       };
 
 
@@ -69,9 +81,9 @@
         let addprofile = document.querySelector("#addprofile");
         addprofile.innerHTML = NewProfileForm.format("C.handlerAddProfile()");
       };
-      V.renderUpdateProfile = function () {
+      V.renderUpdateProfile = function (profiles) {
         let updateprofile = document.querySelector("#updateprofile");
-        updateprofile.innerHTML = updateProfileForm.format("C.handlerUpdateProfile()");
+        updateprofile.innerHTML = updateProfileForm.format("C.handlerUpdateProfile()", "C.handlerUpdateProfile()" , profiles)
       };
 
       C.start();
