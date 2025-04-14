@@ -38,9 +38,6 @@ function readMoviesController() {
         exit();
     }
 }
-
-
-
 function getMovieDetailsController () {
     if (isset($_REQUEST['id'])) {
         $id = $_REQUEST['id']; // Get ID
@@ -70,8 +67,46 @@ function readProfilesController() {
 
 
 
+function getFavController() {
+    if (isset($_REQUEST['id'])) {
+        $id = $_REQUEST['id'];
+        $favorites = getFavByProfile($id);
+        return $favorites;
+        
+    } else {
+        echo json_encode(['error' => 'Missing id parameter']);
+        http_response_code(400); // Bad Request
+        exit();
+    }
+}
 
 
+function addFavController() {
+    $id_fav = $_REQUEST['id_fav'];
+    $id_profile = $_REQUEST['id_profile'];
+    $id_film = $_REQUEST['id_film'];
+
+    $ok = addFav($id_fav, $id_profile, $id_film);
+
+    if ($ok === 1) {
+        return ["success" => true, "message" => "Le film a bien été ajouté aux favoris."];
+    } else {
+        delFav($id_fav);
+        return ["success" => false, "message" => "le film est déjà présent dans les favoris"];
+    }
+
+}
+function delFavController() {
+    $id_fav = $_REQUEST['id_fav'];
+
+    $ok = delFav($id_fav);
+    if ($ok === 1) {
+        return ["success" => true, "message" => "Le film a bien été retiré des favoris."];
+    } else {
+        return ["success" => false, "message" => "le film n'est pas dans les favoris"];
+    }
+
+}
 
 
 

@@ -44,33 +44,67 @@ if ( isset($_REQUEST['todo']) ){
   $todo = $_REQUEST['todo'];
   switch ($todo) {
 
+
+    
     case 'getAllMovies':
       $data = readMoviesController();
       break;
-
     case 'addMovie':
       $data = addMovieController();
       break;
+    case 'getMovieDetails':
+      $data = getMovieDetailsController();
+      break;
+    case 'readMoviesGrouped':
+      $data = readMoviesGroupedController();
+      break;
+    
 
+
+
+  
+
+    case 'getFav':
+      $data = addprofileController();
+      break;
+    case 'addFav':
+      $data = addprofileController();
+      break;
+    case 'delFav':
+      $data = addprofileController();
+      break;
+    
+
+
+
+
+
+
+    case 'readProfiles':
+      $data = readProfilesController();
+      break;
     case 'addProfile':
       $data = addprofileController();
       break;
-      
     case 'updateProfile':
      $data = updateProfileController();
      break;
 
-    case 'getMovieDetails':
-      $data = getMovieDetailsController();
-      break;
 
-    case 'readMoviesGrouped':
-    $data = readMoviesGroupedController();
-    break;
 
-    case 'readProfiles':
-    $data = readProfilesController();
-    break;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       
     default:

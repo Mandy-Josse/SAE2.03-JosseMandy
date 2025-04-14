@@ -18,6 +18,7 @@
     <script type="module">
       import { DataMovie } from "./data/dataMovie.js";
       import { DataProfile } from "./data/dataProfile.js";
+      import { DataFav } from "./data/dataFav.js";
       import { NavBar } from "./component/NavBar/script.js";
       import { List_ite1 } from "./component/ite1/script.js";
       import { MovieDetails } from "./component/Moviedetails/script.js";
@@ -34,22 +35,23 @@
         // console.log("entrée avec age:", age);
         let data = await DataMovie.requestMovies(age);
         console.log("bien sorti avec:", data);
-
-
         let datacat = await C.getMovieGrouped(data);        // charge les catégories de films
         console.log("bien sorti avec:", data);
-
         V.getMovieGrouped (datacat)
         return data;
       };
-
-
-
       //Récupère les donnée de la base de données des profils
       C.getProfiles = async function () {
         profiles = await DataProfile.requestProfiles();
         // console.log("Profiles object:", profiles);
         return profiles;
+      };
+
+      //Récupère les donnée de la base de données des profils
+      C.getFav = async function () {
+        let Favorites = await DataFav.requestFavorites();
+        console.log("Favorites object:", Favorites);
+        return Favorites;
       };
 
       //Assure le changement de l'id du profil sélectionné après selection ou modification dans navbar
@@ -103,7 +105,6 @@
       C.handlerDetail = async function (id) {
         let data = await DataMovie.requestMovieDetails(id);
         // console.log("Movie details object:", data);
-
         V.renderMovieDetails(data);
         C.handlerbacktofilmdetails();
       };
@@ -141,7 +142,9 @@
 
 
 
-
+      C.LoadFavPage = function () {
+        console.log("page à load")
+      }
 
 
 
@@ -154,6 +157,7 @@
         V.renderNavBar(
           "C.handlerbacktofilms()",
           "C.ProfileSelectChangeNav()",
+          "C.LoadFavPage()",
           profiles            //transmet les profils
         );
         // Active une pop up pour choisir un profil si la valeur n'est pas définie = Après déconnection/lancement de l'app
@@ -185,7 +189,7 @@
       window.V = {};
 
       //Fonction qui render la Barre de navigation
-      V.renderNavBar = function (hAbout, ProfileSelectChange, data) {
+      V.renderNavBar = function (hAbout, ProfileSelectChange,hFav, data) {
         let header = document.querySelector("#header");
         header.innerHTML = NavBar.format(
           hAbout,

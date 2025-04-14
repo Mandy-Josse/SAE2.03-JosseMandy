@@ -17,10 +17,13 @@ NavBar.formatOneProfile = function (i, data) {
 };
 
 
-NavBar.format = function (hHome, hProfileSelectChange, data) {
+NavBar.format = function (hHome, hProfileSelectChange, hFav, data) {
   let html = template;
   html = html.replace("{{hHome}}", hHome);
   html = html.replace("{{hProfileSelectChange}}", hProfileSelectChange);
+  html = html.replace("{{hFav}}", hFav);
+
+  
   let optionsHTML = "";
   for (let i = 0; i < data.length; i++) {
     let profile = data[i];

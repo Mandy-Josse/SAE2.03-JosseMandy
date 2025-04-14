@@ -161,6 +161,56 @@ function addProfile($n, $y, $a) {
     }
 }
 
+
+function getFavByProfile($id_profile) {
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+    $sql = "SELECT * FROM Favoris WHERE id_profile = :id_profile";
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':id_profile', $id_profile);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
+}
+
+function addFav($id_fav, $id_profile, $id_film) {
+    try {
+        $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+        $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        // Vérifier si le nom existe déjà
+        $checkSql = "SELECT COUNT(*) FROM Favoris WHERE id_fav = :id_fav";
+        $checkStmt = $cnx->prepare($checkSql);
+        $checkStmt->bindParam(':id_fav', $id_fav);
+        $checkStmt->execute();
+        $count = $checkStmt->fetchColumn();
+
+        if ($count > 0) {
+            // Le nom existe déjà
+            return -1;
+        }
+
+        // Insérer le nouveau profil
+        $sql = "INSERT INTO Favoris (id_fav, id_profile, id_film) VALUES (:id_fav, :id_profile, :id_film)";
+        $stmt = $cnx->prepare($sql);
+        $stmt->bindParam(':id_fav', $id_fav);
+        $stmt->bindParam(':id_profile', $id_profile);
+        $stmt->bindParam(':id_film', $id_film);
+        $stmt->execute();
+
+        return $stmt->rowCount();
+    } catch (PDOException $e) {
+        return 0;
+    }
+}
+function delFav($id_fav) {
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+    $sql = "DELETE FROM Favoris WHERE id_fav = :id_fav";
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':id_fav', $id_fav);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
+}
+
+
 function updateProfile($id, $name, $age, $avatar){
     try {
         $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
