@@ -160,13 +160,15 @@ function addProfile($n, $y, $a) {
         return 0;
     }
 }
-function updateProfile($name, $age, $avatar){
+
+function updateProfile($id, $name, $age, $avatar){
     try {
         $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
         $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $sql = "UPDATE Users SET age = :age, avatar = :avatar WHERE name = :name";
+        $sql = "UPDATE Users SET name = :name, age = :age, avatar = :avatar WHERE idusers = :id";
         $stmt = $cnx->prepare($sql);
+        $stmt->bindParam(':id', $id);
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':age', $age);
         $stmt->bindParam(':avatar', $avatar);

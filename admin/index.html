@@ -22,7 +22,6 @@
 
 
 
-
       window.C = {};
       //Récupère les donnée de la base de données des profils
       C.getProfiles = async function () {
@@ -49,13 +48,13 @@
         V.renderLog(res.message);
       };
       C.handlerUpdateProfile = async function (){
+        let id = document.querySelector("#profileSelector").value;
+        console.log(id)
         let form = document.querySelector('.updateProfile__form');
         let fd = new FormData(form);
-        let res = await DataProfile.update(fd);
+        let res = await DataProfile.update(fd, id);
         V.renderLog(res.message);
       }
-
-
 
 
       C.start = async function () {

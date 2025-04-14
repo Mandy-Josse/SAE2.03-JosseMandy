@@ -25,7 +25,7 @@ updateProfileForm.format = function (handler, hProfileSelectChange, data) {
   let optionsHTML = "";
   for (let i = 0; i < data.length; i++) {
     let profile = data[i];
-    optionsHTML += updateProfileForm.formatOneProfile(i, profile);
+    optionsHTML += updateProfileForm.formatOneProfile(i+1, profile);
   }
   console.log("data = ", data);
 

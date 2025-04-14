@@ -8,24 +8,18 @@ DataProfile.add = async function (fdata) {
     body: fdata,
   };
 
-  let answer = await fetch(
-    HOST_URL + "/server/script.php?todo=addProfile",
-    config
-  );
+  let answer = await fetch(HOST_URL + "/server/script.php?todo=addProfile", config);
   let data = await answer.json();
   return data;
 };
 
-DataProfile.update = async function (fdata) {
+DataProfile.update = async function (fdata, id) {
   let config = {
     method: "POST",
     body: fdata,
   };
 
-  let answer = await fetch(
-    HOST_URL + "/server/script.php?todo=updateProfile",
-    config
-  );
+  let answer = await fetch(HOST_URL + "/server/script.php?todo=updateProfile&id=" + id, config);
   let data = await answer.json();
   return data;
 };

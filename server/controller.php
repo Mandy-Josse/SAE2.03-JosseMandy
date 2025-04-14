@@ -43,8 +43,8 @@ function readMoviesController() {
 
 function getMovieDetailsController () {
     if (isset($_REQUEST['id'])) {
-        $id = $_REQUEST['id']; // Get the ID from the request
-        $movies = getMovieDetails($id); // Pass the ID to the function
+        $id = $_REQUEST['id']; // Get ID
+        $movies = getMovieDetails($id); // Pass ID to function
         return $movies;
     } else {
         echo json_encode(['error' => 'Missing id parameter']);
@@ -115,22 +115,29 @@ function addprofileController() {
 }
 
 
-function updateProfileController(){
+function updateProfileController() {
+    $id = $_REQUEST['id'];
     $name = $_REQUEST['name'];
     $age = $_REQUEST['age'];
     $avatar = $_REQUEST['avatar'];
 
-    $ok = updateProfile($names, $age, $avatar);
+
+    // Validation rapide
+    if (!is_numeric($id)) {
+        return ["message" => "Selectionnez un profil à modifier."];
+    }
+    if (!is_numeric($age) || empty($name) || empty($avatar)) {
+        return ["message" => "Données invalides."];
+    }
+
+    $ok = updateProfile($id, $name, $age, $avatar);
 
     if ($ok > 0){
-        return ["message" => "Le profil '$name' a été modifié avec succès."];
+        return ["message" => "Le profil '$name', $id a été modifié avec succès."];
     } else {
-        return ["message" => "Erreur lors de la modification du profil '$name'."];
+        return ["message" => "Erreur lors de la modification du profil '$name', $id."];
     }
 }
 
-  
-
 
 ?>
-
