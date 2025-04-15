@@ -134,17 +134,18 @@
 
 
 
-      C.getFav = async function (profile) {
-        let Favorites = await DataFav.requestFavorites(profile);
+      C.getFav = async function (idprofile) {
+        console.log("profile fqv object:", idprofile);
+        let Favorites = await DataFav.requestFavorites(idprofile);
         console.log("Favorites object:", Favorites);
         return Favorites;
-      };
+      }
       C.LoadFavPage = async function () {
-        profile = C.selectedProfile
-        fav = await C.getFav(profile)
-        console.log("page à load");
+        let idprofile = C.selectedProfile
+        let fav = await C.getFav(idprofile)
+        console.log("page à load", fav);
         window.location.href = './component/Favoris/template.html';
-        V.renderFav(handlerdetail, handlerdelete, fav)
+        V.renderFav("C.handlerDetail(id_film)", "C.handlerRemoveFav(id_fav)", fav)
       }
       C.handlerRemoveFav = async function (id_fav) {
         let rm = await DataFav.requestDeleteFavorite(id_fav);

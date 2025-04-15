@@ -7,11 +7,11 @@ let template2 = await templateFile2.text();
 let Favoris = {};
 
 // Fonction qui génère la page avec les cartes
-Favoris.format = function (handlerdetail, handlerdelete, data) {
+Favoris.format = function (data) {
   console.log("Données reçues pour format des favoris:", data);
-  // Si pas de films, affiche un message
+  // Si pas de favoris, affiche un message
   if (data.length === 0) {
-    content.innerHTML = '<p class="nofilm">Aucun film disponible pour le moment.</p>';
+    content.innerHTML = '<p class="nofilm">Aucun Favoris pour le moment.</p>';
     return "";
   }
 
@@ -27,15 +27,15 @@ Favoris.format = function (handlerdetail, handlerdelete, data) {
   return html;
 };
 
-// Fonction qui génère une seule carte pour un film
+// Fonction qui génère une seule carte pour un favoris
 Favoris.formatOneCard = function (data) {
   let html = template2; // Template d'une carte
 
-  // Remplace les tags dynamiques avec les données du film
+  // Remplace les tags dynamiques avec les données du film favoris
   html = html.replace("{{image_name}}", data.image);
   html = html.replace("{{title}}", data.name);
-  html = html.replace("{{handler}}", handlerdetail);
-  html = html.replace("{{handlerdelete}}", handlerdelete);
+  html = html.replace("{{handler}}", `C.handlerDetail(${data.id})`);
+  html = html.replace("{{handlerdelete}}", `C.handlerAddFav(${data.id_fav}, ${data.id_profile})`);
 
   return html; // Retourne la carte générée
 };
