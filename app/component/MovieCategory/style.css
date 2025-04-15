@@ -26,3 +26,30 @@
   margin: 1rem;
   padding: 1rem;
 }
+.heart__icon {
+  position: absolute;
+  z-index: 5;
+  top: 1rem;
+  right: 1rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0.5rem;
+  fill: var(--color-fg);
+  background-color: var(--color-bg);
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.card-icon__container {
+  position: relative;
+}
+
+
+
+
+
+.heart__icon svg {
+  width: 100%;
+  height: 100%;
+  fill: var(--color-fg);
+}

@@ -9,3 +9,4 @@
 @import "./../component/Moviedetails/style.css" layer(components);
 @import "./../component/MovieCategory/style.css" layer(components);
 @import "./../component/Profilepop/style.css" layer(components);
+@import "./../component/Favoris/style.css" layer(components);

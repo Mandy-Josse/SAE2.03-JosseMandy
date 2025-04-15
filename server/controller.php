@@ -79,23 +79,21 @@ function getFavController() {
         exit();
     }
 }
-
-
 function addFavController() {
-    $id_fav = $_REQUEST['id_fav'];
-    $id_profile = $_REQUEST['id_profile'];
-    $id_film = $_REQUEST['id_film'];
+    $id_profile = (int) $_REQUEST['id_profile'];
+    $id_film = (int) $_REQUEST['id_film'];
 
-    $ok = addFav($id_fav, $id_profile, $id_film);
+    $ok = addFav($id_profile, $id_film);
 
     if ($ok === 1) {
         return ["success" => true, "message" => "Le film a bien été ajouté aux favoris."];
+    } else if ($ok === -1) {
+        return ["success" => false, "message" => "Le film est déjà dans les favoris."];
     } else {
-        delFav($id_fav);
-        return ["success" => false, "message" => "le film est déjà présent dans les favoris"];
+        return ["success" => false, "message" => "Une erreur est survenue lors de l’ajout du favori."];
     }
-
 }
+
 function delFavController() {
     $id_fav = $_REQUEST['id_fav'];
 

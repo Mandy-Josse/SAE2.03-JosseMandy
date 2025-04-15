@@ -1,0 +1,22 @@
+.navbar__title {
+    font-family: var(--ff-sans);
+}
+
+
+
+.Fav__container {
+    display: flex;
+    flex-direction: row;
+
+
+}
+
+
+
+.Fav__info {}
+.card-icon {}
+
+.card-content {}
+
+.Fav__button {}
+.Fav__svg {}

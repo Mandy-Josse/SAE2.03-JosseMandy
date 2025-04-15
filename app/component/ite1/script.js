@@ -34,6 +34,9 @@ List_ite1.formatOneCard = function (data) {
   html = html.replace("{{image_name}}", data.image);
   html = html.replace("{{title}}", data.name);
   html = html.replace("{{handler}}", `C.handlerDetail(${data.id})`);
+  html = html.replace("{{handleraddfav}}", `C.handlerAddFav(${data.id_fav}, ${data.id_profile}, ${data.id})`);
+
+  
 
   return html; // Retourne la carte générée
 };

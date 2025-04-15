@@ -65,13 +65,13 @@ if ( isset($_REQUEST['todo']) ){
   
 
     case 'getFav':
-      $data = addprofileController();
+      $data = getFavController();
       break;
     case 'addFav':
-      $data = addprofileController();
+      $data = addFavController();
       break;
     case 'delFav':
-      $data = addprofileController();
+      $data = delFavController();
       break;
     
 

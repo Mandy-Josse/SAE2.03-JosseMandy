@@ -24,6 +24,8 @@
       import { MovieDetails } from "./component/Moviedetails/script.js";
       import { list_category } from "./component/MovieCategory/script.js";
       import { Profilepop } from "./component/Profilepop/script.js";
+      import { Favoris } from "./component/Favoris/script.js";
+
 
       // CONTROLLER
       window.C = {};
@@ -46,14 +48,6 @@
         // console.log("Profiles object:", profiles);
         return profiles;
       };
-
-      //Récupère les donnée de la base de données des profils
-      C.getFav = async function () {
-        let Favorites = await DataFav.requestFavorites();
-        console.log("Favorites object:", Favorites);
-        return Favorites;
-      };
-
       //Assure le changement de l'id du profil sélectionné après selection ou modification dans navbar
       C.ProfileSelectChangeNav = function () {
         C.selectedProfile = document.querySelector("#profileSelectnav").value;
@@ -122,7 +116,6 @@
             let filteredMovies = categoryBlock.movies.filter(movie =>
               allowedMovieIds.has(movie.id)
             );
-          
             //Garde la catégorie que si elle contient des films
             if (filteredMovies.length > 0) {
               return {
@@ -134,7 +127,6 @@
             }
           })
           .filter(cat => cat !== null); // Supprime les catégories vides
-        
         console.log("datacat après filtre:", filteredCat);
         return filteredCat;
       };
@@ -142,9 +134,46 @@
 
 
 
-      C.LoadFavPage = function () {
-        console.log("page à load")
+      C.getFav = async function (profile) {
+        let Favorites = await DataFav.requestFavorites(profile);
+        console.log("Favorites object:", Favorites);
+        return Favorites;
+      };
+      C.LoadFavPage = async function () {
+        profile = C.selectedProfile
+        fav = await C.getFav(profile)
+        console.log("page à load");
+        window.location.href = './component/Favoris/template.html';
+        V.renderFav(handlerdetail, handlerdelete, fav)
       }
+      C.handlerRemoveFav = async function (id_fav) {
+        let rm = await DataFav.requestDeleteFavorite(id_fav);
+        console.log("fav retiré");
+        return rm;
+      }
+      C.handlerAddFav = async function (profile, id_profile, id_film) {
+        C.selectedProfile = document.querySelector("#profileSelectnav").value;
+        if (C.selectedProfile === null || C.selectedProfile === undefined) {
+          C.selectedProfile = document.querySelector("#profileSelectpop").value;
+          if (C.selectedProfile === null || C.selectedProfile === undefined) {
+            alert("Erreur, pas de profile, veuillez sélectionner un profil")
+            return
+          }
+        }
+        console.log("Selected profile:",C.selectedProfile);
+        C.selectedProfile = C.selectedProfile
+        console.log(parseInt(C.selectedProfile) + 1, id_film)
+
+        let add = await DataFav.requestAddFavorite(parseInt(C.selectedProfile) + 1, id_film);
+        console.log("fav state:", add);
+        if (add.success === true) {
+          alert("Favori ajouté avec succès!")
+        }
+        else if (add.message === 'Le film est déjà dans les favoris.') {
+          alert("Le film est déjà dans les favoris.")
+        }
+      }
+
 
 
 
@@ -179,21 +208,16 @@
 
 
 
-
-
-
-
-
-
       // RENDER ET VUE WINDOWS
       window.V = {};
 
       //Fonction qui render la Barre de navigation
-      V.renderNavBar = function (hAbout, ProfileSelectChange,hFav, data) {
+      V.renderNavBar = function (hAbout, ProfileSelectChange, hFav, data) {
         let header = document.querySelector("#header");
         header.innerHTML = NavBar.format(
           hAbout,
           ProfileSelectChange,
+          hFav,
           data
         );
       };
@@ -232,6 +256,11 @@
         }
         let categoryBlock = list_category.formatCategoryBlock(datacat);
         content.innerHTML = categoryBlock;
+      };
+
+      V.renderFav = function (handlerdetail, handlerdelete, data) {
+        let fav = document.querySelector("#fav");
+        fav.innerHTML = Favoris.format(handlerdetail,handlerdelete, data)
       };
 
       C.start();

@@ -171,36 +171,37 @@ function getFavByProfile($id_profile) {
     return $stmt->fetchAll(PDO::FETCH_OBJ);
 }
 
-function addFav($id_fav, $id_profile, $id_film) {
+function addFav($id_profile, $id_film) {
     try {
         $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
         $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        // Vérifier si le nom existe déjà
-        $checkSql = "SELECT COUNT(*) FROM Favoris WHERE id_fav = :id_fav";
+        // Vérifier si le favori existe déjà
+        $checkSql = "SELECT COUNT(*) FROM Favoris WHERE id_profile = :id_profile AND id_film = :id_film";
         $checkStmt = $cnx->prepare($checkSql);
-        $checkStmt->bindParam(':id_fav', $id_fav);
+        $checkStmt->bindParam(':id_profile', $id_profile, PDO::PARAM_INT);
+        $checkStmt->bindParam(':id_film', $id_film, PDO::PARAM_INT);
         $checkStmt->execute();
-        $count = $checkStmt->fetchColumn();
+
+        $count = $checkStmt->fetchColumn(); // récupère le COUNT(*)
 
         if ($count > 0) {
-            // Le nom existe déjà
-            return -1;
+            return -1; // déjà présent
         }
 
-        // Insérer le nouveau profil
-        $sql = "INSERT INTO Favoris (id_fav, id_profile, id_film) VALUES (:id_fav, :id_profile, :id_film)";
+        // Ajout du favori
+        $sql = "INSERT INTO Favoris (id_profile, id_film) VALUES (:id_profile, :id_film)";
         $stmt = $cnx->prepare($sql);
-        $stmt->bindParam(':id_fav', $id_fav);
-        $stmt->bindParam(':id_profile', $id_profile);
-        $stmt->bindParam(':id_film', $id_film);
+        $stmt->bindParam(':id_profile', $id_profile, PDO::PARAM_INT);
+        $stmt->bindParam(':id_film', $id_film, PDO::PARAM_INT);
         $stmt->execute();
 
-        return $stmt->rowCount();
+        return $stmt->rowCount(); // renvoie 1 si l'insertion a réussi
     } catch (PDOException $e) {
-        return 0;
+        return 0; // erreur PDO
     }
 }
+
 function delFav($id_fav) {
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
     $sql = "DELETE FROM Favoris WHERE id_fav = :id_fav";

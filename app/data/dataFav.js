@@ -3,20 +3,23 @@ let HOST_URL = "https://mmi.unilim.fr/~josse10/SAE2.03-JosseMandy"; // CHANGE TH
 
 let DataFav = {};
 
-DataFav.requestFavorites = async function (age) {
+DataFav.requestFavorites = async function () {
   let answer = await fetch(HOST_URL + "/server/script.php?todo=getFav" );
-  let movies = await answer.json();
-  return movies;
+  let favs = await answer.json();
+  return favs;
 };
 
-DataFav.requestAddFavorite = async function (id) {
+DataFav.requestAddFavorite = async function (id_profile, id_film) {
   let answer = await fetch(
-    HOST_URL + "/server/script.php?todo=addFav&id=" + id);
-  let movieArray = await answer.json();
-  return movieArray[0]; 
+    HOST_URL + `/server/script.php?todo=addFav&id_profile=${id_profile}&id_film=${id_film}`);
+  let favArray = await answer.json();
+  return favArray; 
 };
 
-DataFav.requestDeleteFavorite = async function () {
+
+
+
+DataFav.requestDeleteFavorite = async function (id) {
   let answer = await fetch(
     HOST_URL + "/server/script.php?todo=delFav&id=" + id);
   let data = await answer.json();
