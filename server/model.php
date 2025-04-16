@@ -164,12 +164,19 @@ function addProfile($n, $y, $a) {
 
 function getFavByProfile($id_profile) {
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
-    $sql = "SELECT * FROM Favoris WHERE id_profile = :id_profile";
+    
+    $sql = "SELECT f.id, f.name, f.image 
+            FROM Favoris fav
+            JOIN Film f ON fav.id_film = f.id
+            WHERE fav.id_profile = :id_profile";
+    
     $stmt = $cnx->prepare($sql);
-    $stmt->bindParam(':id_profile', $id_profile);
+    $stmt->bindParam(':id_profile', $id_profile, PDO::PARAM_INT);
     $stmt->execute();
+    
     return $stmt->fetchAll(PDO::FETCH_OBJ);
 }
+
 
 function addFav($id_profile, $id_film) {
     try {
@@ -210,6 +217,9 @@ function delFav($id_fav) {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_OBJ);
 }
+
+
+
 
 
 function updateProfile($id, $name, $age, $avatar){

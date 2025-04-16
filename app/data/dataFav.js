@@ -3,8 +3,8 @@ let HOST_URL = "https://mmi.unilim.fr/~josse10/SAE2.03-JosseMandy"; // CHANGE TH
 
 let DataFav = {};
 
-DataFav.requestFavorites = async function () {
-  let answer = await fetch(HOST_URL + "/server/script.php?todo=getFav" );
+DataFav.requestFavorites = async function (id_profile) {
+  let answer = await fetch(HOST_URL + `/server/script.php?todo=getFavv&id_profile=${id_profile}`);
   let favs = await answer.json();
   return favs;
 };

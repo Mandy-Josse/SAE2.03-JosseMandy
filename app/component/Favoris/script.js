@@ -8,6 +8,7 @@ let Favoris = {};
 
 // Fonction qui génère la page avec les cartes
 Favoris.format = function (data) {
+  let html = template; // Template d'une carte
   console.log("Données reçues pour format des favoris:", data);
   // Si pas de favoris, affiche un message
   if (data.length === 0) {
@@ -18,7 +19,7 @@ Favoris.format = function (data) {
   // On génère toutes les cartes pour les favoris
   let fav = "";
   for (let e of data) {
-    fav += fav.formatOneCard(e);
+    fav += Favoris.formatOneCard(e);
   }
   html = template.replace("{{favoris}}", fav)
   html = template.replace("{{Nom_profile}}", data.Nom_profile);
