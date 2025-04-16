@@ -167,8 +167,9 @@ function getFavByProfile($id_profile) {
     
     $sql = "SELECT f.id, f.name, f.image 
             FROM Favoris fav
-            JOIN Film f ON fav.id_film = f.id
+            JOIN Movie f ON fav.id_film = f.id
             WHERE fav.id_profile = :id_profile";
+            
     
     $stmt = $cnx->prepare($sql);
     $stmt->bindParam(':id_profile', $id_profile, PDO::PARAM_INT);

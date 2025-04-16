@@ -1,18 +1,20 @@
-let templateFile = await fetch("./component/Favoris/template.html");
+let templateFile = await fetch("./template.html");
 let template = await templateFile.text();
-let templateFile2 = await fetch("./component/Favoris/templatefav.html");
+let templateFile2 = await fetch("./templatefav.html");
 let template2 = await templateFile2.text();
 
 
 let Favoris = {};
 
 // Fonction qui génère la page avec les cartes
+
+
 Favoris.format = function (data) {
   let html = template; // Template d'une carte
   console.log("Données reçues pour format des favoris:", data);
   // Si pas de favoris, affiche un message
   if (data.length === 0) {
-    content.innerHTML = '<p class="nofilm">Aucun Favoris pour le moment.</p>';
+    fav.innerHTML = '<p class="nofilm">Aucun Favoris pour le moment.</p>';
     return "";
   }
 
@@ -21,8 +23,7 @@ Favoris.format = function (data) {
   for (let e of data) {
     fav += Favoris.formatOneCard(e);
   }
-  html = template.replace("{{favoris}}", fav)
-  html = template.replace("{{Nom_profile}}", data.Nom_profile);
+  html = html.replace("{{favoris}}", fav)
 
 
   return html;
@@ -35,10 +36,11 @@ Favoris.formatOneCard = function (data) {
   // Remplace les tags dynamiques avec les données du film favoris
   html = html.replace("{{image_name}}", data.image);
   html = html.replace("{{title}}", data.name);
-  html = html.replace("{{handler}}", `C.handlerDetail(${data.id})`);
-  html = html.replace("{{handlerdelete}}", `C.handlerAddFav(${data.id_fav}, ${data.id_profile})`);
+  html = html.replace("{{handlerdelete}}", `C.handlerRemoveFav(${data.id_fav}, ${data.id_profile})`);
 
   return html; // Retourne la carte générée
 };
+
+
 
 export { Favoris };

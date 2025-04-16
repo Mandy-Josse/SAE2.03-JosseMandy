@@ -21,9 +21,6 @@
 require("model.php");
 
 
-
-
-
 ////APP//////////////////APP/////////////////APP///////////////////////////////////APP/////////////////APP//////////////////APP//////////////////APP/////////////////APP//////////////
 
 function readMoviesController() { 
@@ -63,22 +60,19 @@ function readProfilesController() {
 
 
 
-
-
-
-
 function getFavController() {
     if (isset($_REQUEST['id'])) {
         $id = $_REQUEST['id'];
         $favorites = getFavByProfile($id);
         return $favorites;
-        
+
     } else {
         echo json_encode(['error' => 'Missing id parameter']);
         http_response_code(400); // Bad Request
         exit();
     }
 }
+
 function addFavController() {
     $id_profile = (int) $_REQUEST['id_profile'];
     $id_film = (int) $_REQUEST['id_film'];
@@ -105,8 +99,6 @@ function delFavController() {
     }
 
 }
-
-
 
 /////ADMIN///////////ADMIN///////////////ADMIN///////////////ADMIN////////////////ADMIN///////////////ADMIN///////////////ADMIN////////////////ADMIN///////////////ADMIN///////////////ADMIN
 

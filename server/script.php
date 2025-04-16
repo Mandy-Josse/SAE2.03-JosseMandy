@@ -45,7 +45,7 @@ if ( isset($_REQUEST['todo']) ){
   switch ($todo) {
 
 
-    
+
     case 'getAllMovies':
       $data = readMoviesController();
       break;
@@ -78,8 +78,6 @@ if ( isset($_REQUEST['todo']) ){
 
 
 
-
-
     case 'readProfiles':
       $data = readProfilesController();
       break;
@@ -89,21 +87,6 @@ if ( isset($_REQUEST['todo']) ){
     case 'updateProfile':
      $data = updateProfileController();
      break;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
       

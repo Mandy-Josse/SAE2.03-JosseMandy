@@ -24,7 +24,6 @@
       import { MovieDetails } from "./component/Moviedetails/script.js";
       import { list_category } from "./component/MovieCategory/script.js";
       import { Profilepop } from "./component/Profilepop/script.js";
-      import { Favoris } from "./component/Favoris/script.js";
 
 
       // CONTROLLER
@@ -51,7 +50,8 @@
       //Assure le changement de l'id du profil sélectionné après selection ou modification dans navbar
       C.ProfileSelectChangeNav = function () {
         C.selectedProfile = document.querySelector("#profileSelectnav").value;
-        console.log("Selected profile:",C.selectedProfile,profiles[C.selectedProfile].age);
+        console.log("Selected profile:",C.selectedProfile, profiles[C.selectedProfile].age);
+
         C.getMovie(profiles[C.selectedProfile].age).then((data) => {
           V.renderList_ite1(data); // actualise l'affichage des films
         });
@@ -98,7 +98,7 @@
       // Gère les clics sur les films de la liste et récupère les infos détaillées et complète du film selon son id
       C.handlerDetail = async function (id) {
         let data = await DataMovie.requestMovieDetails(id);
-        // console.log("Movie details object:", data);
+        console.log("Movie details object:", data);
         V.renderMovieDetails(data);
         C.handlerbacktofilmdetails();
       };
@@ -141,12 +141,25 @@
         return Favorites;
       }
       C.LoadFavPage = async function () {
-        let idprofile = C.selectedProfile
+        let idprofile = parseInt(C.selectedProfile) + 1
+        console.log("test:",idprofile)
+        if (idprofile === undefined) {
+          alert("Impossible de charger les favoris sans profil défini! Veuillez sélectionner un profil.")
+          return ""
+        }
+        if (isNaN(idprofile)) {
+          alert("Impossible de charger les favoris sans profil défini! Veuillez sélectionner un profil.")
+          return;
+        }
         let fav = await C.getFav(idprofile)
         console.log("page à load", fav);
-        window.location.href = './component/Favoris/template.html';
-        V.renderFav(fav)
+        
+        window.location.href = './component/Favoris/template.html?profile=' + C.selectedProfile;
+        // V.renderFavoris(fav) 
       }
+
+
+
       C.handlerRemoveFav = async function (id_fav) {
         let rm = await DataFav.requestDeleteFavorite(id_fav);
         console.log("fav retiré");
@@ -259,10 +272,6 @@
         content.innerHTML = categoryBlock;
       };
 
-      V.renderFav = function (data) {
-        let fav = document.querySelector("#fav");
-        fav.innerHTML = Favoris.format(data)
-      };
 
       C.start();
     </script>
