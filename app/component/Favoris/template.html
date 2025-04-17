@@ -53,6 +53,7 @@
 
             if (rm.success === true) {
                 alert("Favori retiré avec succès!")
+                C.LoadFavPage(idprofile);  // Cela recharge la page des favoris
             } else if (rm.message === 'Le film est déjà dans les favoris.') {
                 alert("Le film est déjà dans les favoris.")
             }
