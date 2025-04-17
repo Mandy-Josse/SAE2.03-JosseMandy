@@ -3,6 +3,17 @@ let template = await templateFile.text();
 let templateFileProfiles = await fetch("./component/NavBar/templateProfile.html");
 let templateProfiles = await templateFileProfiles.text();
 
+
+const burger = document.getElementById('burger');
+const navbarMenu = document.getElementById('navbarMenu');
+
+burger.addEventListener('click', () => {
+  burger.classList.toggle('active');
+  navbarMenu.classList.toggle('active');
+});
+
+
+
 let NavBar = {};
 
 
@@ -36,3 +47,5 @@ NavBar.format = function (hHome, hProfileSelectChange, hFav, data) {
 };
 
 export { NavBar };
+
+

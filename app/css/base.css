@@ -1,5 +1,6 @@
 @layer reset, variables, components, utilities;
 
+@import "./main.css" layer(reset);
 @import "./reset.css" layer(reset);
 @import "./variables.css" layer(variables);
 @import "./utilities.css" layer(utilities);
@@ -10,3 +11,9 @@
 @import "./../component/MovieCategory/style.css" layer(components);
 @import "./../component/Profilepop/style.css" layer(components);
 @import "./../component/Favoris/style.css" layer(components);
+
+
+body {
+    max-width: 100vw;
+    overflow-x: hidden;
+}  

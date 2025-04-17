@@ -22,6 +22,7 @@ blockquote,
 dl,
 dd {
   margin: 0;
+  
 }
 /* Remove list styles and padding on ul, ol  */
 ul,
@@ -29,6 +30,7 @@ li {
   padding: 0;
   margin: 0;
   list-style: none;
+  
 }
 /* Set core body defaults */
 body {
