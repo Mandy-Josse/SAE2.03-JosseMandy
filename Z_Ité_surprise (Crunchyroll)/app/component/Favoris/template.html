@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <title>SAE2.03 APP</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./../../css/base.css"/>
+  </head>
+
+  <body>
+    <div id="fav" class="favoris font-sans">
+        <h1 class="fav__title">Vos Favoris</h1>
+        <div>
+                {{favoris}}
+        </div>
+    </div>
+
+
+    <script type="module">
+        import { DataFav } from "./../../data/dataFav.js";
+        import { Favoris } from "./script.js";
+
+
+
+        // CONTROLLER
+        window.C = {};
+
+
+
+        C.getFav = async function (idprofile) {
+          console.log("profile fav object:", idprofile);
+          let Favorites = await DataFav.requestFavorites(idprofile);
+          console.log("Favorites object:", Favorites);
+          return Favorites;
+        }
+        C.LoadFavPage = async function (idprofile) {
+        //   let idprofile = parseInt(C.selectedProfile) + 1
+          if (idprofile === undefined) {
+            alert("Impossible de charger les favoris sans profil défini! Veuillez sélectionner un profil.")
+            return ""
+          }
+          let fav = await C.getFav(idprofile)
+          console.log("page à load", fav);
+          V.renderFavoris(fav, idprofile) 
+        }
+
+
+
+        C.handlerRemoveFav = async function (id_fav, idprofile) {
+            console.log("fav retiré para:", id_fav, idprofile);
+            let rm = await DataFav.requestDeleteFavorite(id_fav, idprofile);
+            console.log("state", rm);
+
+            if (rm.success === true) {
+                alert("Favori retiré avec succès!")
+                C.LoadFavPage(idprofile);  // Cela recharge la page des favoris
+            } else if (rm.message === 'Le film est déjà dans les favoris.') {
+                alert("Le film est déjà dans les favoris.")
+            }
+        }
+
+
+
+        C.start = async function () {
+          // V.renderNavBar(
+          //   "C.handlerbacktofilms()",
+          //   "C.ProfileSelectChangeNav()",
+          //   "C.LoadFavPage()",
+          //   profiles            //transmet les profils 
+          // );
+          const urlParams = new URLSearchParams(window.location.search);
+          let rawProfile = urlParams.get('profile');
+          console.log("select:", rawProfile)
+                
+          if (rawProfile !== null) {
+            C.selectedProfile = parseInt(rawProfile); // ex: 0
+            let idprofile = C.selectedProfile + 1;
+            C.LoadFavPage(idprofile);
+            console.log("select:", idprofile)
+          } else {
+            alert("Profil non transmis dans l'URL.");
+          }
+        };
+
+
+
+
+
+        // RENDER ET VUE WINDOWS
+        window.V = {};
+
+        V.renderFavoris = function (data, idprofile) {
+            let fav = document.querySelector("#fav");
+            fav.innerHTML = Favoris.format(data, idprofile)
+        
+        };
+        
+        C.start();
+    </script>
+  </body>
+</html>
