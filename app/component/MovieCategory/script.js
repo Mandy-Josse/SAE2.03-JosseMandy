@@ -26,6 +26,7 @@ list_category.formatCategoryBlock = function (datacat) {
     categoryHTML = categoryHTML.replace("{{cards}}", cardsHTML);
     categoryHTML = categoryHTML.replace("{{id_category}}", idCategory);
 
+
     fullHTML += categoryHTML;
   }
 

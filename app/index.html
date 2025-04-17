@@ -176,6 +176,10 @@
         }
         C.selectedProfile = C.selectedProfile
         console.log("id profile:", parseInt(C.selectedProfile) + 1, "id film:", id_film)
+        if (id_film === null || id_film === undefined) {
+          alert("Erreur, pas d'identifiant de film")
+          return
+        }
 
         let add = await DataFav.requestAddFavorite(parseInt(C.selectedProfile) + 1, id_film);
         console.log("fav state:", add);
