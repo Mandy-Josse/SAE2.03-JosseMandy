@@ -14,8 +14,8 @@ Favoris.format = function (data, idprofile) {
   console.log("Données reçues pour format des favoris:", data);
   // Si pas de favoris, affiche un message
   if (data.length === 0) {
-    fav.innerHTML = '<p class="nofilm">Aucun Favoris pour le moment.</p>';
-    return "";
+    html = html.replace("{{favoris}}",'<p class="nofilm">Aucun Favoris pour le moment.</p>')
+    return html;
   }
 
   // On génère toutes les cartes pour les favoris
