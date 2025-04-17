@@ -7,6 +7,12 @@
 -- Version du serveur : 10.11.11-MariaDB-0+deb12u1
 -- Version de PHP : 8.3.19
 
+
+
+
+
+
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -18,8 +24,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `josse10`
+-- Base de données : `SAE203`
 --
+CREATE DATABASE IF NOT EXISTS `SAE203` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `SAE203`;
 
 -- --------------------------------------------------------
 
