@@ -70,7 +70,8 @@ header {
   position: relative;
 }
 
-.dropdown-content {
+.dropdown-content_cat {
+  z-index: 10;
   display: none;
   position: absolute;
   top: 100%;
@@ -79,6 +80,18 @@ header {
   background-color: var(--color-bg);
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
 }
+
+.dropdown-content_profile {
+  z-index: 10;
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: -100%;
+  padding: 0.5rem;
+  background-color: var(--color-bg);
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
+}
+
 
 .dropdown:hover .dropdown-content {
   display: block;
@@ -118,79 +131,213 @@ header {
 
 
 
-/* BASE BURGER ICON */
-.burger {
-  display: none;
-  flex-direction: column;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+
+
+/* - Header ------------------ */
+
+.header {
+  display: flex;
   justify-content: space-between;
-  width: 25px;
-  height: 20px;
-  cursor: pointer;
-  z-index: 11;
+  align-items: center;
+  padding: 1.5em 1.65em;
 }
 
-.burger span {
-  display: block;
-  height: 3px;
-  width: 100%;
-  background-color: var(--color-fg);
-  border-radius: 2px;
-  transition: all 0.3s ease-in-out;
-}
+/* - Main-nav */
 
-/* CROSS ANIMATION WHEN ACTIVE */
-.burger.active span:nth-child(1) {
-  transform: rotate(45deg) translateY(8px);
-}
-
-.burger.active span:nth-child(2) {
-  opacity: 0;
-}
-
-.burger.active span:nth-child(3) {
-  transform: rotate(-45deg) translateY(-8px);
-}
-
-/* MOBILE MENU (initialement caché) */
-.navbar__menu {
+.main-nav {
+  /* Position fixe */
   position: fixed;
-  top: 0;
-  right: -100%;
-  height: 100vh;
-  width: 70%;
-  background-color: var(--color-bg);
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
-  padding: 2rem;
-  transition: right 0.3s ease-in-out;
-  z-index: 10;
-}
-
-.navbar__menu.active {
-  right: 0;
-}
-
-.navbar__list {
+  /* top:0  right:0 bottom:0 left:15% en une seule propriété */
+  inset: 0 0 0 15%;
+  /* Disposition en colonne centrée */
+  display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  /* Arrière plan */
+  background-color: var(--color-bg);
+
+  /* Translation de 100% de la largeur de l'élément à droite */
+  translate: 100% 0;
+
+  /* Transition de la translation */
+  transition: 0.4s ease-in-out;
 }
 
-/* Responsive mode */
-@media (max-width: 768px) {
-  .navbar__title {
-    flex: 1;
+
+.main-nav__list {
+  /* Disposition en colonne */
+  display: flex;
+  flex-direction: column;
+
+  /* Gouttiére de 2x16px */
+  gap: 2rem;
+
+  /* Taille de la police */
+  font-size: 2rem;
+
+  /* Couleur du texte */
+  color: var(--text-color)
+}
+
+.main-nav__link {
+  /* Marge intérieure de 1em */
+  padding: 0.2em 1em;
+}
+
+.main-nav__link:hover {
+  /* Couleur du texte */
+  color: var(--btn-color-hover);
+}
+
+
+/* Réadaptation du menu pour les écran > M */
+@media (min-width: 54em) {
+  .main-nav {
+    /* Retour à la valeur initiale de la propriété position*/
+    position: static;
+
+    /* Arrière plan transparent */
+    background-color: transparent;
+
+    /* Réinitialise la translation */
+    translate: 0% 0%
   }
 
-  .burger {
+  .main-nav__list {
+    /* Position en ligne */
     display: flex;
+    flex-direction: row;
+
+
+    /* Gouttiére de 2x16px */
+    gap: 2rem;
+
+    /* Redéfinir la taille de la police */
+    font-size: 2rem;
+
+
+    /* Couleur du texte */
+    color: var(--text-color);
+
   }
 
-  .navbar__list {
-    display: flex;
-    flex-direction: column;
-    padding-top: 2rem;
+  .main-nav__link {
+    /* Marge intérieure nulle */
+    padding: 0px;
   }
+}
 
-  .navbar__menu ul {
-    list-style: none;
+/* Menu Off canvas */
+
+.burger {
+  /* Positionne le burger sur un layer 10 */
+  position: relative;
+  z-index: 10;
+
+
+  /* Curseur pointer */
+  cursor:pointer;
+
+  @media (min-width: 54em) {
+    & {
+      /* Masquer le burger */
+      display: none;
+    }
   }
+}
+
+.burger__line:nth-child(1) {
+  /* Variable déterminant la position en y : augmente de 9px (7px position d'origine + 9px = 16px centre du svg */
+  --_trans: 9px;
+
+
+  /* Variable déterminant la rotation 45deg */
+  --_rotate: 45deg;
+
+  /* Orignie de la transformation (16px,7px) centre de la ligne  */
+  transform-origin: 16px 7px;
+
+  /* Temporisation retour : attente .2s > rotate durée .2s > translation durée .2s   */
+  transition: translate 0.2s 0.8s ease-in-out, translate 0.2s 0.2s ease-in-out;
+}
+
+.burger__line:nth-child(2) {
+  /* Temporisation retour : .4s d'attente > opacité .2s */
+  transition: opacity 0.2s 0.8s ease-in-out;
+}
+
+.burger__line:nth-child(3) {
+  /* Variable déterminant la position en y : diminue de 9px (25px position d'origine - 9px = 16px centre du svg */
+  --_trans: -9px;
+
+
+  /* Variable déterminant la rotation -45deg */
+  --_rotate: -45deg;
+  /* Orignie de la transformation (16px,25px)  */
+  transform-origin: 16px 25px;
+
+  /* Temporisation retour : attente .2s > rotate durée .2s > translation durée .2s   */
+  transition: translate 0.2s 0.4s ease-in-out, rotate 0.2s 0.2s ease-in-out;
+}
+
+/* Au survol du burger la ligne 1 et 3 change de couleur de stroke */
+.burger:hover :where(:nth-child(1), :nth-child(3)) {
+  stroke: var(--btn-color-hover);
+}
+
+/* - Checked */
+
+
+/* Pour toutes les lignes */
+[type="checkbox"]:checked ~ .label .burger .burger__line {
+  /* Applique la translation et la rotation à partir des variables privée de chaque ligne */
+  transform: 0 var(--_trans);
+  transform: var(--_rotate);
+
+  /* Transition aller : après .2s d'attente > translate d'une durée de .2s > rotation d'une durée de .2s */
+  transition: translate 0.2s 0.2s ease-in-out, rotate 0.2s 0.4s ease-in-out;
+
+}
+
+/* Pour la ligne 2 */
+[type="checkbox"]:checked ~ .label .burger .burger__line:nth-child(2) {
+  /* Opacité 0 */
+  opacity: 0;
+
+  /* Transition aller : opacité de .2s sans delay */
+  transition: opacity 0.2s ease-in-out ;
+}
+
+/* Pour le menu */
+[type="checkbox"]:checked ~ .main-nav {
+  /* Réinitialise la translation */
+  translate: 0% 0%;
 }
