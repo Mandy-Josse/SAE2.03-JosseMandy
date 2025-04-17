@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : jeu. 10 avr. 2025 à 14:28
+-- Généré le : jeu. 17 avr. 2025 à 08:27
 -- Version du serveur : 10.11.11-MariaDB-0+deb12u1
 -- Version de PHP : 8.3.19
 
@@ -28,8 +28,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `Category` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL
+  `id` int(3) NOT NULL,
+  `name` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 --
@@ -51,20 +51,60 @@ INSERT INTO `Category` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `Favoris`
+--
+
+CREATE TABLE `Favoris` (
+  `id_fav` int(11) NOT NULL,
+  `id_profile` int(11) NOT NULL,
+  `id_film` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `Favoris`
+--
+
+INSERT INTO `Favoris` (`id_fav`, `id_profile`, `id_film`) VALUES
+(76, 5, 46),
+(77, 3, 17),
+(78, 3, 7),
+(79, 3, 33),
+(80, 3, 32),
+(81, 3, 34),
+(82, 3, 45),
+(83, 3, 44),
+(84, 3, 54),
+(85, 3, 53),
+(86, 2, 61),
+(87, 2, 56),
+(88, 2, 53),
+(89, 2, 52),
+(90, 2, 51),
+(91, 2, 41),
+(92, 2, 35),
+(93, 2, 12),
+(97, 3, 0),
+(98, 1, 0),
+(110, 1, 17),
+(111, 1, 27);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `Movie`
 --
 
 CREATE TABLE `Movie` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `year` int(11) DEFAULT NULL,
-  `length` int(11) DEFAULT NULL,
+  `name` varchar(250) NOT NULL,
+  `year` int(4) DEFAULT NULL,
+  `length` int(3) DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `director` varchar(255) DEFAULT NULL,
-  `id_category` int(11) DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `trailer` varchar(255) DEFAULT NULL,
-  `min_age` int(11) DEFAULT NULL
+  `director` varchar(250) DEFAULT NULL,
+  `id_category` int(3) DEFAULT NULL,
+  `image` varchar(200) DEFAULT NULL,
+  `trailer` varchar(250) DEFAULT NULL,
+  `min_age` int(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 --
@@ -102,7 +142,7 @@ INSERT INTO `Movie` (`id`, `name`, `year`, `length`, `description`, `director`, 
 (60, 'Shrek', 2001, 90, 'Un ogre grognon part sauver une princesse pour garder son marais tranquille, mais rien ne se passe comme prévu.', 'Andrew Adamson, Vicky Jenson', 1, 'shrek1.jpg', 'https://www.youtube.com/embed/CwXOrWvPBPk', 6),
 (61, 'Shrek 2', 2004, 93, 'Shrek et Fiona visitent les parents de Fiona... qui découvrent que leur fille a épousé un ogre.', 'Andrew Adamson, Kelly Asbury, Conrad Vernon', 1, 'shrek2.jpg', 'https://www.youtube.com/embed/xBgSfhp5Fxo', 6),
 (62, 'Shrek le troisième', 2007, 93, 'Shrek doit trouver un héritier au trône de Fort Fort Lointain, mais le jeune Arthur n’est pas prêt à régner.', 'Chris Miller, Raman Hui', 1, 'shrek3.jpg', 'https://www.youtube.com/embed/_MoIr7811Bs?si=4RnrRn5tZONDPX-N', 6),
-(63, 'Shrek 4 : Il était une fin', 2010, 93, 'Shrek, nostalgique de sa vie d’ogre terrifiant, conclut un pacte dangereux avec le malicieux Tracassin.', 'Mike Mitchell', 1, 'shrek4.jpg', 'https://www.youtube.com/embed/N3RqajyxUco', 6),
+(63, 'Shrek 4 : Il était une fin', 2010, 93, 'Shrek, nostalgique de sa vie d’ogre terrifiant, conclut un pacte dangereux avec le malicieux Tracassin.', 'Mike Mitchell', 1, 'shrek4.jpg', 'https://www.youtube.com/embed/3tRzdX2lG1o?si=e61QpPQVgg0xaMs3', 6),
 (64, 'Le Chat Potté', 2011, 90, 'Avant de rencontrer Shrek, le Chat Potté vivait des aventures épiques pour sauver son honneur et trouver les haricots magiques.', 'Chris Miller', 1, 'chat_potte.jpg', 'https://www.youtube.com/embed/9GRJQrK1ZgM?si=MaVKvjhI9HQpxKSG', 6);
 
 -- --------------------------------------------------------
@@ -115,7 +155,7 @@ CREATE TABLE `Users` (
   `idusers` int(2) NOT NULL,
   `name` varchar(100) DEFAULT NULL,
   `age` int(3) DEFAULT NULL,
-  `avatar` varchar(250) NOT NULL
+  `avatar` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -123,10 +163,11 @@ CREATE TABLE `Users` (
 --
 
 INSERT INTO `Users` (`idusers`, `name`, `age`, `avatar`) VALUES
-(241, 'Adulte', 18, 'adult.jpg'),
-(243, 'Enfant', 10, 'enfant.jpg'),
-(244, 'Ado', 16, 'ado.jpg'),
-(245, 'Grand-enfant', 12, 'G_enfant.jpg');
+(1, 'Adulte', 18, 'adult.jpg'),
+(2, 'Pré-adulte', 16, 'pre-adult.jpg'),
+(3, 'Ado', 12, 'teen.jpg'),
+(4, 'Pré-ado', 10, 'pre-teen.jpg'),
+(5, 'Enfant', 6, 'child.jpg');
 
 --
 -- Index pour les tables déchargées
@@ -137,6 +178,12 @@ INSERT INTO `Users` (`idusers`, `name`, `age`, `avatar`) VALUES
 --
 ALTER TABLE `Category`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `Favoris`
+--
+ALTER TABLE `Favoris`
+  ADD PRIMARY KEY (`id_fav`);
 
 --
 -- Index pour la table `Movie`
@@ -159,7 +206,13 @@ ALTER TABLE `Users`
 -- AUTO_INCREMENT pour la table `Category`
 --
 ALTER TABLE `Category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT pour la table `Favoris`
+--
+ALTER TABLE `Favoris`
+  MODIFY `id_fav` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- AUTO_INCREMENT pour la table `Movie`
@@ -171,7 +224,7 @@ ALTER TABLE `Movie`
 -- AUTO_INCREMENT pour la table `Users`
 --
 ALTER TABLE `Users`
-  MODIFY `idusers` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=246;
+  MODIFY `idusers` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=252;
 
 --
 -- Contraintes pour les tables déchargées
@@ -187,10 +240,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-
---
--- Base de données : `SAE203`
---
-CREATE DATABASE IF NOT EXISTS `SAE203` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `SAE203`;
