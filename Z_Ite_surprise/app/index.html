@@ -240,9 +240,9 @@
       };
 
       //Fonction qui render la première liste de films sans catégorie
-      V.renderList_ite1 = function (data) {
+      V.renderList_ite1 = async function (data) {
         let ite1 = document.querySelector("#ite1");
-        ite1.innerHTML = List_ite1.format(data);
+        ite1.innerHTML = await List_ite1.format(data);
       };
 
       //Fonction qui render la section Détails du film quèand on clique sur une carte de film

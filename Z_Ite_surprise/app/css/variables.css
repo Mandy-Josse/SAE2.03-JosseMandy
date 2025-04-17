@@ -9,6 +9,8 @@
   --color-gray-dark: hsl(0, 0%, 20%);
   --color-gray-darker: hsl(0, 0%, 7%);
   --color-orange: hsl(22, 100%, 52%);
+  --color-light-orange: hsl(22, 100%, 64%);
+
   --ff-sans: "DM sans", sans-serif;
 
 
@@ -17,6 +19,8 @@
   --color-bg: var(--color-gray-darker);
   --color-bg--hover: var(--color-bg--dark);
   --color-bg--nav: var(--color-gray-dark);
+  --color-bg-button: var(--color-orange);
+  --color-bg-button--hover: var(--color-light-orange);
 
   --color-hover: var(--color-gray);
   --color-accent: var(--color-orange);
