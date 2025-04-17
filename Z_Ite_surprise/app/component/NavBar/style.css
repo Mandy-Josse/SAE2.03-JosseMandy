@@ -4,9 +4,19 @@ header {
   top: 0;
   padding: 1rem 3rem;
   color: var(--color-fg);
-  background-color: var(--color-accent);
+  background-color: var(--color-bg);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
+
+.header__logo {
+  width: 300px;
+  flex-shrink: 0;
+}
+.logo {
+  width: 100%;
+  object-fit: cover;
+}
+
 .navbar {
   display: flex;
   flex-direction: row;
@@ -104,7 +114,7 @@ header {
 
 .dropdown-content .navbar__item:hover {
   text-underline-offset: 0.5rem;
-  background-color: var(--color-gray-darker);
+  background-color: var(--color-bg--hover);
 }
 
 .navbar__item--disabled {
@@ -217,7 +227,12 @@ header {
 
 
 /* Réadaptation du menu pour les écran > M */
-@media (min-width: 54em) {
+@media (min-width: 60em) {
+  .header {
+    padding: 0;
+  }
+
+
   .main-nav {
     /* Retour à la valeur initiale de la propriété position*/
     position: static;
@@ -339,6 +354,5 @@ header {
   /* Réinitialise la translation */
   translate: 0% 0%;
 }
-
 
 

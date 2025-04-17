@@ -15,8 +15,8 @@
   /* Sementic Tokens */
   --color-fg: var(--color-white);
   --color-bg: var(--color-gray-dark);
+  --color-bg--hover: var(--color-bg--darker);
   --color-bg--darker: var(--color-gray-darker);
-
 
   --color-hover: var(--color-gray);
   --color-accent: var(--color-orange);

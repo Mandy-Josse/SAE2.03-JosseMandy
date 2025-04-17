@@ -14,7 +14,7 @@ Table Movie (Ité1):
 5	    description	                                       text	                        Text, description sont des textes volumineux
 6	    director	                                       varchar(250)                 255 caractères à nouveau en cas de nom long
 7	    id_category (clé étrangère: Category)              int(3)                       Permet 999 catégories en cas de dévellopement ultra précis 
-8	    image	                                           varchar(200)                 Nom du fichier de l'image, inclu l'extension, .jpg .webp .png etc...  200 caractères et une marge comfortable
+8	    image	                                           varchar(250)                 Nom du fichier de l'image, inclu l'extension, .jpg .webp .png etc...  250 caractères et une marge comfortable
 9	    trailer	                                           varchar(250)                 Url du trailer en embed de https:// à l'identifiant complet
 10	    min_age	                                           int(2)		                Age minimum général de 18, pourrait être dans les 20 pour certains pays,
                                                                                         ne sera jamais plus de 100 donc 2 en taille suffit 

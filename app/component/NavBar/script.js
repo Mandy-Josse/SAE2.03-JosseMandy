@@ -3,7 +3,6 @@ let template = await templateFile.text();
 let templateFileProfiles = await fetch("./component/NavBar/templateProfile.html");
 let templateProfiles = await templateFileProfiles.text();
 
-
 let NavBar = {};
 
 
@@ -37,5 +36,3 @@ NavBar.format = function (hHome, hProfileSelectChange, hFav, data) {
 };
 
 export { NavBar };
-
-
