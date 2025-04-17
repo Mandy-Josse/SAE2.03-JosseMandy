@@ -15,3 +15,15 @@
   --color-bg: var(--color-gray-dark);
   --color-bg--darker: var(--color-gray-darker);
 }
+
+  /* --color-white: hsl(0, 0%, 100%);
+  --color-gray: hsl(0, 0%, 50%);
+  --color-gray-dark: hsl(228, 11%, 9%);
+  --color-orange: hsl(22, 100%, 52%);
+
+  --ff-sans: "DM sans", sans-serif;
+
+  --color-fg: var(--color-white);
+  --color-bg: var(--color-gray-dark);
+  --color-hover: var(--color-gray);
+  --color-accent: var(--color-orange); */

@@ -16,8 +16,8 @@ DataFav.requestAddFavorite = async function (id_profile, id_film ) {
 };
 
 
-DataFav.requestDeleteFavorite = async function (id_fav) {
-  let answer = await fetch(HOST_URL + "/server/script.php?todo=delFav&id_fav=" + id_fav);
+DataFav.requestDeleteFavorite = async function (id_fav, id_profile) {
+  let answer = await fetch(HOST_URL + "/server/script.php?todo=delFav&id_fav=" + id_fav + "&id_profile=" + id_profile);
   let data = await answer.json();
   return data;
 };

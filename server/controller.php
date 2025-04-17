@@ -90,12 +90,15 @@ function addFavController() {
 
 function delFavController() {
     $id_fav = $_REQUEST['id_fav'];
+    $id_profile = $_REQUEST['id_profile'];
 
-    $ok = delFav($id_fav);
+    $ok = delFav($id_fav, $id_profile);
     if ($ok === 1) {
         return ["success" => true, "message" => "Le film a bien été retiré des favoris."];
+    } else if ($ok === -1) {
+        return ["success" => false, "message" => "Le film n'est pas dans les favoris."];
     } else {
-        return ["success" => false, "message" => "le film n'est pas dans les favoris"];
+        return ["success" => false, "message" => "Une erreur est survenue lors de la supression du favori."];
     }
 
 }

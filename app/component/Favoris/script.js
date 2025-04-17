@@ -9,7 +9,7 @@ let Favoris = {};
 // Fonction qui génère la page avec les cartes
 
 
-Favoris.format = function (data) {
+Favoris.format = function (data, idprofile) {
   let html = template; // Template d'une carte
   console.log("Données reçues pour format des favoris:", data);
   // Si pas de favoris, affiche un message
@@ -21,7 +21,7 @@ Favoris.format = function (data) {
   // On génère toutes les cartes pour les favoris
   let fav = "";
   for (let e of data) {
-    fav += Favoris.formatOneCard(e);
+    fav += Favoris.formatOneCard(e, idprofile);
   }
   html = html.replace("{{favoris}}", fav)
 
@@ -30,13 +30,13 @@ Favoris.format = function (data) {
 };
 
 // Fonction qui génère une seule carte pour un favoris
-Favoris.formatOneCard = function (data) {
+Favoris.formatOneCard = function (data, idprofile) {
   let html = template2; // Template d'une carte
 
   // Remplace les tags dynamiques avec les données du film favoris
   html = html.replace("{{image_name}}", data.image);
   html = html.replace("{{title}}", data.name);
-  html = html.replace("{{handlerdelete}}", `C.handlerRemoveFav(${data.id})`);
+  html = html.replace("{{handlerdelete}}", `C.handlerRemoveFav(${data.id}, ${idprofile})`);
 
   return html; // Retourne la carte générée
 };

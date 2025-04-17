@@ -210,13 +210,34 @@ function addFav($id_profile, $id_film) {
     }
 }
 
-function delFav($id_fav) {
-    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
-    $sql = "DELETE FROM Favoris WHERE id_fav = :id_fav";
-    $stmt = $cnx->prepare($sql);
-    $stmt->bindParam(':id_fav', $id_fav);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_OBJ);
+function delFav($id_film, $id_profile) {
+    try {        
+        $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+        $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        // Vérifier si le favori existe déjà
+        $checkSql = "SELECT COUNT(*) FROM Favoris WHERE id_film = :id_film AND id_profile = :id_profile";
+        $checkStmt = $cnx->prepare($checkSql);
+        $checkStmt->bindParam(':id_film', $id_film, PDO::PARAM_INT); 
+        $checkStmt->bindParam(':id_profile', $id_profile, PDO::PARAM_INT); 
+        $checkStmt->execute();
+
+        $count = $checkStmt->fetchColumn(); // récupère le COUNT(*)
+        if ($count === 0) {
+            return -1; // pas présent
+        }
+
+        $sql = "DELETE FROM Favoris WHERE id_film = :id_film AND id_profile = :id_profile";
+        $stmt = $cnx->prepare($sql);
+        $stmt->bindParam(':id_film', $id_film, PDO::PARAM_INT);
+        $stmt->bindParam(':id_profile', $id_profile, PDO::PARAM_INT);
+
+        $stmt->execute();
+        return $stmt->rowCount();
+        
+    } catch (PDOException $e) {
+        return 0; // erreur PDO
+    }
 }
 
 

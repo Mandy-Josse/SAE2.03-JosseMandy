@@ -41,14 +41,14 @@
           }
           let fav = await C.getFav(idprofile)
           console.log("page à load", fav);
-          V.renderFavoris(fav) 
+          V.renderFavoris(fav, idprofile) 
         }
 
 
 
-        C.handlerRemoveFav = async function (id_fav) {
-            console.log("fav retiré para:", id_fav);
-            let rm = await DataFav.requestDeleteFavorite(id_fav);
+        C.handlerRemoveFav = async function (id_fav, idprofile) {
+            console.log("fav retiré para:", id_fav, idprofile);
+            let rm = await DataFav.requestDeleteFavorite(id_fav, idprofile);
             console.log("state", rm);
 
             if (rm.success === true) {
@@ -75,6 +75,7 @@
             C.selectedProfile = parseInt(rawProfile); // ex: 0
             let idprofile = C.selectedProfile + 1;
             C.LoadFavPage(idprofile);
+            console.log("select:", idprofile)
           } else {
             alert("Profil non transmis dans l'URL.");
           }
@@ -87,9 +88,9 @@
         // RENDER ET VUE WINDOWS
         window.V = {};
 
-        V.renderFavoris = function (data) {
+        V.renderFavoris = function (data, idprofile) {
             let fav = document.querySelector("#fav");
-            fav.innerHTML = Favoris.format(data)
+            fav.innerHTML = Favoris.format(data, idprofile)
         
         };
         
