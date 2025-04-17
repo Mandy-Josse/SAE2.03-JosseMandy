@@ -160,12 +160,12 @@
 
 
 
-      C.handlerRemoveFav = async function (id_fav) {
-        let rm = await DataFav.requestDeleteFavorite(id_fav);
-        console.log("fav retiré");
-        return rm;
-      }
-      C.handlerAddFav = async function (profile, id_profile, id_film) {
+      // C.handlerRemoveFav = async function (id_fav) {
+      //   let rm = await DataFav.requestDeleteFavorite(id_fav);
+      //   console.log("fav retiré");
+      //   return rm;
+      // }
+      C.handlerAddFav = async function (id_profile, id_film) {
         C.selectedProfile = document.querySelector("#profileSelectnav").value;
         if (C.selectedProfile === null || C.selectedProfile === undefined) {
           C.selectedProfile = document.querySelector("#profileSelectpop").value;
@@ -174,22 +174,21 @@
             return
           }
         }
-        console.log("Selected profile:",C.selectedProfile);
         C.selectedProfile = C.selectedProfile
-        console.log(parseInt(C.selectedProfile) + 1, id_film)
+        console.log("id profile:", parseInt(C.selectedProfile) + 1, "id film:", id_film)
 
         let add = await DataFav.requestAddFavorite(parseInt(C.selectedProfile) + 1, id_film);
         console.log("fav state:", add);
         if (add.success === true) {
-          alert("Favori ajouté avec succès!")
+          alert("Favori ajouté avec succès!");
         }
         else if (add.message === 'Le film est déjà dans les favoris.') {
-          alert("Le film est déjà dans les favoris.")
+          alert("Le film est déjà dans les favoris.");
+        } else {
+          alert("Erreur, pas de profil, veuillez sélectionner un profil");
+          return;
         }
       }
-
-
-
 
 
 

@@ -1,11 +1,13 @@
 <div class="fav__container">
-    <div class="fav__info card">
-        <img
-            class="card-icon"
-            src="./../../../server/images/{{image_name}}"
-            alt="Bannière du film"
-        />
-        <h3 class="card-content">{{title}}</h3>
+    <div class="fav__info fav__card card--row">
+        <div class="fav__image-wrapper">
+            <img
+                class="fav__card-icon"
+                src="./../../../server/images/{{image_name}}"
+                alt="Bannière du film"
+            />
+        </div>
+        <h3 class="fav__card-content">{{title}}</h3>
     </div>
     <button type="button" class="Fav__button"  onclick="{{handlerdelete}}">
         Suprimer  

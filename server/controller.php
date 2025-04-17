@@ -74,8 +74,8 @@ function getFavController() {
 }
 
 function addFavController() {
-    $id_profile = (int) $_REQUEST['id_profile'];
-    $id_film = (int) $_REQUEST['id_film'];
+    $id_profile =  $_REQUEST['id_profile'];
+    $id_film = $_REQUEST['id_film'];
 
     $ok = addFav($id_profile, $id_film);
 

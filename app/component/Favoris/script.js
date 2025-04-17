@@ -36,7 +36,7 @@ Favoris.formatOneCard = function (data) {
   // Remplace les tags dynamiques avec les données du film favoris
   html = html.replace("{{image_name}}", data.image);
   html = html.replace("{{title}}", data.name);
-  html = html.replace("{{handlerdelete}}", `C.handlerRemoveFav(${data.id_fav}, ${data.id_profile})`);
+  html = html.replace("{{handlerdelete}}", `C.handlerRemoveFav(${data.id})`);
 
   return html; // Retourne la carte générée
 };

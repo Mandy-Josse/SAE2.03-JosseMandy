@@ -8,7 +8,7 @@
   </head>
 
   <body>
-    <div id="fav" class="font-sans"></div>
+    <div id="fav" class="favoris font-sans"></div>
         <h1 class="fav__title">Vos Favoris</h1>
         <div>
                 {{favoris}}
@@ -47,13 +47,16 @@
 
 
         C.handlerRemoveFav = async function (id_fav) {
-          let rm = await DataFav.requestDeleteFavorite(id_fav);
-          console.log("fav retiré");
-          return rm;
+            console.log("fav retiré para:", id_fav);
+            let rm = await DataFav.requestDeleteFavorite(id_fav);
+            console.log("state", rm);
+
+            if (rm.success === true) {
+                alert("Favori retiré avec succès!")
+            } else if (rm.message === 'Le film est déjà dans les favoris.') {
+                alert("Le film est déjà dans les favoris.")
+            }
         }
-
-
-
 
 
 
