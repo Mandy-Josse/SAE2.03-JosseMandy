@@ -1,16 +1,28 @@
-header {
+.header {
   position: sticky;
   z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   top: 0;
+  height: 200px;
   padding: 1rem 3rem;
   color: var(--color-fg);
-  background-color: var(--color-bg);
+  background-color: var(--color-bg--nav);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+
+.label {
+  display: flex;
+  justify-content: right;
+}
+
 .header__logo {
+  justify-content: left;
   width: 300px;
   flex-shrink: 0;
+  padding-left: 3rem;
 }
 .logo {
   width: 100%;
@@ -61,14 +73,9 @@ header {
   opacity: 0.6;
 }
 
-.navbar__item--disabled {
-  color: grey;
-  text-decoration: none;
-  cursor: not-allowed;
-  pointer-events: none;
-  opacity: 0.6;
+.navbar__item:hover {
+  background-color: var(--color-bg--hover);
 }
-
 
 
 
@@ -189,6 +196,7 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-right: 3rem;
   /* Arrière plan */
   background-color: var(--color-bg);
 
@@ -227,7 +235,7 @@ header {
 
 
 /* Réadaptation du menu pour les écran > M */
-@media (min-width: 60em) {
+@media (min-width: 70em) {
   .header {
     padding: 0;
   }
@@ -279,7 +287,7 @@ header {
   /* Curseur pointer */
   cursor:pointer;
 
-  @media (min-width: 54em) {
+  @media (min-width: 70em) {
     & {
       /* Masquer le burger */
       display: none;

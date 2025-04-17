@@ -70,7 +70,7 @@ header {
   position: relative;
 }
 
-.dropdown-content_cat {
+.dropdown-content {
   z-index: 10;
   display: none;
   position: absolute;
@@ -80,7 +80,6 @@ header {
   background-color: var(--color-bg);
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
 }
-
 .dropdown-content_profile {
   z-index: 10;
   display: none;
@@ -128,9 +127,6 @@ header {
   color: var(--color-black);
   
 }
-
-
-
 
 
 
@@ -341,6 +337,3 @@ header {
   /* Réinitialise la translation */
   translate: 0% 0%;
 }
-
-
-
