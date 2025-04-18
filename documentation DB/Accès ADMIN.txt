@@ -1,0 +1,6 @@
+Mysql/phpmyadmin: id usersae203 pswd:  miM01*08jOHTy
+
+Accès page admin caché: (https://josse-sae203.mmi-limoges.fr/admin/)
+Admin:
+Id= admin 
+pswd=  miM01*08jOHTy
