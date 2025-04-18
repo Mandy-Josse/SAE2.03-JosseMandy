@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,500;9..40,700&display=swap");
+
+:root {
+  /* Primitive Tokens */
+  --color-black: hsl(253, 69%, 8%);
+  --color-white: hsl(0, 0%, 100%);
+  --color-gray-light: hsl(0, 0%, 80%);
+  --color-gray: hsl(0, 0%, 50%);
+  --color-gray-dark: hsl(0, 0%, 20%);
+  --color-gray-darker: hsl(0, 0%, 7%);
+  --color-orange: hsl(22, 100%, 52%);
+  --color-light-orange: hsl(22, 100%, 64%);
+
+  --ff-sans: "DM sans", sans-serif;
+
+
+  /* Sementic Tokens */
+  --color-fg: var(--color-white);
+  --color-bg: var(--color-gray-darker);
+  --color-bg--hover: var(--color-bg-dark);
+  --color-bg--nav: var(--color-gray-dark);
+  --color-bg-button: var(--color-orange);
+  --color-bg-button--hover: var(--color-light-orange);
+
+  --color-hover: var(--color-gray);
+  --color-accent: var(--color-orange);
+}

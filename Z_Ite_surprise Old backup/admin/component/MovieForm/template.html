@@ -1,0 +1,109 @@
+<div class="addMovie">
+  <h2 class="addMovie__title">Ajouter un film</h2>
+  <form class="addMovie__form">
+    <input
+      class="addMovie__intput"
+      required
+      type="text"
+      name="title"
+      placeholder="Titre"
+    />
+
+    <input
+      class="addMovie__intput"
+      required
+      type="number"
+      name="annee"
+      placeholder="Année"
+      pattern="[0-9]{4}"
+      min="1895"
+      max="2025"
+    />
+    <select class="addMovie__intput" name="min_age">
+      <option value="6">Tous publics</option>
+      <option value="10">10ans</option>
+      <option value="12">12ans</option>
+      <option value="16">16ans</option>
+      <option value="18">18ans</option>
+    </select>
+    <select class="addMovie__intput" name="categorie">
+      <option value="1">Action</option>
+      <option value="2">Comédie</option>
+      <option value="3">Drame</option>
+      <option value="4">Science-fiction</option>
+      <option value="5">Animation</option>
+      <option value="6">Thriller</option>
+      <option value="7">Horreur</option>
+      <option value="8">Aventure</option>
+      <option value="9">Fantaisie</option>
+      <option value="10">Documentaire</option>
+    </select>
+  </form>
+  <form class="addMovie__form">
+    <input
+      class="addMovie__intput"
+      required
+      type="text"
+      name="realisateur"
+      placeholder="Réalisateur"
+      pattern="[^0-9]*"
+    />
+    <input
+      class="addMovie__intput"
+      required
+      type="number"
+      name="duree"
+      placeholder="Durée"
+      min="0"
+      max="9999"
+    />
+    <input
+      class="addMovie__intput"
+      required
+      type="text"
+      name="description"
+      placeholder="Synopsis"
+      pattern="[^0-9]*"
+    />
+  </form>
+  <form class="addMovie__form">
+    <input
+      class="addMovie__intput"
+      required
+      type="text"
+      name="trailer"
+      placeholder="URL de la bande annonce"
+      pattern="[^0-9]*"
+    />
+    <input
+      class="addMovie__intput"
+      required
+      type="text"
+      name="affiche_name"
+      placeholder="Nom de l'affiche"
+      pattern="[^0-9]*"
+    />
+  </form>
+  
+  <form class="addMovie__form">
+    <div type="button" class="addMovie__sendbutton" onclick="{{handler}}">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="addMovie__icon"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        width="20"
+        height="20"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M12 4v16m8-8H4"
+        />
+      </svg>
+      Ajouter
+    </div>
+  </form>
+</div>

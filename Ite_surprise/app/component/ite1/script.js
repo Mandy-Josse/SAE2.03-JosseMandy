@@ -3,7 +3,7 @@ let template = await templateFile.text();
 let templateFile2 = await fetch("./component/ite1/templatecard.html");
 let template2 = await templateFile2.text();
 
-import { DataMovie } from "./../../data/dataMovie";
+import { DataMovie } from "./../../data/dataMovie.js";
 
 let List_ite1 = {};
 

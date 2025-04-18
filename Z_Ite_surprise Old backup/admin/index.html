@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <title>SAE2.03 ADMIN</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/base.css" />
+  </head>
+  <body>
+    <section id="log"></section>
+    <section id="addmov"></section>
+    <section id="updateprofile"></section>
+    <section id="addprofile"></section>
+
+    <script type="module">
+      import { DataMovie } from "./data/dataMovie.js";
+      import { DataProfile } from "./data/dataProfile.js";
+      import { Log } from "./component/Log/script.js";
+      import { NewMovieForm } from "./component/MovieForm/script.js";
+      import { NewProfileForm } from "./component/ProfileForm/script.js";
+      import { updateProfileForm } from "./component/ProfileFormUpdate/script.js";
+
+
+
+      window.C = {};
+      //Récupère les donnée de la base de données des profils
+      C.getProfiles = async function () {
+        let profiles = await DataProfile.requestProfiles();
+        // console.log("Profiles object:", profiles);
+        return profiles;
+      };
+
+
+      C.handlerAddMovie = async function () {
+        let form = document.querySelector(".addMovie__form");
+        let fd = new FormData(form);
+        let res = await DataMovie.add(fd);
+        console.log(res);
+        V.renderLog(res.message);
+      };
+
+
+
+      C.handlerAddProfile = async function () {
+        let form = document.querySelector(".addProfile__form");
+        let fd = new FormData(form);
+        let res = await DataProfile.add(fd);
+        V.renderLog(res.message);
+      };
+      C.handlerUpdateProfile = async function (){
+        let id = document.querySelector("#profileSelector").value;
+        console.log(id)
+        let form = document.querySelector('.updateProfile__form');
+        let fd = new FormData(form);
+        let res = await DataProfile.update(fd, id);
+        V.renderLog(res.message);
+      }
+
+
+
+
+      
+
+      C.start = async function () {
+        let profiles = await C.getProfiles(); // récupère les profils
+        V.renderLog("Démarrage de l'application");
+        V.renderAddMovie();
+        V.renderAddProfile();
+        V.renderUpdateProfile(profiles);
+      };
+
+
+
+      window.V = {};
+      V.renderLog = function (txt) {
+        let content = document.querySelector("#log");
+        content.innerHTML = Log.format(txt);
+      };
+      V.renderAddMovie = function () {
+        let addmovie = document.querySelector("#addmov");
+        addmovie.innerHTML = NewMovieForm.format("C.handlerAddMovie()");
+      };
+      V.renderAddProfile = function () {
+        let addprofile = document.querySelector("#addprofile");
+        addprofile.innerHTML = NewProfileForm.format("C.handlerAddProfile()");
+      };
+      V.renderUpdateProfile = function (profiles) {
+        let updateprofile = document.querySelector("#updateprofile");
+        updateprofile.innerHTML = updateProfileForm.format("C.handlerUpdateProfile()", "C.handlerUpdateProfile()" , profiles)
+      };
+
+      C.start();
+    </script>
+  </body>
+</html>

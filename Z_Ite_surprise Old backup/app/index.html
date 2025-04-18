@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <title>SAE2.03 APP</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/base.css" />
+  </head>
+
+  <body>
+    <section id="Profilepop" class="profilepop__overlay"></section>
+    <header id="header"></header>
+    <section id="content"></section>
+    <!-- <section id="ite1"></section> -->
+    <section id="movieDetails" class="movieDetails"></section>
+    <section id="movieGrouped" class="movieGrouped"></section>
+
+    <script type="module">
+      import { DataMovie } from "./data/dataMovie.js";
+      import { DataProfile } from "./data/dataProfile.js";
+      import { DataFav } from "./data/dataFav.js";
+      import { NavBar } from "./component/NavBar/script.js";
+      import { List_ite1 } from "./component/ite1/script.js";
+      import { MovieDetails } from "./component/Moviedetails/script.js";
+      import { list_category } from "./component/MovieCategory/script.js";
+      import { Profilepop } from "./component/Profilepop/script.js";
+
+
+      // CONTROLLER
+      window.C = {};
+      C.selectedProfile = undefined;
+      let profiles = [];
+
+      //Récupère les données minimum de la base de données des film (id, nom, affiche du film uniquement)
+      C.getMovie = async function (age) {
+        // console.log("entrée avec age:", age);
+        let data = await DataMovie.requestMovies(age);
+        console.log("bien sorti avec:", data);
+        let datacat = await C.getMovieGrouped(data);        // charge les catégories de films
+        console.log("bien sorti avec:", data);
+        V.getMovieGrouped (datacat)
+        return data;
+      };
+      //Récupère les donnée de la base de données des profils
+      C.getProfiles = async function () {
+        profiles = await DataProfile.requestProfiles();
+        // console.log("Profiles object:", profiles);
+        return profiles;
+      };
+      //Assure le changement de l'id du profil sélectionné après selection ou modification dans navbar
+      C.ProfileSelectChangeNav = function () {
+        C.selectedProfile = document.querySelector("#profileSelectnav").value;
+        console.log("Selected profile:",C.selectedProfile, profiles[C.selectedProfile].age);
+
+        C.getMovie(profiles[C.selectedProfile].age).then((data) => {
+          V.renderList_ite1(data); // actualise l'affichage des films
+        });
+      };
+      //Assure le changement de l'id du profil sélectionné après selection ou modification dans la pop up
+      C.ProfileSelectChangePop = function () {
+        C.selectedProfile = document.querySelector("#profileSelectpop").value;
+        console.log("Selected profile:", C.selectedProfile, profiles[C.selectedProfile].age);
+        C.ProfileSelectChangeHide()
+        C.getMovie(profiles[C.selectedProfile].age).then((data) => {
+          V.renderList_ite1(data); // actualise l'affichage des films
+        });
+      };
+
+      C.ProfileSelectChangeHide = function () {
+        document.getElementById("Profilepop").style.display = "none"; // Cache la popup
+      };
+
+
+
+
+
+
+
+      //
+      //FONCTIONS D'ANCRES
+      //Ramène au somet de la page sur la liste de films non triée
+      C.handlerbacktofilms = function () {
+        const sectionIte1 = document.querySelector("#ite1");
+        if (sectionIte1) {
+          sectionIte1.scrollIntoView({ behavior: "smooth" });
+        }
+      };
+      //Ramène suite au clic sur un film à l'endroit de la page ou apparait le film de détail (Serait bien au futur de le faire sur une page à part si le temps permet)
+      C.handlerbacktofilmdetails = function () {
+        const sectiondetails = document.querySelector("#movieDetails");
+        if (sectiondetails) {
+          sectiondetails.scrollIntoView({ behavior: "smooth" });
+        }
+      };
+
+      //
+      //FONCTIONS DE GESTION DES COMPOSANTS/EVENEMENTS
+      // Gère les clics sur les films de la liste et récupère les infos détaillées et complète du film selon son id
+      C.handlerDetail = async function (id) {
+        let data = await DataMovie.requestMovieDetails(id);
+        console.log("Movie details object:", data);
+        V.renderMovieDetails(data);
+        C.handlerbacktofilmdetails();
+      };
+
+      //Assure le regroupement des films par catégorie, objet catégories puis sous objet liste de film
+      C.getMovieGrouped = async function (data) {
+        let datacat = await DataMovie.requestGroupedMovies(); // Liste des catégories ET films associés
+        console.log("datacat avant filtre:", datacat);
+
+        //Construit un set d'ID de films autorisés (respectent l'âge et sont donc déjà dans data)
+        let allowedMovieIds = new Set(data.map(movie => movie.id));
+        //Filtre les films de chaque catégorie
+        let filteredCat = datacat
+          .map(categoryBlock => {
+            let filteredMovies = categoryBlock.movies.filter(movie =>
+              allowedMovieIds.has(movie.id)
+            );
+            //Garde la catégorie que si elle contient des films
+            if (filteredMovies.length > 0) {
+              return {
+                category: categoryBlock.category,
+                movies: filteredMovies
+              };
+            } else {
+              return null; // return undefined sinon
+            }
+          })
+          .filter(cat => cat !== null); // Supprime les catégories vides
+        console.log("datacat après filtre:", filteredCat);
+        return filteredCat;
+      };
+
+
+
+
+      C.getFav = async function (idprofile) {
+        console.log("profile fav object:", idprofile);
+        let Favorites = await DataFav.requestFavorites(idprofile);
+        console.log("Favorites object:", Favorites);
+        return Favorites;
+      }
+      C.LoadFavPage = async function () {
+        let idprofile = parseInt(C.selectedProfile) + 1
+        console.log("test:",idprofile)
+        if (idprofile === undefined) {
+          alert("Impossible de charger les favoris sans profil défini! Veuillez sélectionner un profil.")
+          return ""
+        }
+        if (isNaN(idprofile)) {
+          alert("Impossible de charger les favoris sans profil défini! Veuillez sélectionner un profil.")
+          return;
+        }
+        let fav = await C.getFav(idprofile)
+        console.log("page à load", fav);
+        
+        window.location.href = './component/Favoris/template.html?profile=' + C.selectedProfile;
+        // V.renderFavoris(fav) 
+      }
+
+
+
+      // C.handlerRemoveFav = async function (id_fav) {
+      //   let rm = await DataFav.requestDeleteFavorite(id_fav);
+      //   console.log("fav retiré");
+      //   return rm;
+      // }
+      C.handlerAddFav = async function (id_profile, id_film) {
+        C.selectedProfile = document.querySelector("#profileSelectnav").value;
+        if (C.selectedProfile === null || C.selectedProfile === undefined) {
+          C.selectedProfile = document.querySelector("#profileSelectpop").value;
+          if (C.selectedProfile === null || C.selectedProfile === undefined) {
+            alert("Erreur, pas de profile, veuillez sélectionner un profil")
+            return
+          }
+        }
+        C.selectedProfile = C.selectedProfile
+        console.log("id profile:", parseInt(C.selectedProfile) + 1, "id film:", id_film)
+        if (id_film === null || id_film === undefined) {
+          alert("Erreur, pas d'identifiant de film")
+          return
+        }
+
+        let add = await DataFav.requestAddFavorite(parseInt(C.selectedProfile) + 1, id_film);
+        console.log("fav state:", add);
+        if (add.success === true) {
+          alert("Favori ajouté avec succès!");
+        }
+        else if (add.message === 'Le film est déjà dans les favoris.') {
+          alert("Le film est déjà dans les favoris.");
+        } else {
+          alert("Erreur, pas de profil, veuillez sélectionner un profil");
+          return;
+        }
+      }
+
+
+
+      C.start = async function () {
+        let age = undefined;
+        let profiles = await C.getProfiles(); // récupère les profils
+        console.log("profiles:", profiles)
+        V.renderNavBar(
+          "C.handlerbacktofilms()",
+          "C.ProfileSelectChangeNav()",
+          "C.LoadFavPage()",
+          profiles            //transmet les profils
+        );
+        // Active une pop up pour choisir un profil si la valeur n'est pas définie = Après déconnection/lancement de l'app
+        if (C.selectedProfile != undefined) {
+          age = profiles[C.selectedProfile].age;
+          console.log("profile is defined", age);
+        } else {
+          console.log("profile is NOT defined.");
+          V.renderProfileSelector("C.ProfileSelectChangePop()", "C.ProfileSelectChangeHide()", profiles);
+          age = 0;
+        }
+        console.log("Selected profile age:", age);
+        let data = await C.getMovie(age);       // Charge les films selon l'âge
+        // let datacat = C.getMovieGrouped(data);        // charge les catégories de films
+        // V.getMovieGrouped(datacat);
+      };
+
+
+
+
+
+      // RENDER ET VUE WINDOWS
+      window.V = {};
+
+      //Fonction qui render la Barre de navigation
+      V.renderNavBar = function (hAbout, ProfileSelectChange, hFav, data) {
+        let header = document.querySelector("#header");
+        header.innerHTML = NavBar.format(
+          hAbout,
+          ProfileSelectChange,
+          hFav,
+          data
+        );
+      };
+
+      //Fonction qui render la première liste de films sans catégorie
+      V.renderList_ite1 = async function (data) {
+        let ite1 = document.querySelector("#ite1");
+        ite1.innerHTML = await List_ite1.format(data);
+      };
+
+      //Fonction qui render la section Détails du film quèand on clique sur une carte de film
+      V.renderMovieDetails = function (data) {
+        let movieDet = document.querySelector("#movieDetails");
+        movieDet.innerHTML = MovieDetails.format(data);
+      };
+
+      //Fonction qui rebnder la pop up de choix de profil
+      V.renderProfileSelector = function (ProfileSelectChange, ProfileSelecthide, data) {
+        console.log("Rendering profile selector with data:", data);
+        let profileSelect = document.querySelector("#Profilepop");
+        profileSelect.style.display = "flex";
+        profileSelect.innerHTML = Profilepop.formatProfileSelector(
+          ProfileSelectChange,
+          ProfileSelecthide,
+          data
+        );
+      };
+
+      V.getMovieGrouped = async function (datacat) {
+        let content = document.querySelector("#movieGrouped");
+        content.innerHTML = "";
+
+        if (!datacat || datacat.length === 0) {
+          content.innerHTML = '<p class="nofilm">Aucun film disponible pour le moment.</p>';
+          return;
+        }
+        let categoryBlock = list_category.formatCategoryBlock(datacat);
+        content.innerHTML = categoryBlock;
+      };
+
+
+      C.start();
+    </script>
+  </body>
+</html>
