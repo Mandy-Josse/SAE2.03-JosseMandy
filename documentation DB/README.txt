@@ -44,7 +44,7 @@ Table Users (Ité 5):
                                                         donc 11 caractères suffisent dans l'éventualité maximale du nombre d'utilisateur au pire cas.
 2	name	                varchar(100)	            100 caractères suffisent pour nommé un profil type, si c'était un nom d'utilisateur il
                                                         faudrait augmenter légèrement pour laissez la liberté aux utilisateurs
-3	age	                    int(3)		                Age minimum général de 6 pour certains films, minimum 1, maximum 3 pour inclure les rares centenaires            
+3	age	                    varchar(3)		                Age minimum général de 6 pour certains films, minimum 1, maximum 3 pour inclure les rares centenaires            
 4	avatar	                varchar(200)	            Nom du fichier de l'avatar du profil, intègre l'extension, 200 caractères et une marge comfortable
 
 
@@ -55,9 +55,9 @@ Table Users pour stocker les donnée des profils créés. Pas besoin de plus que
 _________________________________________________________________________________________________________
 Table Favoris (Ité 9):
 	Nom	                       Type                 Raisons	du type
-1	id_fav (Primaire)	           int(11)		        Tous les id sont à 11 chiffres, permet un grand nombre de 99 999 999 999favoris par profile pour le même nombre de profile et de film
-2	id_profile	               int(11)			    /
-3	id_film	                   int(11)	            /
+1	id_fav (Primaire)	       int		            Tous les id sont à 11 chiffres, permet un grand nombre de 99 999 999 999favoris par profile pour le même nombre de profile et de film
+2	id_profile	               int			        /
+3	id_film	                   int	                /
 
 Table regroupant les Favoris selon les profiles, on récupère l'id du film et l'id du profil pour savoir quel film et dans les favoris de quel profil
 

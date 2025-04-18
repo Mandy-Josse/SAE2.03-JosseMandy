@@ -1,17 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1deb5ubuntu1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost
--- Généré le : jeu. 17 avr. 2025 à 08:27
--- Version du serveur : 10.11.11-MariaDB-0+deb12u1
--- Version de PHP : 8.3.19
-
-
-
-
-
-
+-- Hôte : localhost:3306
+-- Généré le : ven. 18 avr. 2025 à 13:27
+-- Version du serveur : 8.0.41-0ubuntu0.22.04.1
+-- Version de PHP : 8.1.2-1ubuntu2.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -26,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `SAE203`
 --
-CREATE DATABASE IF NOT EXISTS `SAE203` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `SAE203`;
 
 -- --------------------------------------------------------
 
@@ -36,9 +28,9 @@ USE `SAE203`;
 --
 
 CREATE TABLE `Category` (
-  `id` int(3) NOT NULL,
+  `id` int NOT NULL,
   `name` varchar(150) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Déchargement des données de la table `Category`
@@ -63,9 +55,9 @@ INSERT INTO `Category` (`id`, `name`) VALUES
 --
 
 CREATE TABLE `Favoris` (
-  `id_fav` int(11) NOT NULL,
-  `id_profile` int(11) NOT NULL,
-  `id_film` int(11) NOT NULL
+  `id_fav` int NOT NULL,
+  `id_profile` int NOT NULL,
+  `id_film` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -83,18 +75,30 @@ INSERT INTO `Favoris` (`id_fav`, `id_profile`, `id_film`) VALUES
 (83, 3, 44),
 (84, 3, 54),
 (85, 3, 53),
-(86, 2, 61),
-(87, 2, 56),
-(88, 2, 53),
-(89, 2, 52),
-(90, 2, 51),
-(91, 2, 41),
-(92, 2, 35),
 (93, 2, 12),
 (97, 3, 0),
 (98, 1, 0),
-(110, 1, 17),
-(111, 1, 27);
+(115, 1, 33),
+(117, 1, 17),
+(119, 1, 64),
+(120, 1, 30),
+(121, 1, 31),
+(122, 1, 7),
+(124, 1, 52),
+(125, 1, 12),
+(126, 1, 28),
+(127, 1, 32),
+(128, 1, 34),
+(129, 1, 35),
+(130, 1, 36),
+(131, 1, 37),
+(132, 1, 38),
+(133, 1, 39),
+(134, 1, 40),
+(135, 1, 41),
+(137, 1, 44),
+(138, 1, 45),
+(139, 1, 46);
 
 -- --------------------------------------------------------
 
@@ -103,17 +107,17 @@ INSERT INTO `Favoris` (`id_fav`, `id_profile`, `id_film`) VALUES
 --
 
 CREATE TABLE `Movie` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `name` varchar(250) NOT NULL,
-  `year` int(4) DEFAULT NULL,
-  `length` int(3) DEFAULT NULL,
-  `description` text DEFAULT NULL,
+  `year` int DEFAULT NULL,
+  `length` int DEFAULT NULL,
+  `description` text,
   `director` varchar(250) DEFAULT NULL,
-  `id_category` int(3) DEFAULT NULL,
+  `id_category` int DEFAULT NULL,
   `image` varchar(200) DEFAULT NULL,
   `trailer` varchar(250) DEFAULT NULL,
-  `min_age` int(2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `min_age` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Déchargement des données de la table `Movie`
@@ -160,10 +164,10 @@ INSERT INTO `Movie` (`id`, `name`, `year`, `length`, `description`, `director`, 
 --
 
 CREATE TABLE `Users` (
-  `idusers` int(2) NOT NULL,
-  `name` varchar(100) DEFAULT NULL,
-  `age` int(3) DEFAULT NULL,
-  `avatar` varchar(200) NOT NULL
+  `idusers` int NOT NULL,
+  `name` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `age` int DEFAULT NULL,
+  `avatar` varchar(200) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -214,25 +218,25 @@ ALTER TABLE `Users`
 -- AUTO_INCREMENT pour la table `Category`
 --
 ALTER TABLE `Category`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `Favoris`
 --
 ALTER TABLE `Favoris`
-  MODIFY `id_fav` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
+  MODIFY `id_fav` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=140;
 
 --
 -- AUTO_INCREMENT pour la table `Movie`
 --
 ALTER TABLE `Movie`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT pour la table `Users`
 --
 ALTER TABLE `Users`
-  MODIFY `idusers` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=252;
+  MODIFY `idusers` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=252;
 
 --
 -- Contraintes pour les tables déchargées
